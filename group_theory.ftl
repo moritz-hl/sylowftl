@@ -206,6 +206,9 @@ Then y = Mul(G)[(g2, a)]=Mul(G)[(g1, Mul(G)[(Mul(G)[(Inv(G)[g1], g2)], a)])].
 end.
 Qed.
 
+
+
+
 Lemma.
 El(G) is a subgroup of G.
 
@@ -419,6 +422,39 @@ Let H be a normal subgroup of G.
 Then there is a Group G2 such that there is a function f such that
 (f is a grphom from G to G2 and Ker(f, G, G2) = H).
 
+Lemma.
+Let H be a subgroup of G.
+H = {Inv(G)[x] | x << H}.
 
-###Zyklische Gruppen.
-###...
+Definition.
+Let U be a subgroup of G.
+Let V be a subgroup of G.
+PG(U, V, G) = {Mul(G)[(x, y)] | x << U and  y << V}.
+
+Lemma.
+Let U be a subgroup of G.
+Let V be a subgroup of G.
+If PG(U, V, G) = PG(V, U, G) then PG(U, V, G) is a subgroup of G.
+Proof.
+Assume PG(U, V, G) = PG(V, U, G).
+One(G) << PG(U, V, G).
+
+Let x, y be elements of PG(U, V, G).
+Mul(G)[(x, y)] << PG(U, V, G).
+Proof.
+Take u1 << U and v1 << V such that x = Mul(G)[(u1, v1)].
+Take u2 << U and v2 << V such that y = Mul(G)[(u2, v2)].
+Then Mul(G)[(x, y)] = Mul(G)[(u1, Mul(G)[(Mul(G)[(v1, u2)], v2)])].
+Take v3 << V and u3 << U such that Mul(G)[(v1, u2)] = Mul(G)[(u3, v3)].
+Mul(G)[(x, y)] = Mul(G)[(Mul(G)[(u1, u3)], Mul(G)[(v3, v2)])].
+end.
+
+Inv(G)[x] << PG(U, V, G).
+Proof.
+Take u1 << U and v1 << V such that x = Mul(G)[(u1, v1)].
+Inv(G)[x] = Mul(G)[(Inv(G)[v1], Inv(G)[u1])].
+Inv(G)[x] << PG(V, U, G).
+Hence Inv(G)[x] << PG(U, V, G).
+end.
+Qed.
+
