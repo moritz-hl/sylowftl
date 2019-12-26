@@ -129,7 +129,7 @@ Definition.
 An abelian group is a group G such that
 for all elements x, y of El(G) Mul(G)[(x, y)] = Mul(G)[(y, x)].
 
-Axiom.
+Axiom assoc.
 Let x, y, z be elements of El(G).
 Mul(G)[(x, Mul(G)[(y, z)])]
 = Mul(G)[(Mul(G)[(x, y)], z)].
@@ -440,12 +440,15 @@ Assume PG(U, V, G) = PG(V, U, G).
 One(G) << PG(U, V, G).
 
 Let x, y be elements of PG(U, V, G).
+Then x, y << El(G).
 Mul(G)[(x, y)] << PG(U, V, G).
 Proof.
 Take u1 << U and v1 << V such that x = Mul(G)[(u1, v1)].
 Take u2 << U and v2 << V such that y = Mul(G)[(u2, v2)].
 Then Mul(G)[(x, y)] = Mul(G)[(u1, Mul(G)[(Mul(G)[(v1, u2)], v2)])].
 Take v3 << V and u3 << U such that Mul(G)[(v1, u2)] = Mul(G)[(u3, v3)].
+Mul(G)[(u1, Mul(G)[(Mul(G)[(v1, u2)], v2)])] = Mul(G)[(u1, Mul(G)[(Mul(G)[(u3, v3)], v2)])].
+Mul(G)[(u1, Mul(G)[(Mul(G)[(u3, v3)], v2)])] =Mul(G)[(Mul(G)[(u1, u3)], Mul(G)[(v3, v2)])] (by assoc). 
 Mul(G)[(x, y)] = Mul(G)[(Mul(G)[(u1, u3)], Mul(G)[(v3, v2)])].
 end.
 
