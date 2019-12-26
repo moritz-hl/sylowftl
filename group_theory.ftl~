@@ -258,6 +258,71 @@ Definition.
 Let H be a subgroup of G.
 LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
+[synonym number/-s]
+
+Signature.
+A number is a notion.
+
+Signature.
+0 is a number.
+
+Signature.
+1 is a number.
+
+Let a, b denote numbers.
+
+Signature.
+a < b is an atom.
+
+Signature.
+a divides b is an atom.
+
+Signature.
+a*b is a number.
+
+Signature.
+a+b is a number.
+
+Signature.
+|M| is a number.
+
+Axiom Lagrange.
+Let H be a subgroup of G.
+Then |El(G)| = |H|*|LCosets(H, G)|.
+###Proof (needs better def of numbers / cardinalities).
+
+Signature.
+A prime is a number.
+
+Let p denote a prime.
+
+Axiom.
+If p = a*b then a = p or a = 1.
+
+Axiom.
+a divides b iff there is a number k such that b = a*k.
+
+Axiom.
+If M is a subset of N and |M|=|N| then M = N.
+
+Axiom.
+If (there is an element x of M such that for all elements y of M y = x) then |M| = 1.
+
+
+Lemma.
+Let H be a subgroup of G.
+Assume |El(G)| is prime.
+Then H = El(G) or H = {One(G)}.
+Proof.
+  |H| = |El(G)| or |H| = 1.
+  If |H| = |El(G)| then H = El(G).
+  If |H| = 1 then H = {One(G)}.
+Qed.
+
+Lemma.
+Let H be a =.
+Then H = {One(G)}.
+
 
 ###Homomorphismen
 
@@ -294,7 +359,7 @@ Qed.
 
 Definition.
 Let f be a grphom from G1 to G2.
-Ker(f, G1, G2) = {z | z << El(G1) and f[z]=One(G2)}.
+Ker(f, G1, G2) = {j | j << El(G1) and f[j]=One(G2)}.
 
 Lemma.
 Let f be a grphom from G1 to G2.
