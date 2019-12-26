@@ -258,7 +258,6 @@ Definition.
 Let H be a subgroup of G.
 LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
-
 ###Homomorphismen
 
 Let G1, G2 denote groups.
@@ -383,8 +382,42 @@ Then gact(g, G) is bijection from El(G) to El(G).
 Lemma.
 Let g be an element of El(G).
 Then gact(g, G) is an element of El(Symm(El(G))).
-
 ###Quotienten.
+
+Definition.
+Let H be a normal subgroup of G.
+FactGrp(H, G) is a group F such that
+(El(F) = LCosets(H, G)
+and forall x, y << El(G) 
+(Mul(F)[(LCos(x, H, G), LCos(y, H, G))] = LCos(Mul(G)[(x, y)], H, G)
+and Inv(F)[LCos(x, H, G)] = LCos(Inv(G)[x], H, G))).
+
+Definition.
+Let H be a normal subgroup of G.
+p(H, G) is a function f such that
+(Dom(f) = El(G) and
+forall x << El(G) f[x] = LCos(x, H, G)).
+
+Lemma.
+Let H be a normal subgroup of G.
+p(H, G) is from El(G) to El(FactGrp(H, G)).
+
+Lemma.
+Let H be a normal subgroup of G.
+p(H, G) is surjective onto El(FactGrp(H, G)).
+
+Lemma.
+Let H be a normal subgroup of G.
+p(H, G) is grphom from G to FactGrp(H, G).
+
+Lemma.
+Let H be a normal subgroup of G.
+Ker(p(H, G), G, FactGrp(H, G)) = H.
+
+Lemma.
+Let H be a normal subgroup of G.
+Then there is a Group G2 such that there is a function f such that
+(f is a grphom from G to G2 and Ker(f, G, G2) = H).
 
 
 ###Zyklische Gruppen.
