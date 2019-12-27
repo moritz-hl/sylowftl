@@ -487,6 +487,7 @@ Axiom.
 Let a, b, c be whole numbers.
 a + (b - c) = (a + b) - c.
 
+
 Definition.
 GZZ is a group F such that
 El(F) = ZZ
@@ -499,5 +500,5 @@ Let a, b, c be whole numbers.
 Then a - a = 0.
 Proof.
 a+0 = a.
-a - a = (a+0) - a = a + (0 - a) = 0.
+a - a = (a+0) - a = a + (0 - a).
 Qed.
