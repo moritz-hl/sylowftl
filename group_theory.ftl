@@ -461,3 +461,43 @@ Hence Inv(G)[x] << PG(U, V, G).
 end.
 Qed.
 
+[synonym number/-s]
+
+Signature.
+A whole number is a notion.
+
+Definition.
+ZZ is the set of whole numbers.
+
+Signature.
+0 is a whole number.
+
+Signature.
+1 is a whole number.
+
+Signature.
+Let a, b be whole numbers.
+a+b is a whole number.
+
+Signature.
+Let a, b be whole numbers.
+a-b is a whole number.
+
+Axiom.
+Let a, b, c be whole numbers.
+a + (b - c) = (a + b) - c.
+
+Definition.
+GZZ is a group F such that
+El(F) = ZZ
+and
+One(F) = 0
+and forall x, y << El(F) (Mul(F)[(x, y)] = x + y and Inv(F)[x] = 0 - x).
+
+Lemma.
+Let a, b, c be whole numbers.
+Then a - a = 0.
+Proof.
+a+0 = a.
+a - a = (a+0) - a = a + (0 - a) = 0.
+Qed.
