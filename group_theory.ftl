@@ -8,6 +8,8 @@ Prod(M,N) = { (x,y) | x << M and y << N }.
 Definition.
 A subset of M is a set N such that every element of N is an element of M.
 
+###Functions
+
 Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
 
@@ -31,17 +33,14 @@ comp(f, g) is a function h such that Dom(h) = Dom(g)
 and for every x << Dom(g) comp(f, g)[x] = f[g[x]].
 
 [synonym group/-s]
-###ToDo Definition-Checker for Groups.
+###ToDo Definition-Check for Groups.
 Signature.
 A group is a notion.
-
 
 Let G denote a group.
 
 Signature.
 El(G) is a  set.
-
-
 
 Signature.
 One(G) is a set.
@@ -275,7 +274,7 @@ Definition.
 Let H be a subgroup of G.
 LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
-###Homomorphismen
+###Homomorphisms
 
 Let G1, G2 denote groups.
 
@@ -377,7 +376,8 @@ gact(g, G) is from El(G) to El(G).
 gact(g, G) is surjective onto El(G).
 gact(g, G) is bijection from El(G) to El(G).
 Qed.
-###Quotienten.
+
+###Quotients
 
 Definition.
 Let H be a normal subgroup of G.
@@ -413,6 +413,8 @@ Lemma.
 Let H be a normal subgroup of G.
 Then there is a Group G2 such that there is a function f such that
 (f is a grphom from G to G2 and Ker(f, G, G2) = H).
+
+###Inner product
 
 Lemma.
 Let H be a subgroup of G.
@@ -486,6 +488,8 @@ Let f be a groupaction from G on M.
 Let x << M.
 Stab(x, f, G, M) is a subgroup of G.
 
+###(Z, +)
+
 [synonym number/-s]
 
 Signature.
@@ -512,6 +516,9 @@ Axiom.
 Let a, b, c be whole numbers.
 a + (b - c) = (a + b) - c.
 
+Axiom.
+Let a, b, c be whole numbers.
+a - (b + c) = (a - b) -c.
 
 Definition.
 GZZ is a group F such that
