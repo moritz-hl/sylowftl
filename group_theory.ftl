@@ -492,34 +492,34 @@ Stab(x, f, G, M) is a subgroup of G.
 
 ###(Z, +)
 
-[synonym number/-s]
+[synonym integer/-s]
 
 Signature.
-A whole number is a notion.
+A integer is a notion.
 
 Definition.
-ZZ is the set of whole numbers.
+ZZ is the set of integers.
 
 Signature.
-0 is a whole number.
+0 is an integer.
 
 Signature.
-1 is a whole number.
+1 is a integer.
 
 Signature.
-Let a, b be whole numbers.
-a+b is a whole number.
+Let a, b be integers.
+a+b is an integer.
 
 Signature.
-Let a, b be whole numbers.
-a-b is a whole number.
+Let a, b be integers.
+a-b is an integer.
 
 Axiom.
-Let a, b, c be whole numbers.
+Let a, b, c be integers.
 a + (b - c) = (a + b) - c.
 
 Axiom.
-Let a, b, c be whole numbers.
+Let a, b, c be integers.
 a - (b + c) = (a - b) -c.
 
 Definition.
@@ -530,7 +530,7 @@ One(F) = 0
 and forall x, y << El(F) (Mul(F)[(x, y)] = x + y and Inv(F)[x] = 0 - x).
 
 Lemma.
-Let a, b, c be whole numbers.
+Let a, b, c be integers.
 Then a - a = 0.
 Proof.
 a+0 = a.

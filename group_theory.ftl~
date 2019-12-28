@@ -22,9 +22,11 @@ Let f be a function. f is surjective onto M iff (f is from Dom(f) to M and for e
 Definition.
 Let f be a function. f is bijection from M to N iff (f is injective and f is from M to N) and (f is surjective onto M).
 
+Definition.
+Let f be a function. Ran(f) = {f[x] | x << Dom(f)}.
+
 Axiom FunExt.
 Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
-
 
 Definition.
 Let f, g be functions.
@@ -316,7 +318,7 @@ One(G1) << Ker(f, G1, G2).
 Let x, y be elements of Ker(f, G1, G2).
 Then f[Mul(G1)[(x, y)]] = Mul(G2)[(f[x], f[y])] = One(G2).
 f[Inv(G1)[x]] = Inv(G2)[f[x]] = Inv(G2)[One(G2)] = One(G2).
-Qed. 
+Qed.
 
 
 Lemma.
