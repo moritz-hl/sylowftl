@@ -381,6 +381,11 @@ gact(g, G) is bijection from El(G) to El(G).
 Qed.
 
 ###Quotients
+Lemma.
+Let H be a normal subgroup of G.
+Let x << El(G).
+Then LCos(x, H, G) << LCosets(H, G).
+
 
 Definition.
 Let H be a normal subgroup of G.
