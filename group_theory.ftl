@@ -195,8 +195,9 @@ g2 = Mul(G)[(y, Inv(G)[c])].
 Inv(G)[g2] = Mul(G)[(c, Inv(G)[y])].
 
 Mul(G)[(Inv(G)[g2], g1)] = Mul(G)[(Mul(G)[(c, Inv(G)[y])], g1)].
-Mul(G)[(Mul(G)[(c, Inv(G)[y])], g1)] = Mul(G)[(c, Mul(G)[(Inv(G)[y], g1)])].
-Mul(G)[(Inv(G)[y], g1)] = Inv(G)[b].
+
+Mul(G)[(Inv(G)[y], g1)] = Mul(G)[(Inv(G)[y], Mul(G)[(y, Inv(G)[b])])]
+= Mul(G)[(Mul(G)[(Inv(G)[y],y)], Inv(G)[b])].
 
 Hence Mul(G)[(Inv(G)[g2], g1)] = Mul(G)[(c, Inv(G)[b])].
 qed.
