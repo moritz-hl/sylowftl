@@ -402,6 +402,7 @@ Definition.
 Definition.
 5 = Succ(4).
 
+
 Axiom.
 Succ(n) != 0.
 
@@ -419,6 +420,7 @@ NN = {x| x = 0 or there is a number k such that x = Succ(k)}.
 Proof.
   Define M2 = {x|x = 0 or there is a number k such that x = Succ(k)}.
 Qed.
+
 
 ###Zyklische Gruppen
 
