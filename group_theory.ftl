@@ -1,4 +1,3 @@
-
 Let M,N denote sets.
 Let x << M stand for x is an element of M.
 
@@ -34,8 +33,13 @@ Assume g is from Dom(g) to Dom(f).
 comp(f, g) is a function h such that Dom(h) = Dom(g)
 and for every x << Dom(g) comp(f, g)[x] = f[g[x]].
 
+Axiom.
+Let f be a function.
+Assume f is bijection from M to N.
+There is a function g such that (g is bijection from N to M and for every x << M g[f[x]] = x).
+
+
 [synonym group/-s]
-###ToDo Definition-Check for Groups.
 Signature.
 A group is a notion.
 
@@ -56,7 +60,7 @@ Mul(G) is a function from  Prod(El(G), El(G)) to El(G).
 Signature.
 Inv(G) is an function from El(G) to El(G).
 
-Axiom assoc.
+Axiom Assoc.
 Let x, y, z be elements of El(G).
 Mul(G)[(x, Mul(G)[(y, z)])]
 = Mul(G)[(Mul(G)[(x, y)], z)].
@@ -67,7 +71,7 @@ Let x be an element of El(G). Then Mul(G)[(x, Inv(G)[x])] = One(G) =  Mul(G)[( I
 Axiom MulOne.
 Let x be an element of El(G). Then Mul(G)[(x,One(G))] = x =  Mul(G)[(One(G), x)].
 
-Lemma.
+Lemma OneUni.
 Let x, y be elements of El(G).
 Assume Mul(G)[(x, y)] = x.
 then y = One(G).
@@ -77,7 +81,7 @@ Let x, y be elements of El(G).
 Assume Mul(G)[(x, y)] = One(G).
 Then y = Inv(G)[x].
 
-Lemma.
+Lemma InvOne.
 Inv(G)[One(G)] = One(G).
 
 Lemma MulInv.
@@ -90,7 +94,6 @@ Qed.
 Lemma.
 Let x be an element of El(G).
 Then Inv(G)[Inv(G)[x]] = x.
-
 
 Definition.
 A subgroup of G is set H such that
@@ -146,7 +149,6 @@ Mul(G)[(g, Mul(G)[(h, Inv(G)[g])])] << H.
 Definition.
 An abelian group is a group G such that
 for all elements x, y of El(G) Mul(G)[(x, y)] = Mul(G)[(y, x)].
-
 
 
 
@@ -394,12 +396,12 @@ FactGrp(H, G) is a group F such that
 and forall x, y << El(G) 
 (Mul(F)[(LCos(x, H, G), LCos(y, H, G))] = LCos(Mul(G)[(x, y)], H, G)
 and Inv(F)[LCos(x, H, G)] = LCos(Inv(G)[x], H, G))).
-
 Definition.
 Let H be a normal subgroup of G.
 p(H, G) is a function f such that
 (Dom(f) = El(G) and
 forall x << El(G) f[x] = LCos(x, H, G)).
+
 
 Lemma.
 Let H be a normal subgroup of G.
@@ -421,47 +423,6 @@ Lemma.
 Let H be a normal subgroup of G.
 Then there is a Group G2 such that there is a function f such that
 (f is a grphom from G to G2 and Ker(f, G, G2) = H).
-
-###Inner product
-
-Lemma.
-Let H be a subgroup of G.
-H = {Inv(G)[x] | x << H}.
-
-Definition.
-Let U be a subgroup of G.
-Let V be a subgroup of G.
-PG(U, V, G) = {Mul(G)[(x, y)] | x << U and  y << V}.
-
-Lemma.
-Let U be a subgroup of G.
-Let V be a subgroup of G.
-If PG(U, V, G) = PG(V, U, G) then PG(U, V, G) is a subgroup of G.
-Proof.
-Assume PG(U, V, G) = PG(V, U, G).
-One(G) << PG(U, V, G).
-
-Let x, y be elements of PG(U, V, G).
-Then x, y << El(G).
-Mul(G)[(x, y)] << PG(U, V, G).
-Proof.
-Take u1 << U and v1 << V such that x = Mul(G)[(u1, v1)].
-Take u2 << U and v2 << V such that y = Mul(G)[(u2, v2)].
-Then Mul(G)[(x, y)] = Mul(G)[(u1, Mul(G)[(Mul(G)[(v1, u2)], v2)])].
-Take v3 << V and u3 << U such that Mul(G)[(v1, u2)] = Mul(G)[(u3, v3)].
-Mul(G)[(u1, Mul(G)[(Mul(G)[(v1, u2)], v2)])] = Mul(G)[(u1, Mul(G)[(Mul(G)[(u3, v3)], v2)])].
-Mul(G)[(u1, Mul(G)[(Mul(G)[(u3, v3)], v2)])] =Mul(G)[(Mul(G)[(u1, u3)], Mul(G)[(v3, v2)])] (by assoc). 
-Mul(G)[(x, y)] = Mul(G)[(Mul(G)[(u1, u3)], Mul(G)[(v3, v2)])].
-end.
-
-Inv(G)[x] << PG(U, V, G).
-Proof.
-Take u1 << U and v1 << V such that x = Mul(G)[(u1, v1)].
-Inv(G)[x] = Mul(G)[(Inv(G)[v1], Inv(G)[u1])].
-Inv(G)[x] << PG(V, U, G).
-Hence Inv(G)[x] << PG(U, V, G).
-end.
-Qed.
 
 ###Group action
 
@@ -496,49 +457,87 @@ Let f be a groupaction from G on M.
 Let x << M.
 Stab(x, f, G, M) is a subgroup of G.
 
-###(Z, +)
-
 [synonym integer/-s]
+Signature Integers. An integer is a notion.
 
-Signature.
-A integer is a notion.
+Let a,b,c,d,i,j,k,l,m,n stand for integers.
 
-Definition.
-ZZ is the set of integers.
+Signature IntZero.  0 is an integer.
+Signature IntOne.   1 is an integer.
+Signature IntNeg.   -a is an integer.
+Signature IntPlus.  a + b is an integer.
+Signature IntMult.  a * b is an integer.
 
-Signature.
-0 is an integer.
+Let a - b stand for a + (-b).
 
-Signature.
-1 is a integer.
+Axiom AddAsso.      a + (b + c) = (a + b) + c.
+Axiom AddComm.      a + b = b + a.
+Axiom AddZero.      a + 0 = a = 0 + a.
+Axiom AddNeg.       a - a = 0 = -a + a.
 
-Signature.
-Let a, b be integers.
-a+b is an integer.
+Axiom MulAsso.      a * (b * c) = (a * b) * c.
+Axiom MulComm.      a * b = b * a.
+Axiom MulOne.       a * 1 = a = 1 * a.
 
-Signature.
-Let a, b be integers.
-a-b is an integer.
 
-Axiom.
-Let a, b, c be integers.
-a + (b - c) = (a + b) - c.
+Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
+                    (a + b) * c = (a*c) + (b*c).
 
-Axiom.
-Let a, b, c be integers.
-a - (b + c) = (a - b) -c.
+Lemma MulZero.      a * 0 = 0 = 0 * a.
+Proof. a*0 = a*(1-1). Qed.
 
-Definition.
-GZZ is a group F such that
-El(F) = ZZ
-and
-One(F) = 0
-and forall x, y << El(F) (Mul(F)[(x, y)] = x + y and Inv(F)[x] = 0 - x).
+Lemma MulMinOne.    -1 * a = -a = a * -1.
+Proof. a+(-1*a)=0. Qed.
 
-Lemma.
-Let a, b, c be integers.
-Then a - a = 0.
+Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
+
+Let a is nonzero stand for a != 0.
+Let p,q stand for nonzero integers.
+
+[synonym divisor/-s] [synonym divide/-s]
+
+Definition Divisor. A divisor of b is a nonzero integer a
+                    such that for some n (a * n = b).
+
+Let a divides b stand for a is a divisor of b.
+Let a | b stand for a is a divisor of b.
+
+Definition EquMod.  a = b (mod q) iff q | a-b.
+
+Lemma EquModRef.    a = a (mod q).
+
+Lemma EquModSym.    a = b (mod q) => b = a (mod q).
 Proof.
-a+0 = a.
-a - a = (a+0) - a = a + (0 - a).
-Qed.
+    Assume that a = b (mod q).
+    (1)  Take n such that q * n = a - b.
+    q * -n .= (-1) * (q * n) (by MulMinOne, MulAsso,MulComm,MulBubble)
+                   .= (-1) * (a - b) (by 1).
+    Thus q is a divisor of b-a.
+qed.
+
+Lemma EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
+Proof.
+    Assume that a = b (mod q) /\ b = c (mod q).
+    Take n such that q * n = a - b.
+    Take m such that q * m = b - c.
+    We have q * (n + m) = a - c.
+qed.
+
+Lemma EquModMul. a = b (mod p * q) => a = b (mod p) /\ a = b (mod q).
+Proof.
+    Assume that a = b (mod p * q).
+    Take m such that (p * q) * m = a - b.
+    We have p * (q * m) = a - b = q * (p * m).
+qed.
+
+Signature Prime.    a is prime is an atom.
+
+Let a prime stand for a prime nonzero integer.
+
+Axiom PrimeDivisor. n has a prime divisor iff n != 1 /\ n != -1.
+
+###ToDo.
+###Gruppenkardinalität
+###Gruppe Z
+###Gruppe Zp
+###Satz von Cauchy
