@@ -211,12 +211,6 @@ VMul(v, G, n) = One(G).
 Definition.
 Vecs(G, n)  = {v | v is a vector on G of length n}.
 
-###TODO
-###rotation
-Definition.
-Let v be a vector on G of length n.
-Let i be a number.
-Rot(v, G, n, i)  is a function.
 
 Lemma.
 Inv(G)[One(G)] = One(G).
@@ -233,5 +227,8 @@ Dom(Mul(G)) = Prod(El(G), El(G)).
 Lemma.
 Let x be an element of Prod(El(G), El(G)).
 Mul(G)[(One(G), One(G))] is an element of El(G).
+
+
+
 
 

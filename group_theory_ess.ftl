@@ -491,3 +491,22 @@ Mul(G)[(One(G), One(G))] is an element of El(G).
 ###Zyklische Gruppen (vllt Ganze Zahlen).
 
 
+###Ziel:
+##Cauchy
+###Let p be a prime number
+###Let be G a group such that p | gord(G).
+###There is an element x << G such that ord(x) = p
+
+###Define Om = {v | v is a vector on G of  length n and VMul(v, G, n) = One(G)}.
+###|Om| = PotZ(|G|, p-1).
+###Define grpact f ....
+###FixP(f) = {v << M| for all i < n v[i] = v[0] }.
+### OneV = (One(G), One(G), ...) << FixP(f).
+###p | |FixP(f)|
+### 1 < p -> 1 < |FixP(f)|.
+###Take v such that v != OneV and v << FixP(f)
+###Define x = v[0]
+###Ord(x) = p.
+
+
+
