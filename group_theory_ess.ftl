@@ -171,7 +171,7 @@ Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Assume Mul(G)[(Inv(G)[g2], g1)] << H.
 Then LCos(g1, H, G) = LCos(g2, H, G).
-###Beweis sehr rechnerintensi
+###Beweis sehr rechnerintensiv
 
 Lemma.
 Let H be a subgroup of G.
