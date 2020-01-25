@@ -137,7 +137,6 @@ MN(5) = {0, 1, 2, 3, 4}.
 Lemma.
 MN(Succ(n)) = {x | x is an element of MN(n) or x = n}.
 
-
 Signature.
 A FSet is a set.
 
@@ -156,13 +155,10 @@ test = {1, 2}.
 Lemma.
 card(test) = 2.
 Proof.
-Define testf[i] = Case i = 0 -> 1, Case i = 1 -> 2 for i in MN(2).
-Dom(testf) = MN(2).
-testf[0] = 1.
-testf[1] = 2.
-testf is injective.
-testf is from MN(2) to test.
-testf is surjective onto test.
-Therefore  the thesis.
+  Define testf[i] = Succ(i) for i in MN(2).
+  Dom(testf) = MN(2).
+  testf is injective.
+  testf is from MN(2) to test.
+  testf is surjective onto test.
+  Therefore  the thesis.
 Qed.
-

@@ -150,10 +150,14 @@ Proof.
   FixP(Op(G, p)) = {v | v is an element of Om(G, p) and v is constant on G of length p}.
 
   OneV(G, p) is an element of FixP(Op(G, p)).
+
   p | card(FixP(Op(G, p))).
   1 < p.
+
   Hence 1 < card(FixP(Op(G, p))).
+
   Take an element v of FixP(Op(G, p)) such that v != OneV(G, p).
+
   ord(v[0], G) | p.
   v[0] != One(G).
   1 < ord(v[0], G).

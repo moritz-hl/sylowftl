@@ -150,8 +150,6 @@ Definition.
 An abelian group is a group G such that
 for all elements x, y of El(G) Mul(G)[(x, y)] = Mul(G)[(y, x)].
 
-
-
 Lemma.
 Let G be an abelian Group.
 Let H be a subgroup of G.
@@ -535,9 +533,3 @@ Signature Prime.    a is prime is an atom.
 Let a prime stand for a prime nonzero integer.
 
 Axiom PrimeDivisor. n has a prime divisor iff n != 1 /\ n != -1.
-
-###ToDo.
-###Gruppenkardinalität
-###Gruppe Z
-###Gruppe Zp
-###Satz von Cauchy
