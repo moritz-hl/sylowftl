@@ -1,6 +1,8 @@
 Let M,N denote sets.
 Let x << M stand for x is an element of M.
 
+###There are no proofs in this file
+
 [synonym number/-s]
 Signature.
 A group is a notion.

@@ -34,13 +34,16 @@ Assume Mul(G)[(Inv(G)[g2], g1)] << H.
 Then LCos(g1, H, G) = LCos(g2, H, G).
 ###Beweis sehr rechnerintensiv
 
+Lemma CosEq.
+Let H be a subgroup of G.
+Let g1, g2 be elements of El(G).
+Assume there is an element y of El(G) such that (y << LCos(g1, H, G) and y << LCos(g2, H, G)).
+Then LCos(g1, H, G) = LCos(g2, H, G).
+
 Lemma.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Mul(G)[(Inv(G)[g2], g1)] << H Iff LCos(g1, H, G) = LCos(g2, H, G).
-
-###TODO: G ist die disjunkte Vereinigung der Nebenklassen und alle Nebenklassen haben die gleiche Kardinalität
-##? Wie könnte man das formulieren?
 
 Lemma.
 Let H be a subgroup of G.
@@ -49,6 +52,12 @@ Let h be an element of El(G).
 Assume g is an element of LCos(h, H, G).
 Then LCos(g, H, G) = LCos(h, H, G).
 
-###TODO: Satz von Lagrange
+Definition.
+Let H be a subgroup of G.
+LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
-##Definition von Normalteilern
+
+Definition.
+Let G be a group.
+Let U be a subgroup of G.
+Index(G, U) = card(LCosets(U, G)).

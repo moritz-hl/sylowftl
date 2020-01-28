@@ -1,6 +1,3 @@
-[read praktikum/functions.ftl]
-[read praktikum/groupdef.ftl]
-
 [synonym number/-s]
 
 Signature.
@@ -52,11 +49,8 @@ Axiom.
 If Succ(n) < Succ(m) then n < m.
 
 
-
-
 Definition.
 \MN(n) = {x|x is a number and  x<n}.
-
 
 Lemma.
 NN = {x| x is a number and (x = 0 or 0 < x)}.
@@ -107,7 +101,6 @@ If n < m then n != m.
 Signature.
 A prime number is a number.
 
-
 Axiom.
 Let p be a prime number.
 Let n be a number.
@@ -118,11 +111,58 @@ Signature.
 Let M be a set.
 card(M) is a number.
 
-Signature.
+Definition.
 Let M be a set such that for all elements N of M N is a set.
-Union(M) is a set.
+Union(M) = {x | There is an element N of M such that x is an element of N}.
+
+Definition.
+Let N1, N2 be a sets.
+N1 and N2 are disjunct iff there is no element x of N1 such that x is an element of N2.
+
+Lemma.
+Let N1, N2 be sets.
+N1 and N2 are disjunct iff N2 and N1 are disjunct.
+
+Definition.
+Let N1, N2 be sets.
+N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
+
+Definition.
+Let N1 be set.
+Let N2 be a subset of N1.
+N1 \\ N2 = {x | x is an element of N1 and x is not an element of N2}.
+
+Axiom.
+Let N1, N2 be sets.
+If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
+
+Axiom.
+Let N1 be a set.
+Let N2 be a subset of N1.
+Then card(N1 \\ N2) = card(N1) - card(N2).
 
 Definition.
 Let M be a set such that for all elements N of M N is a set.
-M is disjunct iff for all elements N1, N2 of M there is no element of N1 that is an element of N2.
+M is disjunct collection iff for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
 
+Axiom.
+Let M be a set such that for all elements N of M N is a set.
+Assume M is disjunct collection.
+Assume that for all elements N1, N2 of M card(N1) = card(N2).
+Let N be an element of M.
+card(N) | card(Union(M)) and card(M) | card(Union(M)).
+
+
+Axiom.
+Let N1, N2 be sets.
+card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and f is injective and f is surjective onto N2).
+
+Axiom.
+Let M be a set.
+If card(M) != 0 then there is an element x of M such that x = x.
+
+Axiom.
+Let M be a set.
+Assume card(M) > 1.
+Let x be an element of M.
+Then there is an element y of M such that x != y.
