@@ -61,6 +61,9 @@ Let U be a subgroup of G.
 Let g be an element of El(G).
 fCos(g, U, G) is surjective onto LCos(g, U, G).
 
+
+
+
 Lemma Lagrange.
 Let G be a group.
 Let U be a subgroup of G.
@@ -70,15 +73,11 @@ Proof.
   Let N1, N2 be elements of LCosets(U, G).
   Take elements g1, g2 of El(G) such that N1 = LCos(g1, U, G) and N2 = LCos(g2, U, G).
   card(N1) = card(U) = card(N2).
-  Hence card(U) | card(El(G)) and Index(G, U) | card(El(G)).
+  U is an element of LCosets(U, G).
+  LCosets(U, G) is disjunct collection.
 Qed.
 
-Lemma.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-Let x << M.
-Stab(x,f, G, M) is a subgroup of G.
+
 
 Definition.
 Let M be a set.

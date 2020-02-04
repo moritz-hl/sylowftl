@@ -7,7 +7,6 @@ Definition.
 Let H be a subgroup of G.
 LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
-
 Lemma.
 Let H be a normal subgroup of G.
 Let x << El(G).

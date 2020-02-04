@@ -1,3 +1,6 @@
+[read praktikum/grptheory/functions.ftl]
+[read praktikum/grptheory/groupdef.ftl]
+
 Let G denote a group.
 
 Definition.
@@ -7,6 +10,13 @@ and (One(G) << H)
 and (for every x << H Inv(G)[x] << H)
 and (for all elements x, y of H Mul(G)[(x, y)] << H).
 
+Definition.
+Let U be a subgroup of G.
+Gr(U, G) is a group H such that
+(El(H) = U)
+and (One(H) = One(G))
+and (for every x << U Inv(H)[x] = Inv(G)[x])
+and (for all elements x, y of U Mul(H)[(x, y)] = Mul(G)[(x, y)]).
 
 ##Untergruppenkriterium
 

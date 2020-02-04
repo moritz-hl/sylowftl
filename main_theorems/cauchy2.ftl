@@ -7,12 +7,11 @@ Prod(M,N) = { (x,y) | x << M and y << N }.
 Definition.
 A subset of M is a set N such that every element of N is an element of M.
 
-
 Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
 
 Definition.
-Let f be a function. f is injective iff for all elements x,y of Dom(f) we have (x!=y => f[x] != f[y]).
+Let f be a function. f is injective iff for all elements x,y of Dom(f) we have (x != y => f[x] != f[y]).
 
 Definition.
 Let f be a function. f is surjective onto M iff (f is from Dom(f) to M and for every y << M there is an element x of Dom(f) such that f[x]=y).
@@ -37,9 +36,7 @@ Let f be a function.
 Assume f is bijection from M to N.
 There is a function g such that (g is bijection from N to M and for every x << M g[f[x]] = x).
 
-
 [synonym group/-s]
-
 ##Definition von Gruppen
 
 Signature.
@@ -88,6 +85,7 @@ and (for all elements x, y of H Mul(G)[(x, y)] << H).
 
 ##Untergruppenkriterium
 
+
 Lemma.
 Let G be a group.
 Let H be a subset of El(G).
@@ -116,6 +114,7 @@ Proof.
     Hence Mul(G)[(x, y)] << H.
     end.
 Qed.
+
 [synonym number/-s]
 
 Signature.
@@ -340,7 +339,6 @@ Axiom.
 Let p be a prime number.
 card(Om(G, p)) = PotZ(card(El(G)), p-1).
 
-
 Axiom.
 Let x,n,m  be numbers.
 If x < n and n | m then x < m.
@@ -356,8 +354,6 @@ Let n be a number such that 1 < n.
 Let v be a vector of G of length n.
 Assume v is constant on G of length n.
 If VMul(v, G, n) = One(G) then ord(v[0], G) | n.
-
-
 
 Axiom.
 Let n be a number such that 1 < n.
@@ -377,9 +373,10 @@ Proof.
   ##OneV(G, p) is an element of FixP(Op(G, p)).
 
   ##p | card(FixP(Op(G, p))).
+
   1 < p.
 
-  ##Hence 1 < card(FixP(Op(G, p))).
+##Hence 1 < card(FixP(Op(G, p))).
 
   ##Take an element v of FixP(Op(G, p)) such that v != OneV(G, p).
 

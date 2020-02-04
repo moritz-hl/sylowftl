@@ -1,3 +1,7 @@
+[read praktikum/grptheory/functions.ftl]
+[read praktikum/grptheory/groupdef.ftl]
+[read praktikum/grptheory/subgroups.ftl]
+
 Let G denote a group.
 
 Definition.
@@ -56,8 +60,3 @@ Definition.
 Let H be a subgroup of G.
 LCosets(H, G) = {LCos(g, H, G) | g << El(G)}.
 
-
-Definition.
-Let G be a group.
-Let U be a subgroup of G.
-Index(G, U) = card(LCosets(U, G)).

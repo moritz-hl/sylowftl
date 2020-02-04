@@ -1,3 +1,7 @@
+[read praktikum/grptheory/functions.ftl]
+[read praktikum/grptheory/groupdef.ftl]
+[read praktikum/grptheory/subgroups.ftl]
+
 Definition.
 Let M be a set.
 Let G be a group.
@@ -33,3 +37,10 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
+
+Lemma.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x << M.
+Stab(x,f, G, M) is a subgroup of G.
