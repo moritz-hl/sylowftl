@@ -131,7 +131,7 @@ Let p,q stand for nonzero integers.
 
 [synonym divisor/-s] [synonym divide/-s]
 
-Definition Divisor. A divisor of b is a nonzero integer a
+Definition Divisor. A divisor of b is a integer a
                     such that for some n (a * n = b).
 
 Let a divides b stand for a is a divisor of b.
@@ -366,6 +366,12 @@ Let k be an integer.
 If M is disjunct collection and  for all elements N of M  k | card(N) then
 k | card(Union(M)).
 
+Axiom.
+Let n be a natural number.
+Let p be a prime number.
+Let k be a natural number.
+If k | p^n then k = 1 or p | k.
+
 
 Lemma.
 Let M be a set.
@@ -387,8 +393,8 @@ Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
     card(N) = Index(G, Stab(x, f, G, M)).
 
     Hence card(El(G)) = card(Stab(x, f, G, M))*card(N).
-
-    Hence card(N) is a divisor of  card(El(G)).
+    
+    card(N) is a divisor of card(El(G)).
 
     Hence p | card(N).
   end.

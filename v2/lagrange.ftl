@@ -340,6 +340,14 @@ Let G be a group.
 Let U be a subgroup of G.
 Let g be an element of El(G).
 fCoset(g, U, G) is injective.
+Proof.
+
+Let u1, u2 be elements of U such that fCoset(g, U, G)[u1] = fCoset(g, U, G)[u2].
+We have u1 = Inv(G)[g] *^{G} (g *^{G} u1)
+= Inv(G)[g] *^{G} (g *^{G} u2) = u2.
+Thus u1 = u2.
+
+qed.
 
 Lemma.
 Let G be a group.
