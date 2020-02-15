@@ -84,6 +84,10 @@ Let g be an element of El(G).
 Let H be a subgroup of G.
 LeftCoset(g, H, G) = {g *^{G} h | h << H}.
 
+Axiom CosetEq.
+Let H be a subgroup of G.
+Let g1, g2 be elements of El(G).
+Inv(G)[g2]*^{G}  g1 << H iff LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
 
 Definition.
 Let H be a subgroup of G.
@@ -244,7 +248,7 @@ f[((a *^{G}  b), x)] = f[(a, f[(b, x)])].
 Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(p, U, P, G) is a function f 
+Op(U, P, G) is a function f 
 such that f is from Prod(El(Gr(U, G)), LeftCosets(P, G)) to LeftCosets(P, G) and
 for all elements u of U for all elements x of El(G) 
 f[(u, LeftCoset(x, P, G))] = LeftCoset(u *^{G}  x,P, G).
@@ -252,7 +256,7 @@ f[(u, LeftCoset(x, P, G))] = LeftCoset(u *^{G}  x,P, G).
 Axiom.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(p, U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
+Op(U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
 
 
 Definition.
@@ -297,13 +301,12 @@ fixedPoints(M, G, f) is a finite set.
 
 
 
+
 Axiom.
 Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
-
-
 
 Signature.
 A group of order p is a finite group H  such that
@@ -326,25 +329,25 @@ card(fixedPoints(M, G, f)) = card(M) (mod p).
 Definition.
 Let g be an element of El(G).
 Let U be a subgroup of G.
-ConjugateSet(g, U, G) = {(g *^{G} (u *^{G} Inv(G)[g]))| u is an element of U}.
+Conjugate(g, U, G) = {(g *^{G} (u *^{G} Inv(G)[g]))| u is an element of U}.
 
 Definition.
 Let U, V be subgroups of G.
-U and V are conjugates in G iff there is an element g of El(G) such that U = ConjugateSet(g, V, G).
+U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
 
 
-Axiom.
+Axiom ConjSize.
 Let G be a finite group.
 Let g be an element of El(G).
 Let U be a subgroup of G.
-card(ConjugateSet(g, U, G)) = card(U).
+card(Conjugate(g, U, G)) = card(U).
 
 
 Definition.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
-Axiom.
+Axiom SylSize.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
@@ -355,32 +358,25 @@ Theorem Sylow2a.
 Let G be a finite group.
 Let P be an element of Syl(p, G).
 Let U be a subgroup of G of order p.
-Then there is an element g of El(G) such that ConjugateSet(g, U, G) is a subset of P.
+Then there is an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
 Proof.
-  Take a groupaction f from Gr(U, G) on LeftCosets(P, G) such that f = Op(p, U, P, G).
-  Index(G, P) != 0  (mod p).
-
-  card(fixedPoints(LeftCosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
+  Take a groupaction f from Gr(U, G) on LeftCosets(P, G) such that f = Op(U, P, G).
   
+  We have card(fixedPoints(LeftCosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
+  
+  p does not divide Index(G, P).
+
   Hence card(fixedPoints(LeftCosets(P, G), Gr(U, G),  f)) != 0.
   
   Take an element x of fixedPoints(LeftCosets(P, G), Gr(U, G),  f).
-  Take an element y of El(G) such that x = LeftCoset(y, P, G).
+  Take an element g of El(G) such that x = LeftCoset(g, P, G).
   
-  Let us show that ConjugateSet(Inv(G)[y], U, G) is a subset of P.
-    Let i be an element of ConjugateSet(Inv(G)[y], U, G).
-    Take an element h of U such that Inv(G)[y] *^{G} (h *^{G}  y) = i.
-    x = f[(h, x)].
+  Let us show that every element of Conjugate(Inv(G)[g], U, G) is an element of P.
+    Let i  be an element of Conjugate(Inv(G)[g], U, G).
+    Take an element u of U such that Inv(G)[g] *^{G} (u *^{G}  g) = i.
 
-    LeftCoset(y, P, G) = f[(h, LeftCoset(y, P, G))]  =  LeftCoset((h *^{G} y) ,P, G).
-    
-    Hence h *^{G} y is an element of LeftCoset(y, P, G).
-  
-    Take an element w of P such that h *^{G} y = y *^{G} w.
-
-    Then we have w = Inv(G)[y] *^{G} (y *^{G} w) =  Inv(G)[y] *^{G} (h *^{G} y).
-
-    Thus i is an element of P.
+    We have LeftCoset(g, P, G)  = f[(u,x)]  =  LeftCoset((u *^{G} g) ,P, G).
+    Therefore Inv(G)[g] *^{G} (u *^{G}  g) is an element of P (By CosetEq).
   end.
 Qed.
 
@@ -389,7 +385,9 @@ Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 P and U are conjugates in G.
 Proof.
-  Take an element g of El(G) such that ConjugateSet(g, U, G) is a subset of P.
-  card(ConjugateSet(g, U, G)) = card(U) = card(P).
-  Hence ConjugateSet(g, U, G) = P.
+  Take an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
+
+  card(Conjugate(g, U, G)) = card(U) = card(P) (by SylSize, ConjSize).
+
+  Hence Conjugate(g, U, G) = P.
 qed.
