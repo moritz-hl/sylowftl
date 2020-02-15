@@ -22,8 +22,7 @@ Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] 
 Signature.
 A group is a notion.
 
-Signature.
-a finite group is a group.
+
 
 Let G denote a group.
 
@@ -167,7 +166,13 @@ Let p denote a prime number.
 Signature.
 A finite set is a set.
 
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+N is a finite set.
+
 Signature.
+Let M be a finite set.
 card(M) is a natural number.
 
 Definition.
@@ -175,9 +180,15 @@ Let M be a set such that for all elements N of M N is a set.
 Union(M) = {x | There is an element N of M such that x is an element of N}.
 
 Axiom.
+Let M be a set such that for all elements N of M N is a finite set.
+Union(M) is a finite set.
+
+Axiom.
+Let M be a finite set.
 If card(M) != 0 then there is an element x of M such that x = x.
 
 Axiom.
+Let M be a finite set.
 Let N be a subset of M.
 If card(M) = card(N) then M = N.
 
@@ -185,8 +196,21 @@ If card(M) = card(N) then M = N.
 
 ###Lagrange's Theorem
 
+Definition.
+a finite group is a group G such that El(G) is a finite set.
+
+Lemma.
+Let G be a finite group.
+Let U be a subgroup of G.
+U is a finite set.
+
+Axiom.
+Let G be a finite group.
+Let U be a subgroup of G.
+LeftCosets(U, G) is a finite set.
 
 Definition.
+Let G be a finite group.
 Let U be a subgroup of G.
 Index(G, U) = card(LeftCosets(U, G)).
 
@@ -194,10 +218,12 @@ Axiom.
 Let U be a subgroup of G.
 El(G) = Union(LeftCosets(U, G)).
 
+
+
 Axiom Lagrange.
-Let G be a group.
+Let G be a finite group.
 Let U be a subgroup of G.
-card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)).
+card(El(G)) = card(U)*card(LeftCosets(U, G)).
 
 
 
@@ -254,7 +280,25 @@ Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) is a subgroup of G.
 
+
+###
 Axiom.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x << M.
+Orbit(x,f, G, M) is a finite set.
+             
+###
+Axiom.
+Let M be a finite set.
+Let G be a group.
+Let f be a function from Prod(El(G), M) to M.
+fixedPoints(M, G, f) is a finite set.
+
+
+
+Axiom.
+Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
@@ -262,7 +306,7 @@ Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 
 
 Signature.
-A group of order p is a group H  such that
+A group of order p is a finite group H  such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
 Signature.
@@ -273,6 +317,7 @@ A subgroup of G of order p is a subgroup U of G such that
 ###Fixed Points Lemma.
 
 Axiom.
+Let M be a finite set.
 Let G be a group of order p.
 Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
@@ -289,15 +334,18 @@ U and V are conjugates in G iff there is an element g of El(G) such that U = Con
 
 
 Axiom.
+Let G be a finite group.
 Let g be an element of El(G).
 Let U be a subgroup of G.
 card(ConjugateSet(g, U, G)) = card(U).
 
 
 Definition.
+Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
 Axiom.
+Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
 
@@ -323,6 +371,7 @@ Proof.
     Let i be an element of ConjugateSet(Inv(G)[y], U, G).
     Take an element h of U such that Inv(G)[y] *^{G} (h *^{G}  y) = i.
     x = f[(h, x)].
+
     LeftCoset(y, P, G) = f[(h, LeftCoset(y, P, G))]  =  LeftCoset((h *^{G} y) ,P, G).
     
     Hence h *^{G} y is an element of LeftCoset(y, P, G).

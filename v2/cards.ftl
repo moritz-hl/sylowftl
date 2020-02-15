@@ -109,7 +109,6 @@ Signature.
 Let M be a set.
 card(M) is a natural number.
 
-
 Definition.
 Let M be a set such that for all elements N of M N is a set.
 Union(M) = {x | There is an element N of M such that x is an element of N}.
@@ -130,7 +129,6 @@ N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
 Axiom.
 Let N1, N2 be sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
-
 
 Definition.
 Let M be a set such that for all elements N of M N is a set.
