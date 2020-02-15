@@ -150,6 +150,7 @@ and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
 f[((a *^{G}  b), x)] = f[(a, f[(b, x)])].
 
+
 Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
@@ -164,30 +165,18 @@ Let U be a subgroup of G.
 Op(U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
 Proof.
 Take a function f such that f = Op( U, P, G).
+Take a group H such that  H = Gr(U, G).
+Take a set M such that M = LeftCosets(P, G).
 
-Let us show that for every element x of LeftCosets(P, G) 
-f[(One(Gr(U, G)), x)] = x.
-Obvious.
-
-Let us show that for every element x of LeftCosets(P, G) for all elements a, b of El(Gr(U, G))
+Let us show that for every element x of M for all elements a, b of El(H)
  f[(Mul(Gr(U, G))[(a, b)], x)] =  f[(a,  f[(b, x)])].
-Let g be an element of El(G).
-Let u1, u2 be elements of U.
-f[(u1, LeftCoset(g, P, G))] = LeftCoset(Mul(G)[(u1, g)],P, G).
-f[(u2,  LeftCoset(u1 *^{G}  g,P, G))] = LeftCoset(Mul(G)[(u2, Mul(G)[(u1, g)])],P, G).
-f[(Mul(G)[(u2, u1)], LeftCoset(g,P, G))] = LeftCoset(Mul(G)[(Mul(G)[(u2, u1)], g)],P, G).
-Therefore f[(u2, f[(u1, LeftCoset(g, P, G))])] = f[(Mul(Gr(U, G))[(u2, u1)], LeftCoset(g,P, G))].
+  Let g be an element of El(G).
+  Let u1, u2 be elements of U.
+  f[(u1, LeftCoset(g, P, G))] = LeftCoset(Mul(G)[(u1, g)],P, G).
+  f[(u2,  LeftCoset(u1 *^{G}  g,P, G))] = LeftCoset(Mul(G)[(u2, Mul(G)[(u1, g)])],P, G).
+  f[(Mul(G)[(u2, u1)], LeftCoset(g,P, G))] = LeftCoset(Mul(G)[(Mul(G)[(u2, u1)], g)],P, G).
+  Therefore f[(u2, f[(u1, LeftCoset(g, P, G))])] = f[(Mul(Gr(U, G))[(u2, u1)], LeftCoset(g,P, G))].
 end.
 
-f is from Prod(El(Gr(U, G)), LeftCosets(P, G)) to LeftCosets(P, G).
-f is a function.
-f is from Prod(El(Gr(U, G)), LeftCosets(P, G)) to LeftCosets(P, G).
-for every element x of LeftCosets(P, G) for all elements a, b of El(Gr(U, G))
-((a *^{Gr(U, G)} b, x) is an element of Prod(El(Gr(U, G)), LeftCosets(P, G)) and  f[(a *^{Gr(U, G)} b, x)] =  f[(a,  f[(b, x)])]).
-for every element x of LeftCosets(P, G) 
-f[(One(Gr(U, G)), x)] = x.
-
-[prove off]
-f is a groupaction from Gr(U, G) on LeftCosets(P, G). ##??
-[/prove]
+Therefore the thesis.
 Qed.

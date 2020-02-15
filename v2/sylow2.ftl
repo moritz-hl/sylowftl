@@ -23,15 +23,11 @@ Signature.
 A group is a notion.
 
 
-
 Let G denote a group.
 
 Signature.
 El(G) is a  set.
 
-Lemma.
-Let x, y be elements of El(G).
-(x, y) is an element of Prod(El(G), El(G)).
 
 Signature.
 One(G) is an object.
@@ -153,7 +149,6 @@ Axiom EquModSym.    a = b (mod q) => b = a (mod q).
 
 Axiom EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
 
-Axiom EquModMul. a = b (mod q * r) => a = b (mod q) /\ a = b (mod r).
 
 Signature Prime.    a is prime is an atom.
 
@@ -319,12 +314,13 @@ A subgroup of G of order p is a subgroup U of G such that
 
 ###Fixed Points Lemma.
 
-Axiom.
+[prove off]
+Theorem FixPointsMod.
 Let M be a finite set.
 Let G be a group of order p.
 Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
-
+[/prove]
 
 Definition.
 Let g be an element of El(G).
@@ -335,7 +331,7 @@ Definition.
 Let U, V be subgroups of G.
 U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
 
-
+###
 Axiom ConjSize.
 Let G be a finite group.
 Let g be an element of El(G).
@@ -347,11 +343,11 @@ Definition.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
+###
 Axiom SylSize.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
-
 
 
 Theorem Sylow2a.
@@ -368,11 +364,12 @@ Proof.
 
   Hence card(fixedPoints(LeftCosets(P, G), Gr(U, G),  f)) != 0.
   
-  Take an element x of fixedPoints(LeftCosets(P, G), Gr(U, G),  f).
-  Take an element g of El(G) such that x = LeftCoset(g, P, G).
+  We can take an element x of fixedPoints(LeftCosets(P, G), Gr(U, G),  f)
+  and an element g of El(G) such that x = LeftCoset(g, P, G).
   
   Let us show that every element of Conjugate(Inv(G)[g], U, G) is an element of P.
     Let i  be an element of Conjugate(Inv(G)[g], U, G).
+
     Take an element u of U such that Inv(G)[g] *^{G} (u *^{G}  g) = i.
 
     We have LeftCoset(g, P, G)  = f[(u,x)]  =  LeftCoset((u *^{G} g) ,P, G).

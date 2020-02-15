@@ -40,10 +40,6 @@ Let G denote a group.
 Signature.
 El(G) is a  set.
 
-Lemma.
-Let x, y be elements of El(G).
-(x, y) is an element of Prod(El(G), El(G)).
-
 Signature.
 One(G) is an object.
 
@@ -102,30 +98,14 @@ Let H be a subgroup of G.
 LeftCoset(g, H, G) = {g *^{G} h | h << H}.
 
 
-
 Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
 Then Inv(G)[g2] *^{G} g1 << H.
 
-Let Mul(G)[(a, b)] stand for a *^{G} b.
-
-Axiom.
-Let H be a subgroup of G.
-Let g1, g2 be elements of El(G).
-Assume Inv(G)[g2] *^{G} g1 << H.
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
-
-
 
 Axiom CosEq.
-Let H be a subgroup of G.
-Let g1, g2 be elements of El(G).
-Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
-
-Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Inv(G)[g2]*^{G}  g1 << H Iff LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
@@ -173,44 +153,6 @@ Axiom MulOne.       a * 1 = a = 1 * a.
 Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
                     (a + b) * c = (a*c) + (b*c).
 
-Axiom MulZero.      a * 0 = 0 = 0 * a.
-
-Axiom MulMinOne.    (-1) * a = -a = a * -1.
-
-Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
-
-Let a is nonzero stand for a != 0.
-Let p,q stand for nonzero integers.
-
-[synonym divisor/-s] [synonym divide/-s]
-
-Definition Divisor. A divisor of b is a nonzero integer a
-                    such that for some n (a * n = b).
-
-Let a divides b stand for a is a divisor of b.
-Let a | b stand for a is a divisor of b.
-
-Axiom.
-If q | a and q | b then q | (a + b).
-
-Definition EquMod.  a = b (mod q) iff q | a-b.
-
-Definition NeqMod.  a != b (mod q) iff not (a = b (mod q)).
-
-Axiom EquModRef.    a = a (mod q).
-
-Axiom EquModSym.    a = b (mod q) => b = a (mod q).
-
-Axiom EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
-
-Axiom EquModMul. a = b (mod p * q) => a = b (mod p) /\ a = b (mod q).
-
-Signature Prime.    a is prime is an atom.
-
-Let a prime stand for a prime nonzero integer.
-
-Axiom PrimeDivisor. n has a prime divisor iff n != 1 /\ n != -1.
-
 
 [synonym number/-s]
 
@@ -257,10 +199,9 @@ M is disjunct collection iff for all elements N1, N2 of M (N1 = N2 or ( N1 and N
 
 Axiom cardUnion.
 Let M be a set such that for all elements N of M N is a set.
-Assume M is disjunct collection.
-Assume that for all elements N1, N2 of M card(N1) = card(N2).
 Let N be an element of M.
-card(Union(M)) = card(N)*card(M).
+If M is disjunct collection and for all elements N1, N2 of M card(N1) = card(N2)
+then card(Union(M)) = card(N)*card(M).
 
 Axiom.
 Let N1, N2 be sets.
@@ -295,15 +236,15 @@ Lemma.
 Let U be a subgroup of G.
 El(G) = Union(LeftCosets(U, G)).
 Proof.
-Let us show that El(G) is a subset of Union(LeftCosets(U, G)).
+Let us show that every element of El(G) is an element of Union(LeftCosets(U, G)).
   Let g be an element of El(G).
   Then g is an element of LeftCoset(g, U, G).
 end.
 
-Let us show that Union(LeftCosets(U, G)) is a subset of El(G).
+Let us show that every element of Union(LeftCosets(U, G)) is an element of El(G).
   Let h be an element of Union(LeftCosets(U, G)).
   Take an element k of El(G) such that h is an element of LeftCoset(k, U, G).
-h is an element of El(G).
+  h is an element of El(G).
 end.
 
 Therefore El(G) = Union(LeftCosets(U, G)).
@@ -314,58 +255,42 @@ Let G be a group.
 Let U be a subgroup of G.
 LeftCosets(U, G) is disjunct collection.
 Proof.
-Let N1, N2 be elements of LeftCosets(U, G).
-Assume that not (N1 and  N2 are disjunct).
-Take elements g1, g2  of El(G) such that N1 = LeftCoset(g1, U, G) and N2 = LeftCoset(g2, U, G).
-Then g1 << N1 and g1 << N2.
-Hence N1 = N2 (by CosEq).
+  Let N1, N2 be elements of LeftCosets(U, G).
+
+  Assume that N1 and N2 are not disjunct.
+
+  Take elements g1, g2  of El(G) such that N1 = LeftCoset(g1, U, G) and N2 = LeftCoset(g2, U, G).
+  Then g1 << N1 and g1 << N2.
+
+  Hence N1 = N2.
 Qed.
 
-Definition.
-Let G be a group.
-Let U be a subgroup of G.
-Let g be an element of El(G).
-fCoset(g, U, G) is a function f
-such that Dom(f) = U
-and  for all elements u of U f[u] = (g *^{G} u).
-
-Lemma.
-Let G be a group.
-Let U be a subgroup of G.
-Let g be an element of El(G).
-fCoset(g, U, G) is from U to LeftCoset(g, U, G).
-
-Lemma.
-Let G be a group.
-Let U be a subgroup of G.
-Let g be an element of El(G).
-fCoset(g, U, G) is injective.
-Proof.
-
-Let u1, u2 be elements of U such that fCoset(g, U, G)[u1] = fCoset(g, U, G)[u2].
-We have u1 = Inv(G)[g] *^{G} (g *^{G} u1)
-= Inv(G)[g] *^{G} (g *^{G} u2) = u2.
-Thus u1 = u2.
-
-qed.
-
-Lemma.
-Let G be a group.
-Let U be a subgroup of G.
-Let g be an element of El(G).
-fCoset(g, U, G) is surjective onto LeftCoset(g, U, G).
 
 Theorem Lagrange.
 Let G be a group.
 Let U be a subgroup of G.
 card(El(G)) = card(U)*card(LeftCosets(U, G)).
 Proof.
-  card(El(G)) = card(Union(LeftCosets(U, G))).
-  Let N1, N2 be elements of LeftCosets(U, G).
-  Take elements g1, g2 of El(G) such that N1 = LeftCoset(g1, U, G) and N2 = LeftCoset(g2, U, G).
-  card(N1) = card(U) = card(N2).
-  Thus for all elements N11, N12 of LeftCosets(U, G) card(N11) = card(N12).
-  U is an element of LeftCosets(U, G).
-  LeftCosets(U, G) is disjunct collection.
-  card(El(G)) = card(Union(LeftCosets(U, G))) = card(N1)*card(LeftCosets(U, G)) (by cardUnion).
+Let us show that for all elements g of El(G) card(LeftCoset(g, U, G)) = card(U).
+  Let g be an element of El(G).
+  Define f[u] = g *^{G} u for u in U.
+  f is from U to LeftCoset(g, U, G).
+  f is injective.
+  Proof.
+    Let us show that for all  elements u1, u2 of U If f[u1] = f[u2] then u1 = u2.
+
+      Let u1, u2 be elements of U such that f[u1] = f[u2].
+      We have u1 = Inv(G)[g] *^{G} (g *^{G} u1) = Inv(G)[g] *^{G} (g *^{G} u2) = u2.
+      Thus u1 = u2.
+
+    end.
+  end.
+  f is surjective onto LeftCoset(g, U, G).
+  Proof. Obvious.
+end.
+
+U is an element of LeftCosets(U, G).
+LeftCosets(U, G) is disjunct collection and for all elements N1, N2 of LeftCosets(U, G) card(N1) = card(N2).
+
+Therefore card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)) (by cardUnion).
 Qed.

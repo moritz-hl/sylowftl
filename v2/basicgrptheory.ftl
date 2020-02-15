@@ -45,10 +45,10 @@ Let x, y be elements of El(G).
 (x, y) is an element of Prod(El(G), El(G)).
 
 Signature.
-One(G) is an object.
+1^G is an object.
 
 Axiom.
-One(G) << El(G).
+1^G << El(G).
 
 Signature.
 Let a, b be elements of El(G).
@@ -61,23 +61,23 @@ Axiom Assoc.
 Let x, y, z be elements of El(G). x *^{G} ( y *^{G} z) = (x *^{G} y) *^{G} z. 
 
 Axiom InvOne.
-Let x be an element of El(G). Then x *^{G} Inv(G)[x] = One(G) =  Inv(G)[x] *^{G} x.
+Let x be an element of El(G). Then x *^{G} Inv(G)[x] = 1^G =  Inv(G)[x] *^{G} x.
 
 Axiom MulOne.
-Let x be an element of El(G). Then x *^{G} One(G) = x =  One(G) *^{G} x.
+Let x be an element of El(G). Then x *^{G} 1^G = x =  1^G *^{G} x.
 
 Lemma.
 Let x, y be elements of El(G).
-If x *^{G} y = One(G) then y = Inv(G)[x].
+If x *^{G} y = 1^G then y = Inv(G)[x].
 
 Lemma.
 Let x, y be elements of El(G).
-If x *^{G} y = x then y = One(G).
+If x *^{G} y = x then y = 1^G.
 
 Definition.
 A subgroup of G is set H such that
 (H is a subset of El(G))
-and (One(G) << H)
+and (1^G << H)
 and (for every x << H Inv(G)[x] << H)
 and (for all elements x, y of H x *^{G} y << H).
 
@@ -85,7 +85,7 @@ Definition.
 Let U be a subgroup of G.
 Gr(U, G) is a group H such that
 (El(H) = U)
-and (One(H) = One(G))
+and (One(H) = 1^G)
 and (for every x << U Inv(H)[x] = Inv(G)[x])
 and (for all elements x, y of U x *^{Gr(U, G)} y = x *^{G} y).
 
@@ -95,17 +95,17 @@ Let H be a subset of El(G).
 Assume ((There is a x << H such that x = x) and (for all elements  y, z of H  z *^{G} Inv(G)[y] << H)).
 Then H is a subgroup of G.
 Proof.
-  One(G) << H.
+  1^G << H.
     Proof.
       Take x << H.
-      Then One(G) = x *^{G} Inv(G)[x].
-      Thus One(G) << H.
+      Then 1^G = x *^{G} Inv(G)[x].
+      Thus 1^G << H.
     end.
 
   For every x << H Inv(G)[x] << H.
     Proof.
       Let x be an element of H.
-      Then Inv(G)[x] = One(G) *^{G} Inv(G)[x].
+      Then Inv(G)[x] = 1^G *^{G} Inv(G)[x].
       Thus Inv(G)[x] << H.
     end.
 

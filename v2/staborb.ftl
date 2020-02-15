@@ -174,43 +174,6 @@ Axiom MulOne.       a * 1 = a = 1 * a.
 Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
                     (a + b) * c = (a*c) + (b*c).
 
-Axiom MulZero.      a * 0 = 0 = 0 * a.
-
-Axiom MulMinOne.    (-1) * a = -a = a * -1.
-
-Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
-
-Let a is nonzero stand for a != 0.
-Let p,q stand for nonzero integers.
-
-[synonym divisor/-s] [synonym divide/-s]
-
-Definition Divisor. A divisor of b is a nonzero integer a
-                    such that for some n (a * n = b).
-
-Let a divides b stand for a is a divisor of b.
-Let a | b stand for a is a divisor of b.
-
-Axiom.
-If q | a and q | b then q | (a + b).
-
-Definition EquMod.  a = b (mod q) iff q | a-b.
-
-Definition NeqMod.  a != b (mod q) iff not (a = b (mod q)).
-
-Axiom EquModRef.    a = a (mod q).
-
-Axiom EquModSym.    a = b (mod q) => b = a (mod q).
-
-Axiom EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
-
-Axiom EquModMul. a = b (mod p * q) => a = b (mod p) /\ a = b (mod q).
-
-Signature Prime.    a is prime is an atom.
-
-Let a prime stand for a prime nonzero integer.
-
-Axiom PrimeDivisor. n has a prime divisor iff n != 1 /\ n != -1.
 
 
 [synonym number/-s]
@@ -322,25 +285,6 @@ Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
 Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
 
-Definition.
-Let M be a set.
-Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-A fixedpoint on M on G of f is an element y of M such that
-for every element a of El(G) f[(a, y)] = y.
-
-Definition.
-Let M be a set.
-Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-fixedPoints(M, G, f) = {y | y is a fixedpoint on M on G of f}.
-
-Lemma.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-Let x be an element of M.
-x is a fixedpoint on M on G of f iff card(Orbit(x, f, G, M)) = 1.
 
 Definition.
 Let M be a set.
@@ -355,6 +299,7 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) is a subgroup of G.
+
 
 Definition.
 Let M be a set.
