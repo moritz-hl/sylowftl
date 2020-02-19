@@ -1,9 +1,13 @@
-
+###Finite Sets
+[synonym set/-s]
 Let M, N denote sets.
 Let x << M stand for x is an element of M.
 
 Definition.
 Prod(M,N) = { (x,y) | x << M and y << N }.
+
+Definition.
+Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
 
 Definition.
 A subset of M is a set N such that every element of N is an element of M.
@@ -105,13 +109,31 @@ A natural number is a nonnegative integer.
 Signature.
 A finite set is a set.
 
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+N is a finite set.
+
+Axiom.
+Let f be a function such that Dom(f) is a finite set.
+Range(f) is a finite set.
+
+Axiom.
+Let M, N be finite set.
+Prod(M, N) is a finite set.
+
+
 Signature.
-Let M be a set.
+Let M be a finite set.
 card(M) is a natural number.
 
 Definition.
 Let M be a set such that for all elements N of M N is a set.
 Union(M) = {x | There is an element N of M such that x is an element of N}.
+
+Axiom.
+Let M be a set such that for all elements N of M N is a finite set.
+Union(M) is a finite set.
 
 Definition.
 Let N1, N2 be a sets.
@@ -121,13 +143,17 @@ Definition.
 Let N1, N2 be sets.
 N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
 
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
 Definition.
 Let N1 be a set.
 Let N2 be a subset of N1.
 N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
 
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
 Definition.
@@ -135,31 +161,31 @@ Let M be a set such that for all elements N of M N is a set.
 M is disjunct collection iff for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
 
 Axiom cardUnion.
-Let M be a set such that for all elements N of M N is a set.
+Let  M be a finite set such that for all elements N of M N is a finite set.
 Assume M is disjunct collection.
 Assume that for all elements N1, N2 of M card(N1) = card(N2).
 Let N be an element of M.
 card(Union(M)) = card(N)*card(M).
 
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and f is injective and f is surjective onto N2).
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 If card(M) != 0 then there is an element x of M such that x = x.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 Assume 1 < card(M).
 Let x be an element of M.
 Then there is an element y of M such that x != y.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 Let N be a subset of M.
 If card(M) = card(N) then M = N.

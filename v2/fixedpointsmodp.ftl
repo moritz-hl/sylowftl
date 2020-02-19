@@ -162,6 +162,13 @@ Let a prime stand for a prime nonzero integer.
 
 Let a natural number stand for a nonnegative integer.
 
+Axiom.
+Let n be a natural number.
+Let p be a prime number.
+Let k be a natural number.
+If k | p^n then k = 1 or p | k.
+
+
 Signature.
 A finite set is a set.
 
@@ -286,12 +293,12 @@ Let x1, x2 be elements of M.
 Assume that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
 Then Orbit(x1, f, G, M) = Orbit(x2, f, G, M).
 Proof.
-Let us show that Orbit(x1, f, G, M) is a subset of Orbit(x2, f, G, M).
+Let us show that every element of Orbit(x1, f, G, M) is an element of Orbit(x2, f, G, M).
   Let x3 be an element of Orbit(x1, f, G, M).
   x1 is an element of Orbit(x2, f, G, M).
   Thus x3 is an element of Orbit(x2, f, G, M).
 end.
-Let us show that Orbit(x2, f, G, M) is a subset of Orbit(x1, f, G, M).
+Let us show that every element of Orbit(x2, f, G, M) is an element of Orbit(x1, f, G, M).
   Let x3 be an element of Orbit(x2, f, G, M).
   x2 is an element of Orbit(x1, f, G, M).
   Thus x3 is an element of Orbit(x1, f, G, M).
@@ -323,7 +330,7 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Union(OrbitsNotTriv(f, G, M)) = M \\ fixedPoints(M, G, f).
 Proof.
-Let us show that Union(OrbitsNotTriv(f, G, M)) is a subset of M \\ fixedPoints(M, G, f).
+Let us show that every element of Union(OrbitsNotTriv(f, G, M)) is an element of  M \\ fixedPoints(M, G, f).
 Let x be an element of Union(OrbitsNotTriv(f, G, M)).
 Take an element y of M such that x is an element of Orbit(y, f, G, M) and y is not an element of fixedPoints(M, G, f).
 x is an element of M.
@@ -332,7 +339,7 @@ fixedPoints(M , G, f) is a subset of M.
 Hence x is an element of M \\ fixedPoints(M, G, f).
 end.
 
-Let us show that M \\ fixedPoints(M, G, f) is a subset of Union(OrbitsNotTriv(f, G, M)).
+Let us show that every element of M \\ fixedPoints(M, G, f) is an element of Union(OrbitsNotTriv(f, G, M)).
   Let x be an element of M \\ fixedPoints(M , G, f).
   x is an element of M.
   x is not an element of fixedPoints(M , G, f).
@@ -366,12 +373,6 @@ Let k be an integer.
 If M is disjunct collection and  for all elements N of M  k | card(N) then
 k | card(Union(M)).
 
-Axiom.
-Let n be a natural number.
-Let p be a prime number.
-Let k be a natural number.
-If k | p^n then k = 1 or p | k.
-
 
 Lemma.
 Let M be a set.
@@ -385,18 +386,21 @@ Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
     Let N be an element of OrbitsNotTriv(f, G, M).
 
     Take an element x of M such that N = Orbit(x, f, G, M).
-
-    If card(N) = 1 then x is an element of fixedPoints(M, G, f).
-
-    Hence card(N) != 1.
-
-    card(N) = Index(G, Stab(x, f, G, M)).
-
-    Hence card(El(G)) = card(Stab(x, f, G, M))*card(N).
     
-    card(N) is a divisor of card(El(G)).
+    Let us show that card(N) != 1.
+      Assume the contrary.
+       
+      x is not a fixedPoint on M on G of f.
 
-    Hence p | card(N).
+      x is an element of N.
+      Thus x is a fixedPoint on M on G of f.
+
+      Contradiction.
+    end.
+
+    We have card(N) = Index(G, Stab(x, f, G, M)).
+    Hence card(El(G)) = card(Stab(x, f, G, M))*card(N) and card(N) | card(El(G)).
+    Therefore p | card(N).
   end.
 end.
  

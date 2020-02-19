@@ -299,14 +299,34 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) is a subgroup of G.
+Proof.
+
+One(G) is an element of Stab(x, f, G, M).
+
+Let us show that for all elements y, z of Stab(x, f, G, M)  z *^{G} Inv(G)[y] << Stab(x, f, G, M).
+  Let y, z be elements of Stab(x, f, G, M).
+  We have f[(z *^{G} Inv(G)[y], x)] = x.
+  Therefore z *^{G} Inv(G)[y] is an element of Stab(x, f, G, M).
+end.
+
+Therefore the thesis.
+Qed.
 
 
-Definition.
+Lemma.
 Let M be a set.
 Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
-fStabOrb(x, f, G, M) is a function h such that
+Let g, h be elements of El(G).
+If LeftCoset(g, Stab(x, f, G, M), G) = LeftCoset(h, Stab(x, f, G, M), G) then f[(g, x)] = f[(h, x)].
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x << M.
+There is a function h such that
 h is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
 and (for all elements i of El(G) h[LeftCoset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
 
@@ -315,34 +335,34 @@ Let M be a set.
 Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
-fStabOrb(x, f, G, M) is injective and surjective onto Orbit(x, f, G, M).
+Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 Proof.
 
-fStabOrb(x, f, G, M) is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M).
+Take a function h such that
+h is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
+and (for all elements i of El(G) h[LeftCoset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
 
-fStabOrb(x, f, G, M) is surjective onto Orbit(x, f, G, M).
-Proof. Obvious.
+h is surjective onto Orbit(x, f, G, M).
+Proof.
+  Let us show that for every element y of Orbit(x, f, G, M) there is an element z of Dom(f) such that f[z] = y.
+    Let y be an element of Orbit(x, f, G, M).
+    Take an element i of El(G) such that f[(i, x)] = y.
+    Then we have h[LeftCoset(i,Stab(x, f, G, M),G)] = y.
+  end.
+end.
 
-Let us show that fStabOrb(x, f, G, M) is injective.
-  Let h1, h2 be elements of LeftCosets(Stab(x, f, G, M), G).
-  Take elements g1, g2 of El(G) such that
-  h1 = LeftCoset(g1,Stab(x, f, G, M),G) and h2 = LeftCoset(g2, Stab(x, f, G, M),G).
-  Assume fStabOrb(x, f, G, M)[h1] = fStabOrb(x, f, G, M)[h2].
-  Then f[(g1, x)] = f[(g2, x)].
-
-  ((Inv(G)[g2] *^{G} g1), x) is an element of Prod(El(G), M).
-
-   f[((Inv(G)[g2] *^{G} g1), x)] = f[((Inv(G)[g2]*^{G} g2), x)] = x.
+h is injective.
+Proof.
+  Let us show that for all elements h1, h2 of LeftCosets(Stab(x, f, G, M), G) if h[h1] = h[h2] then h1 = h2.
+    Let h1, h2 be elements of LeftCosets(Stab(x, f, G, M), G) such that h[h1] =h[h2].
+    
+    Take elements g1, g2 of El(G) such that h1 = LeftCoset(g1,Stab(x, f, G, M),G) and h2 = LeftCoset(g2, Stab(x, f, G, M),G).
   
-  Thus Inv(G)[g2] *^{G} g1 is an element of Stab(x, f, G, M).
-  
-  Therefore h1 = h2.
+    Then f[(g1, x)] = f[(g2, x)].
+    f[((Inv(G)[g2] *^{G} g1), x)] = f[((Inv(G)[g2]*^{G} g2), x)] = x.
+    
+    Thus Inv(G)[g2] *^{G} g1 is an element of Stab(x, f, G, M).
+    Therefore h1 = h2.
+  end.
 end.
 qed.
-
-Lemma.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-Let x << M.
-Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).

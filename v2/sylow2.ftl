@@ -12,8 +12,20 @@ A subset of M is a set N such that every element of N is an element of M.
 Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
 
+Definition.
+Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
+
 Axiom FunExt.
 Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
+
+
+
+Definition.
+Let M be a set.
+M is empty iff there is no element x of M such that x = x.
+
+Lemma.
+M is not empty iff there is an element x of M such that x = x.
 
 
 [synonym group/-s]
@@ -22,12 +34,10 @@ Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] 
 Signature.
 A group is a notion.
 
-
 Let G denote a group.
 
 Signature.
 El(G) is a  set.
-
 
 Signature.
 One(G) is an object.
@@ -89,18 +99,39 @@ Definition.
 Let H be a subgroup of G.
 LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
 
+
+Definition.
+Let g be an element of El(G).
+Let U be a subgroup of G.
+Conjugate(g, U, G) = {(g *^{G} (u *^{G} Inv(G)[g]))| u is an element of U}.
+
+Definition.
+Let U, V be subgroups of G.
+U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
+
 [synonym integer/-s]
+[synonym number/-s]
 
 Signature Integers. An integer is a notion.
 
+Signature Naturals. A natural number is an integer.
+
 Let a,b,c,n, m stand for integers.
 
-Signature IntZero.  0 is an integer.
-Signature IntOne.   1 is an integer.
+Signature IntZero.  0 is a natural number.
+Signature IntOne.   1 is a natural number.
+
 Signature IntNeg.   -a is an integer.
 Signature IntPlus.  a + b is an integer.
 Signature IntMult.  a * b is an integer.
-Signature.          a ^ b is an integer.
+
+Signature. Let b be a natural number.  a ^ b is an integer.
+
+Axiom. If a and b are natural numbers then a + b is a natural number.
+Axiom. If a and b are natural numbers then a * b is a natural number.
+
+##Natural Numbers
+
 
 Signature. a < b is an atom.
 
@@ -126,7 +157,7 @@ Axiom MulMinOne.    (-1) * a = -a = a * -1.
 Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
 
 Let a is nonzero stand for a != 0.
-Let q, r stand for nonzero integers.
+Let p,q stand for nonzero integers.
 
 [synonym divisor/-s] [synonym divide/-s]
 
@@ -137,30 +168,43 @@ Let a divides b stand for a is a divisor of b.
 Let a | b stand for a is a divisor of b.
 
 Axiom.
-If q | a and q | b then q | (a + b).
+If  q | a and q | b then q | (a + b).
 
 Definition EquMod.  a = b (mod q) iff q | a-b.
 
 Definition NeqMod.  a != b (mod q) iff not (a = b (mod q)).
 
-Axiom EquModRef.    a = a (mod q).
+Lemma EquModRef.    a = a (mod q).
 
-Axiom EquModSym.    a = b (mod q) => b = a (mod q).
+[ontored on]
+Lemma EquModSym.    a = b (mod q) => b = a (mod q).
+Proof.
+    Assume that a = b (mod q).
+    (1) Take n such that q * n = a - b.
+    q * -n .= (-1) * (q * n) (by MulMinOne, MulAsso,MulComm,MulBubble)
+                   .= (-1) * (a - b) (by 1).
+    Therefore q | b-a.
+qed.
 
-Axiom EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
+Lemma EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
+Proof.
+    Assume that a = b (mod q) /\ b = c (mod q).
+    Take n such that q * n = a - b.
+    Take m such that q * m = b - c.
+    We have q * (n + m) = a - c.
+qed.
 
+Lemma EquModMul. a = b (mod p * q) => a = b (mod p) /\ a = b (mod q).
+Proof.
+    Assume that a = b (mod p * q).
+    Take m such that (p * q) * m = a - b.
+    We have p * (q * m) = a - b = q * (p * m).
+qed.
+[/ontored]
 
 Signature Prime.    a is prime is an atom.
 
-Signature NNeg. a is nonnegative is an atom.
-
 Let a prime stand for a prime nonzero integer.
-
-[synonym number/-s]
-
-Let a natural number stand for a nonnegative integer.
-
-Let p denote a prime number.
 
 Signature.
 A finite set is a set.
@@ -169,6 +213,15 @@ Axiom.
 Let M be a finite set.
 Let N be a subset of M.
 N is a finite set.
+
+Axiom.
+Let f be a function such that Dom(f) is a finite set.
+Range(f) is a finite set.
+
+Axiom.
+Let M, N be finite set.
+Prod(M, N) is a finite set.
+
 
 Signature.
 Let M be a finite set.
@@ -192,9 +245,6 @@ Let N be a subset of M.
 If card(M) = card(N) then M = N.
 
 
-
-###Lagrange's Theorem
-
 Definition.
 a finite group is a group G such that El(G) is a finite set.
 
@@ -217,18 +267,12 @@ Axiom.
 Let U be a subgroup of G.
 El(G) = Union(LeftCosets(U, G)).
 
-
-
 Axiom Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
 card(El(G)) = card(U)*card(LeftCosets(U, G)).
 
-
-
 ###Groupactions
-
-
 Definition.
 Let M be a set.
 Let G be a group.
@@ -237,8 +281,6 @@ such that f is from Prod(El(G), M) to M
 and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
 f[((a *^{G}  b), x)] = f[(a, f[(b, x)])].
-
-
 
 Definition.
 Let P be a subgroup of G.
@@ -253,20 +295,19 @@ Let P be a subgroup of G.
 Let U be a subgroup of G.
 Op(U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
 
-
 Definition.
 Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
 Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
 
 Definition.
-Let f be a function from Prod(El(G), M) to M.
+Let f be a groupaction from G on M.
 A fixedpoint on M on G of f is an element y of M such that
 for every element a of El(G) f[(a, y)] = y.
 
 Definition.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
+Let f be a groupaction from G on M.
 fixedPoints(M, G, f) = {y | y is a fixedpoint on M on G of f}.
 
 Definition.
@@ -279,23 +320,36 @@ Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) is a subgroup of G.
 
-
-###
-Axiom.
+Lemma.
 Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Orbit(x,f, G, M) is a finite set.
+Proof.
+  Define h[g] = f[(g, x)] for g in El(G).
+  Dom(h) is a finite set.
+  Orbit(x, f, G, M) is a subset of Range(h).
+  Proof.
+    Let us show that every element of Orbit(x, f, G, M) is an element of Range(h).
+       Let y be an element of Orbit(x, f, G, M).
+
+       We can take an element g1 of El(G) such that y = f[(g1, x)].
+
+       Thus y is an element of Range(h).
+    end.
+  end.
+  Therefore Orbit(x, f, G, M) is a finite set.
+Qed.
              
-###
-Axiom.
+Lemma.
 Let M be a finite set.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
+Let f be a groupaction from G on M.
 fixedPoints(M, G, f) is a finite set.
-
-
-
+Proof.
+  fixedPoints(M, G, f) is a subset of M.
+  Therefore the thesis.
+Qed.
 
 Axiom.
 Let G be a finite group.
@@ -304,7 +358,7 @@ Let x << M.
 Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 
 Signature.
-A group of order p is a finite group H  such that
+A group of order p is a finite group H such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
 Signature.
@@ -320,28 +374,19 @@ Let M be a finite set.
 Let G be a group of order p.
 Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
-[/prove]
 
-Definition.
-Let g be an element of El(G).
-Let U be a subgroup of G.
-Conjugate(g, U, G) = {(g *^{G} (u *^{G} Inv(G)[g]))| u is an element of U}.
-
-Definition.
-Let U, V be subgroups of G.
-U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
-
-###
-Axiom ConjSize.
+Theorem ConjSize.
 Let G be a finite group.
 Let g be an element of El(G).
 Let U be a subgroup of G.
 card(Conjugate(g, U, G)) = card(U).
-
+[/prove]
 
 Definition.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
+
+
 
 ###
 Axiom SylSize.
@@ -372,7 +417,7 @@ Proof.
 
     Take an element u of U such that Inv(G)[g] *^{G} (u *^{G}  g) = i.
 
-    We have LeftCoset(g, P, G)  = f[(u,x)]  =  LeftCoset((u *^{G} g) ,P, G).
+    We have LeftCoset(g, P, G) = f[(u,x)] =  LeftCoset((u *^{G} g) ,P, G).
     Therefore Inv(G)[g] *^{G} (u *^{G}  g) is an element of P (By CosetEq).
   end.
 Qed.
