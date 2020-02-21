@@ -20,8 +20,6 @@ Axiom. If a and b are natural numbers then a + b is a natural number.
 Axiom. If a and b are natural numbers then a * b is a natural number.
 
 ##Natural Numbers
-
-
 Signature. a < b is an atom.
 
 Let a - b stand for a + (-b).
@@ -35,9 +33,12 @@ Axiom MulAsso.      a * (b * c) = (a * b) * c.
 Axiom MulComm.      a * b = b * a.
 Axiom MulOne.       a * 1 = a = 1 * a.
 
-
 Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
                     (a + b) * c = (a*c) + (b*c).
+
+Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
+
+Axiom PotInj.   Let p be an integer. Let n,m be natural numbers. (p ^ n = p ^  m) => n = m.
 
 Lemma MulZero.      a * 0 = 0 = 0 * a.
 Proof. a*(1+(-1)) = (a*1)+(a*(-1))=0. Qed.
@@ -45,7 +46,15 @@ Proof. a*(1+(-1)) = (a*1)+(a*(-1))=0. Qed.
 Lemma MulMinOne.    (-1) * a = -a = a * -1.
 Proof. a+(-1 * a)= (1*a)+(-1 * a) = 0.  Qed.
 
-Lemma ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
+Lemma.
+c != 0 /\ a * c = b * c => a = b.
+Proof.
+Assume c != 0 /\ a * c = b * c.
+
+(1) (a-b)*c = (a * c) - (b * c) = 0.
+
+Therefore a - b = 0 (by ZeroDiv, 1).
+Qed.
 
 Let a is nonzero stand for a != 0.
 Let p,q stand for nonzero integers.
@@ -59,7 +68,7 @@ Let a divides b stand for a is a divisor of b.
 Let a | b stand for a is a divisor of b.
 
 Lemma.
-If  q | a and q | b then q | (a + b).
+q | a /\ q | b =>  q | (a + b).
 
 Definition EquMod.  a = b (mod q) iff q | a-b.
 

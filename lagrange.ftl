@@ -19,7 +19,6 @@ A disjunct collection is a set M such that
 (for all elements N of M N is a set) and for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
 
 
-
 Definition.
 Prod(M,N) = { (x,y) | x << M and y << N }.
 
@@ -38,7 +37,15 @@ Let f be a function. f is bijection from M to N iff (f is injective and f is fro
 Axiom FunExt.
 Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
 
+
+Definition.
+Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
+
+
 [synonym group/-s]
+
+
+[synonym set/-s]
 
 ##Definition von Gruppen
 
@@ -205,11 +212,29 @@ Signature Prime.    a is prime is an atom.
 
 Let a prime stand for a prime nonzero integer.
 
+
 Signature.
 A finite set is a set.
 
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+N is a finite set.
+
+Axiom.
+Let f be a function such that Dom(f) is a finite set.
+Range(f) is a finite set.
+
+Axiom.
+Let M, N be finite set.
+Prod(M, N) is a finite set.
+
+Axiom.
+Let M be a finite set such that for all elements N of M N is a finite set.
+Union(M) is a finite set.
+
 Signature.
-Let M be a set.
+Let M be a finite set.
 card(M) is a natural number.
 
 Definition.
@@ -218,16 +243,29 @@ a finite group is a group G such that El(G) is a finite set.
 
 
 Axiom cardUnion.
-Let M be a set such that for all elements N of M N is a set.
+Let M be a finite set such that for all elements N of M N is a finite set.
 Let N be an element of M.
 If M is disjunct collection and for all elements N1, N2 of M card(N1) = card(N2)
 then card(Union(M)) = card(N)*card(M).
 
+
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and f is injective and f is surjective onto N2).
 
+Axiom.
+Let U be a subgroup of G.
+El(G) = Union(LeftCosets(U, G)).
+
+###
+Axiom.
+Let G be a finite group.
+Let U be a subgroup of G.
+LeftCosets(U, G) is a finite set.
+###
+
 Definition.
+Let G be a finite group.
 Let U be a subgroup of G.
 Index(G, U) = card(LeftCosets(U, G)).
 
@@ -298,7 +336,7 @@ Let us show that for all elements g of El(G) card(LeftCoset(g, U, G)) = card(U).
   end.
 end.
 
-LeftCosets(U, G) is a disjunct collection and for all elements N1, N2 of LeftCosets(U, G) card(N1) = card(N2).
+(1) LeftCosets(U, G) is a disjunct collection and for all elements N1, N2 of LeftCosets(U, G) card(N1) = card(N2).
 
-Therefore card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)) (by cardUnion).
+Therefore card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)) (by cardUnion, 1).
 Qed.
