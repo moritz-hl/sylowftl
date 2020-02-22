@@ -8,7 +8,16 @@ A subset of M is a set N such that every element of N is an element of M.
 
 Definition.
 Let M be a set such that for all elements N of M N is a set.
-Union(M) = {x | There is an element N of M such that x is an element of N}.
+\-/ M = {x | There is an element N of M such that x is an element of N}.
+
+Definition.
+Let N1, N2 be sets.
+N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
+
+Definition.
+Let N1 be a set.
+Let N2 be a subset of N1.
+N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
 
 Definition.
 Let N1, N2 be a sets.
@@ -135,39 +144,28 @@ Axiom.
 Let M, N be finite set.
 Prod(M, N) is a finite set.
 
-
 Signature.
 Let M be a finite set.
 card(M) is a natural number.
 
 Axiom.
 Let M be a set such that for all elements N of M N is a finite set.
-Union(M) is a finite set.
-
-Definition.
-Let N1, N2 be sets.
-N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
+\-/ M is a finite set.
 
 Axiom.
 Let N1, N2 be finite sets.
 N1 \-/ N2 is a finite set.
 
-Definition.
-Let N1 be a set.
-Let N2 be a subset of N1.
-N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
-
 Axiom.
 Let N1, N2 be finite sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
-
 
 Axiom cardUnion.
 Let  M be a finite set such that for all elements N of M N is a finite set.
 Assume M is a disjunct collection.
 Assume that for all elements N1, N2 of M card(N1) = card(N2).
 Let N be an element of M.
-card(Union(M)) = card(N)*card(M).
+card(\-/M) = card(N)*card(M).
 
 Axiom.
 Let N1, N2 be finite sets.
