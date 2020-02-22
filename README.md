@@ -1,4 +1,4 @@
-#Der zweite Satz von Sylow in Naproche / FTL
+# Der zweite Satz von Sylow in Naproche / FTL
 
 ## 01basicgrptheory.ftl
 
