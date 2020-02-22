@@ -85,16 +85,16 @@ and (for all elements x, y of U x *^{Gr(U, G)} y = x *^{G} y).
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
+Coset(g, H, G) = {g *^{G} h | h << H}.
 
 Axiom CosetEq.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Inv(G)[g2]*^{G}  g1 << H iff LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Inv(G)[g2]*^{G}  g1 << H iff Coset(g1, H, G) = Coset(g2, H, G).
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+Cosets(H, G) = {Coset(g, H, G) | g << El(G)}.
 
 
 Definition.
@@ -235,26 +235,25 @@ Let G be a finite group.
 Let U be a subgroup of G.
 U is a finite set.
 
-
 ###
 Axiom.
 Let G be a finite group.
 Let U be a subgroup of G.
-LeftCosets(U, G) is a finite set.
+Cosets(U, G) is a finite set.
 
 Definition.
 Let G be a finite group.
 Let U be a subgroup of G.
-Index(G, U) = card(LeftCosets(U, G)).
+Index(G, U) = card(Cosets(U, G)).
 
 Axiom.
 Let U be a subgroup of G.
-El(G) = Union(LeftCosets(U, G)).
+El(G) = Union(Cosets(U, G)).
 
 Axiom Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*card(LeftCosets(U, G)).
+card(El(G)) = card(U)*card(Cosets(U, G)).
 
 ###Groupactions
 Definition.
@@ -270,14 +269,14 @@ Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
 Op(U, P, G) is a function f 
-such that f is from Prod(El(Gr(U, G)), LeftCosets(P, G)) to LeftCosets(P, G) and
+such that f is from Prod(El(Gr(U, G)), Cosets(P, G)) to Cosets(P, G) and
 for all elements u of U for all elements x of El(G) 
-f[(u, LeftCoset(x, P, G))] = LeftCoset(u *^{G}  x,P, G).
+f[(u, Coset(x, P, G))] = Coset(u *^{G}  x,P, G).
 
 Axiom.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
+Op(U, P, G) is a groupaction from Gr(U, G) on Cosets(P, G).
 
 Definition.
 Let f be a function from Prod(El(G), M) to M.
@@ -357,54 +356,46 @@ A subgroup of G of order p is a subgroup U of G such that
 
 
 ###Fixed Points Lemma.
-
-[prove off]
-Theorem FixPointsMod.
+Axiom FixPointsMod.
 Let M be a finite set.
 Let G be a group of order p.
 Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
 
-Theorem ConjSize.
+Axiom ConjSize.
 Let G be a finite group.
 Let g be an element of El(G).
 Let U be a subgroup of G.
 card(Conjugate(g, U, G)) = card(U).
-[/prove]
+
 
 Definition.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
 
-Lemma SylSize.
+###Todo
+Axiom SylSize.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
-Proof.
-Take natural numbers n, m such that card(U) = p^n and card(P) = p^m.
-Let us show that n = m.
-Assume the contrary.
-Case m < n.
-n-m is a natural number.
-p^n = (p^(n-m))*(p^m).
-
-(p^n)*Index(G, U) = card(El(G)).
-
-(Index(G, U)*(p^(n-m)))*(p^m) = card(El(G)) = Index(G, P)*(p^m).
-
-Hence (Index(G, U)*(p^(n-m))) = Index(G, P).
-
-p | (Index(G, U)*(p^(n-m))).
-
-contradiction.
-end.
-Case n < m.
-
-
-end.
-end.
-Qed.
+#Proof.
+##Take natural numbers n, m such that card(U) = p^n and card(P) = p^m.
+##Let us show that n = m.
+#Assume the contrary.
+#Case m < n.
+#n-m is a natural number.
+#p^n = (p^(n-m))*(p^m).
+#(p^n)*Index(G, U) = card(El(G)).
+#(Index(G, U)*(p^(n-m)))*(p^m) = card(El(G)) = Index(G, P)*(p^m).
+#Hence (Index(G, U)*(p^(n-m))) = Index(G, P).
+#p | (Index(G, U)*(p^(n-m))).
+#contradiction.
+#end.
+#Case n < m.
+#end.
+#end.
+#Qed.
 
 Theorem Sylow2a.
 Let G be a finite group.
@@ -412,27 +403,27 @@ Let P be an element of Syl(p, G).
 Let U be a subgroup of G of order p.
 Then there is an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
 Proof.
-  Take a groupaction f from Gr(U, G) on LeftCosets(P, G) such that f = Op(U, P, G).
+  Take a groupaction f from Gr(U, G) on Cosets(P, G) such that f = Op(U, P, G).
   
-  Let us show that card(fixedPoints(LeftCosets(P, G), Gr(U, G),  f)) != 0.
-     card(fixedPoints(LeftCosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
-     
+  Let us show that card(fixedPoints(Cosets(P, G), Gr(U, G),  f)) != 0.
+     card(fixedPoints(Cosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
      p does not divide Index(G, P).
-     
      Therefore Index(G, P) != 0 (mod p).
   end.
   
-  We can take an element x of fixedPoints(LeftCosets(P, G), Gr(U, G),  f)
-  and an element g of El(G) such that x = LeftCoset(g, P, G).
+  We can take an element x of fixedPoints(Cosets(P, G), Gr(U, G),  f)
+  and an element g of El(G) such that x = Coset(g, P, G).
   
   Let us show that every element of Conjugate(Inv(G)[g], U, G) is an element of P.
     Let h  be an element of Conjugate(Inv(G)[g], U, G).
 
     Take an element u of U such that h = Inv(G)[g] *^{G} (u *^{G}  g).
 
-    We have LeftCoset(g, P, G) = f[(u,x)] =  LeftCoset((u *^{G} g) ,P, G).
+    We have Coset(g, P, G) = f[(u,x)] =  Coset((u *^{G} g) ,P, G).
 
     Therefore Inv(G)[g] *^{G} (u *^{G}  g) is an element of P (By CosetEq).
+
+    Thus h is an element of P.
   end.
 Qed.
 

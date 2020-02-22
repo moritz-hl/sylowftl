@@ -137,17 +137,12 @@ Proof.
   Take b << H such that y = g1 *^{G} b.
   Take c << H such that y = g2 *^{G} c.
 
-  g1 = y *^{G} Inv(G)[b].
-  g2 = y *^{G} Inv(G)[c].
-  Inv(G)[g2] = c *^{G} Inv(G)[y].
+  We have g1 = y *^{G} Inv(G)[b].
+          g2 = y *^{G} Inv(G)[c].
+          Inv(G)[g2] = c *^{G} Inv(G)[y].
+          Inv(G)[y] *^{G} g1 = Inv(G)[b].
 
-  Inv(G)[g2] *^{G} g1 = (c *^{G} Inv(G)[y]) *^{G}  g1.
-
-
-  Inv(G)[y] *^{G} g1 = Inv(G)[y] *^{G} (y *^{G} Inv(G)[b])
-  = (Inv(G)[y] *^{G} y) *^{G} Inv(G)[b].
-
-  (Inv(G)[g2] *^{G}  g1) = c *^{G} (Inv(G)[y] *^{G} g1).
+  Therefore Inv(G)[g2] *^{G}  g1 = c *^{G} (Inv(G)[b]).
 qed.
 
 
@@ -225,6 +220,15 @@ Let us show that for every elements N1, N2 of Cosets(U, G) N1 = N2 or (N1 and N2
   If N1 and N2 are not disjunct then N1 = N2 (by CosEq).
   Therefore the thesis.
 end.
+Qed.
+
+Lemma.
+Let G be a group.
+Let U be a subgroup of G.
+U is a coset of U in G.
+Proof.
+We have U = Coset(1^G, U, G).
+Therefore the thesis.
 Qed.
 
 Definition.

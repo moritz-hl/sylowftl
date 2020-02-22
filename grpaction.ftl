@@ -98,14 +98,14 @@ Then H is a subgroup of G.
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
+(g, H, G) = {g *^{G} h | h << H}.
 
 
 
 Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
+Assume there is an element y of El(G) such that (y << (g1, H, G) and y << (g2, H, G)).
 Then Inv(G)[g2] *^{G} g1 << H.
 
 Let Mul(G)[(a, b)] stand for a *^{G} b.
@@ -114,31 +114,31 @@ Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Assume Inv(G)[g2] *^{G} g1 << H.
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Then (g1, H, G) = (g2, H, G).
 
 
 
 Axiom CosEq.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Assume there is an element y of El(G) such that (y << (g1, H, G) and y << (g2, H, G)).
+Then (g1, H, G) = (g2, H, G).
 
 Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Inv(G)[g2]*^{G}  g1 << H Iff LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Inv(G)[g2]*^{G}  g1 << H Iff (g1, H, G) = (g2, H, G).
 
 Axiom.
 Let H be a subgroup of G.
 Let g be an element of El(G).
 Let h be an element of El(G).
-Assume g is an element of LeftCoset(h, H, G).
-Then LeftCoset(g, H, G) = LeftCoset(h, H, G).
+Assume g is an element of (h, H, G).
+Then (g, H, G) = (h, H, G).
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+s(H, G) = {(g, H, G) | g << El(G)}.
 
 Definition.
 Let M be a set.
@@ -153,16 +153,16 @@ Lemma.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
 Let u be an element of U.
-Let x, y be elements of El(G) such that LeftCoset(x, P, G) = LeftCoset(y, P, G). 
-Then LeftCoset(u *^{G} x, P, G) = LeftCoset(u *^{G} y, P, G).
+Let x, y be elements of El(G) such that (x, P, G) = (y, P, G). 
+Then (u *^{G} x, P, G) = (u *^{G} y, P, G).
 Proof.
-  Let us show that every element of LeftCoset(u *^{G} x, P, G) is an element of  LeftCoset(u *^{G} y, P, G).
-    Let i be an element of LeftCoset(u *^{G} x, P, G).
+  Let us show that every element of (u *^{G} x, P, G) is an element of  (u *^{G} y, P, G).
+    Let i be an element of (u *^{G} x, P, G).
     Take an element p of P such that i =  (u *^{G} x) *^{G} p.
     Then we have Inv(G)[u] *^{G} i =  x *^{G} p.
-    Inv(G)[u] *^{G} i is an element of LeftCoset(x, P, G).
-    Therefore Inv(G)[u] *^{G} i is an element of LeftCoset(y, P, G)
-    and i is an element of LeftCoset(u *^{G} y, P, G).
+    Inv(G)[u] *^{G} i is an element of (x, P, G).
+    Therefore Inv(G)[u] *^{G} i is an element of (y, P, G)
+    and i is an element of (u *^{G} y, P, G).
   end.
 qed.
 
@@ -172,20 +172,20 @@ Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
 Op(U, P, G) is a function f 
-such that f is from Prod(El(Gr(U, G)), LeftCosets(P, G)) to LeftCosets(P, G) and
+such that f is from Prod(El(Gr(U, G)), s(P, G)) to s(P, G) and
 for all elements u of U for all elements x of El(G) 
-f[(u, LeftCoset(x, P, G))] = LeftCoset(u *^{G}  x,P, G).
+f[(u, (x, P, G))] = (u *^{G}  x,P, G).
 
 
 
 Lemma.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(U, P, G) is a groupaction from Gr(U, G) on LeftCosets(P, G).
+Op(U, P, G) is a groupaction from Gr(U, G) on s(P, G).
 Proof.
 Take a function f such that f = Op(U, P, G).
 Take a group H such that  H = Gr(U, G).
-Take a set M such that M = LeftCosets(P, G).
+Take a set M such that M = s(P, G).
 
 For every element x of M we have f[(One(H), x)] = x.
 
@@ -194,13 +194,13 @@ Let us show that for every element x of M for all elements a, b of El(H)
   Let x be an element of M.
   Let a, b be elements of El(H).
 
-  Take an element g of El(G) such that x = LeftCoset(g, P, G).
+  Take an element g of El(G) such that x = (g, P, G).
 
-  We have f[(b, x)] = LeftCoset(b *^{G} g,P, G).
+  We have f[(b, x)] = (b *^{G} g,P, G).
 
-  f[(a, f[(b, x)])] = LeftCoset(a *^{G} (b *^{G} g),P, G).
+  f[(a, f[(b, x)])] = (a *^{G} (b *^{G} g),P, G).
 
-  f[(a *^{H}  b, x)] = LeftCoset((a *^{G} b)*^{G} g,P, G).
+  f[(a *^{H}  b, x)] = ((a *^{G} b)*^{G} g,P, G).
 
   Thus f[(a, f[(b, x)])] = f[(a *^{H} b, x)].
 end.

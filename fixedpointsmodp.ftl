@@ -81,14 +81,14 @@ and (for all elements x, y of U x *^{Gr(U, G)} y = x *^{G} y).
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
+(g, H, G) = {g *^{G} h | h << H}.
 
 
 
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+s(H, G) = {(g, H, G) | g << El(G)}.
 
 [synonym integer/-s]
 
@@ -212,14 +212,9 @@ card(M) = 1 iff there is an element y of M such that for all elements x of M x =
 
 Definition.
 Let U be a subgroup of G.
-Index(G, U) = card(LeftCosets(U, G)).
-
-
-
+Index(G, U) = card(s(U, G)).
 
 ###Groupactions
-
-
 Definition.
 Let M be a set.
 Let G be a group.
@@ -282,7 +277,7 @@ Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 Axiom Lagrange.
 Let G be a group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*card(LeftCosets(U, G)).
+card(El(G)) = card(U)*card(s(U, G)).
 
 
 Lemma.
