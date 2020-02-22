@@ -1,4 +1,4 @@
-##basicgrptheory.ftl
+#basicgrptheory.ftl
 
 * Gruppe als Notion (43-72)
 * Inverses, Eins sind eindeutig (73-79)
@@ -10,13 +10,13 @@
 * Gruppe ist disjunkte Vereinigung der Nebenklassen (193 - 223)
 * Konjugation (234-241)
 
-##numbers.ftl
+#numbers.ftl
 
 * Integers + Natural Numbers (1 - 58)
 * Teilbarkeit (59 - 71)
 * Modulo Rechnung (73 - 102)
 * Primzahlen (105 - )
 
-##cards.ftl
+#cards.ftl
 
 * "Finite Set" ()
