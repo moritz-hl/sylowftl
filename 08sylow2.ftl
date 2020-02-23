@@ -374,9 +374,9 @@ Then there is an element g of El(G) such that Conjugate(g, U, G) is a subset of 
 Proof.
   Take a groupaction f from Gr(U, G) on Cosets(P, G) such that f = Op(U, P, G).
   
-  Let us show that card(fixedPoints(Cosets(P, G), Gr(U, G),  f)) != 0.
-     card(fixedPoints(Cosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
-     p does not divide Index(G, P).
+  Let us show that card(fixedPoints(Cosets(P, G), Gr(U, G), f)) !=  0.
+     We have card(fixedPoints(Cosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
+             p does not divide Index(G, P).
      Therefore Index(G, P) != 0 (mod p).
   end.
   

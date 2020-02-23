@@ -121,14 +121,14 @@ Then H is a subgroup of G.
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
+Coset(g, H, G) = {g *^{G} h | h << H}.
 
 
 
 Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
+Assume there is an element y of El(G) such that (y << Coset(g1, H, G) and y << Coset(g2, H, G)).
 Then Inv(G)[g2] *^{G} g1 << H.
 
 Let Mul(G)[(a, b)] stand for a *^{G} b.
@@ -137,33 +137,33 @@ Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Assume Inv(G)[g2] *^{G} g1 << H.
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Then Coset(g1, H, G) = Coset(g2, H, G).
 
 
 
 Axiom CosEq.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Assume there is an element y of El(G) such that (y << LeftCoset(g1, H, G) and y << LeftCoset(g2, H, G)).
-Then LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Assume there is an element y of El(G) such that (y << Coset(g1, H, G) and y << Coset(g2, H, G)).
+Then Coset(g1, H, G) = Coset(g2, H, G).
 
 Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Inv(G)[g2]*^{G}  g1 << H Iff LeftCoset(g1, H, G) = LeftCoset(g2, H, G).
+Inv(G)[g2]*^{G}  g1 << H Iff Coset(g1, H, G) = Coset(g2, H, G).
 
 Axiom.
 Let H be a subgroup of G.
 Let g be an element of El(G).
 Let h be an element of El(G).
-Assume g is an element of LeftCoset(h, H, G).
-Then LeftCoset(g, H, G) = LeftCoset(h, H, G).
+Assume g is an element of Coset(h, H, G).
+Then Coset(g, H, G) = Coset(h, H, G).
 
 
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+Cosets(H, G) = {Coset(g, H, G) | g << El(G)}.
 
 [synonym integer/-s]
 
@@ -274,26 +274,26 @@ If card(M) = card(N) then M = N.
 Axiom.
 Let G be a finite group.
 Let U be a subgroup of G.
-LeftCosets(U, G) is a finite set.
+Cosets(U, G) is a finite set.
 
 Definition.
 Let G be a finite group.
 Let U be a subgroup of G.
-Index(G, U) = card(LeftCosets(U, G)).
+Index(G, U) = card(Cosets(U, G)).
 
 Axiom.
 Let U be a subgroup of G.
-El(G) = Union(LeftCosets(U, G)).
+El(G) = Union(Cosets(U, G)).
 
 Axiom.
 Let G be a group.
 Let U be a subgroup of G.
-LeftCosets(U, G) is disjunct collection.
+Cosets(U, G) is disjunct collection.
 
 Axiom Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
-card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)).
+card(Union(Cosets(U, G))) = card(U)*card(Cosets(U, G)).
 
 
 Definition.
@@ -345,7 +345,7 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
 Let g, h be elements of El(G).
-If LeftCoset(g, Stab(x, f, G, M), G) = LeftCoset(h, Stab(x, f, G, M), G) then f[(g, x)] = f[(h, x)].
+If Coset(g, Stab(x, f, G, M), G) = Coset(h, Stab(x, f, G, M), G) then f[(g, x)] = f[(h, x)].
 
 ##"Welldefined" by the previous Lemma.
 Axiom.
@@ -354,8 +354,8 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Let x << M.
 There is a function h such that
-h is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[LeftCoset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
 
 Lemma.
 Let G be a finite group.
@@ -387,24 +387,24 @@ Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 Proof.
 
 Take a function h such that
-h is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[LeftCoset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
 
 h is surjective onto Orbit(x, f, G, M).
 Proof.
   Let us show that for every element y of Orbit(x, f, G, M) there is an element z of Dom(f) such that f[z] = y.
     Let y be an element of Orbit(x, f, G, M).
     Take an element i of El(G) such that f[(i, x)] = y.
-    Then we have h[LeftCoset(i,Stab(x, f, G, M),G)] = y.
+    Then we have h[Coset(i,Stab(x, f, G, M),G)] = y.
   end.
 end.
 
 h is injective.
 Proof.
-  Let us show that for all elements h1, h2 of LeftCosets(Stab(x, f, G, M), G) if h[h1] = h[h2] then h1 = h2.
-    Let h1, h2 be elements of LeftCosets(Stab(x, f, G, M), G) such that h[h1] =h[h2].
+  Let us show that for all elements h1, h2 of Cosets(Stab(x, f, G, M), G) if h[h1] = h[h2] then h1 = h2.
+    Let h1, h2 be elements of Cosets(Stab(x, f, G, M), G) such that h[h1] =h[h2].
     
-    Take elements g1, g2 of El(G) such that h1 = LeftCoset(g1,Stab(x, f, G, M),G) and h2 = LeftCoset(g2, Stab(x, f, G, M),G).
+    Take elements g1, g2 of El(G) such that h1 = Coset(g1,Stab(x, f, G, M),G) and h2 = Coset(g2, Stab(x, f, G, M),G).
   
     Then f[(g1, x)] = f[(g2, x)].
     f[((Inv(G)[g2] *^{G} g1), x)] = f[((Inv(G)[g2]*^{G} g2), x)] = x.

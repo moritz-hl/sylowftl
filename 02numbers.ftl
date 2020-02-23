@@ -118,6 +118,12 @@ Signature Prime.    a is prime is an atom.
 
 Let a prime stand for a prime nonzero integer.
 
+Axiom.
+Let n be a natural number.
+Let p be a prime number.
+Let k be a natural number.
+If k | p^n then k = 1 or p | k.
+
 Lemma.
 Let p be a prime.
 Let a, b be natural numbers.

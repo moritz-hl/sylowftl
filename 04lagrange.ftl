@@ -112,25 +112,25 @@ Then H is a subgroup of G.
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
+Coset(g, H, G) = {g *^{G} h | h << H}.
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+Cosets(H, G) = {Coset(g, H, G) | g << El(G)}.
 
 Axiom.
 Let U be a subgroup of G.
-El(G) = Union(LeftCosets(U, G)).
-
-Axiom.
-Let G be a group.
-Let U be a subgroup of G.
-LeftCosets(U, G) is a disjunct collection.
+El(G) = Union(Cosets(U, G)).
 
 Axiom.
 Let G be a group.
 Let U be a subgroup of G.
-U is an element of LeftCosets(U, G).
+Cosets(U, G) is a disjunct collection.
+
+Axiom.
+Let G be a group.
+Let U be a subgroup of G.
+U is an element of Cosets(U, G).
 
 Definition.
 Let g be an element of El(G).
@@ -257,23 +257,23 @@ card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and 
 
 Axiom.
 Let U be a subgroup of G.
-El(G) = Union(LeftCosets(U, G)).
+El(G) = Union(Cosets(U, G)).
 
 Lemma.
 Let G be a finite group.
 Let U be a subgroup of G.
-LeftCosets(U, G) is a finite set.
+Cosets(U, G) is a finite set.
 Proof.
-Define f[g] = LeftCoset(g, U, G) for g in El(G).
-LeftCosets(U, G) is a subset of  Range(f).
-Therefore the thesis.
+  Define f[g] = Coset(g, U, G) for g in El(G).
+  Cosets(U, G) is a subset of  Range(f).
+  Therefore the thesis.
 Qed.
 
 
 Definition.
 Let G be a finite group.
 Let U be a subgroup of G.
-Index(G, U) = card(LeftCosets(U, G)).
+Index(G, U) = card(Cosets(U, G)).
 
 Lemma.
 Let G be a finite group.
@@ -313,12 +313,12 @@ qed.
 Theorem Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*card(LeftCosets(U, G)).
+card(El(G)) = card(U)*card(Cosets(U, G)).
 Proof.
-Let us show that for all elements g of El(G) card(LeftCoset(g, U, G)) = card(U).
+Let us show that for all elements g of El(G) card(Coset(g, U, G)) = card(U).
   Let g be an element of El(G).
   Define f[u] = g *^{G} u for u in U.
-  f is from U to LeftCoset(g, U, G).
+  f is from U to Coset(g, U, G).
   f is injective.
   Proof.
     Let us show that for all  elements u1, u2 of U If f[u1] = f[u2] then u1 = u2.
@@ -330,10 +330,10 @@ Let us show that for all elements g of El(G) card(LeftCoset(g, U, G)) = card(U).
     Therefore the thesis.
   end.
 
-  f is surjective onto LeftCoset(g, U, G).
+  f is surjective onto Coset(g, U, G).
   Proof.
-    Let us show that for every element y of LeftCoset(g, U, G) there is an element u of U such that f[u] = y.
-      Let y be an element of LeftCoset(g, U, G).
+    Let us show that for every element y of Coset(g, U, G) there is an element u of U such that f[u] = y.
+      Let y be an element of Coset(g, U, G).
       Take an element u of U such that y = g*^{G} u.
       Then f[u] = y.
     end.
@@ -342,9 +342,9 @@ Let us show that for all elements g of El(G) card(LeftCoset(g, U, G)) = card(U).
   end.
 end.
 
-(1) LeftCosets(U, G) is a disjunct collection and for all elements N1, N2 of LeftCosets(U, G) card(N1) = card(N2).
-(2) LeftCosets(U, G) is a finite set such that for all element N1 of LeftCosets(U, G) N1 is a finite set.
-(3) U is an element of LeftCosets(U, G).
+(1) Cosets(U, G) is a disjunct collection and for all elements N1, N2 of Cosets(U, G) card(N1) = card(N2).
+(2) Cosets(U, G) is a finite set such that for all element N1 of Cosets(U, G) N1 is a finite set.
+(3) U is an element of Cosets(U, G).
 
-Therefore card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)) (by cardUnion, 1, 2, 3).
+Therefore card(Union(Cosets(U, G))) = card(U)*card(Cosets(U, G)) (by cardUnion, 1, 2, 3).
 Qed.

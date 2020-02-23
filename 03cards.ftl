@@ -120,7 +120,6 @@ Axiom PrimeDivisor. n has a prime divisor iff n != 1 /\ n != -1.
 
 
 [synonym number/-s]
-
 Signature.
 Let y be a integer.
 y is nonnegative is an atom.

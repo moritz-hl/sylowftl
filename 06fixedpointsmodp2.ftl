@@ -1,8 +1,7 @@
 ###Fixed Points mod p
-
+[synonym set/-s]
 Let M, N denote sets.
 Let x << M stand for x is an element of M.
-
 Definition.
 Prod(M,N) = { (x,y) | x << M and y << N }.
 
@@ -10,7 +9,31 @@ Definition.
 A subset of M is a set N such that every element of N is an element of M.
 
 Definition.
+Let M be a set such that every element of M is a set.
+Union(M) = {x | There is an element N of M such that x is an element of N}.
+
+Definition.
+Let N1, N2 be a sets.
+N1 and N2 are disjunct iff there is no element of N1 that is an element of N2.
+
+Definition.
+A disjunct collection is a set M such that 
+(every element of M is a set) and for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
+
+Definition.
+Let N1, N2 be sets.
+N1 \-/ N2 = {x | x is an element of N1 or x is  an element of N2}.
+
+Definition.
+Let N1 be a set.
+Let N2 be a subset of N1.
+N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
+
+Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
+
+Definition.
+Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
 
 Axiom FunExt.
 Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
@@ -19,9 +42,6 @@ Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] 
 
 Signature.
 A group is a notion.
-
-Signature.
-a finite group is a group.
 
 Let G denote a group.
 
@@ -77,18 +97,14 @@ and (One(H) = One(G))
 and (for every x << U Inv(H)[x] = Inv(G)[x])
 and (for all elements x, y of U x *^{Gr(U, G)} y = x *^{G} y).
 
-
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
-LeftCoset(g, H, G) = {g *^{G} h | h << H}.
-
-
-
+Coset(g, H, G) = {g *^{G} h | h << H}.
 
 Definition.
 Let H be a subgroup of G.
-LeftCosets(H, G) = {LeftCoset(g, H, G) | g << El(G)}.
+Cosets(H, G) = {Coset(g, H, G) | g << El(G)}.
 
 [synonym integer/-s]
 
@@ -130,7 +146,6 @@ Let a is nonzero stand for a != 0.
 Let p,q stand for nonzero integers.
 
 [synonym divisor/-s] [synonym divide/-s]
-
 Definition Divisor. A divisor of b is a integer a
                     such that for some n (a * n = b).
 
@@ -168,53 +183,83 @@ Let p be a prime number.
 Let k be a natural number.
 If k | p^n then k = 1 or p | k.
 
-
 Signature.
 A finite set is a set.
 
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+N is a finite set.
+
+Axiom RanFin.
+Let f be a function such that Dom(f) is a finite set.
+Range(f) is a finite set.
+
+Axiom.
+Let M, N be finite set.
+Prod(M, N) is a finite set.
+
+Axiom.
+Let M be a finite set such that for all elements N of M N is a finite set.
+Union(M) is a finite set.
+
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
 Signature.
-Let M be a set.
+Let M be a finite set.
 card(M) is a natural number.
 
-Let the cardinality of M stand for card(M).
-
-
-Definition.
-Let M be a set such that for all elements N of M N is a set.
-Union(M) = {x | There is an element N of M such that x is an element of N}.
-
-Definition.
-Let N1, N2 be a sets.
-N1 and N2 are disjunct iff there is no element x of N1 such that x is an element of N2.
-
-Definition.
-Let N1, N2 be sets.
-N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
-
-Definition.
-Let N1 be a set.
-Let N2 be a subset of N1.
-N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
-
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
-
 Definition.
-Let M be a set such that for all elements N of M N is a set.
-M is disjunct collection iff for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
+a finite group is a group G such that El(G) is a finite set.
+
+
+Axiom cardUnion.
+Let M be a finite set such that every element of M is a finite set.
+Let N be an element of M.
+If M is disjunct collection and for all elements N1, N2 of M card(N1) = card(N2)
+then card(Union(M)) = card(N)*card(M).
+
+Axiom cardUnion2.
+Let M be a finite set such that every element of M is a finite set.
+Let k be an integer.
+If M is disjunct collection and  for all elements N of M  k | card(N) then
+k | card(Union(M)).
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
+If card(M) != 0 then there is an element x of M such that x = x.
+
+Axiom.
+Let M be a finite set.
 card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
 
+Axiom.
+Let M be a finite set.
+Assume 1 < card(M).
+Let x be an element of M.
+Then there is an element y of M such that x != y.
+
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+If card(M) = card(N) then M = N.
+
+Axiom.
+Let G be a finite group.
+Let U be a subgroup of G.
+Cosets(U, G) is a finite set.
 
 Definition.
+Let G be a finite group.
 Let U be a subgroup of G.
-Index(G, U) = card(LeftCosets(U, G)).
+Index(G, U) = card(Cosets(U, G)).
 
-###Groupactions
 Definition.
 Let M be a set.
 Let G be a group.
@@ -231,6 +276,12 @@ Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
 Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
 
+Axiom. #05, 360
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x << M.
+Orbit(x,f, G, M) is a finite set.
+
 Definition.
 Let M be a set.
 Let G be a group.
@@ -246,11 +297,10 @@ fixedPoints(M, G, f) = {y | y is a fixedpoint on M on G of f}.
 
 Lemma.
 Let M be a set.
-Let G be a group.
+Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x be an element of M.
 x is a fixedpoint on M on G of f iff card(Orbit(x, f, G, M)) = 1.
-
 
 Definition.
 Let M be a set.
@@ -268,17 +318,15 @@ Stab(x,f, G, M) is a subgroup of G.
 
 Axiom.
 Let M be a set.
-Let G be a group.
+Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 
-
-Axiom Lagrange.
-Let G be a group.
+Axiom Lagrange. #pr04
+Let G be a finite group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*card(LeftCosets(U, G)).
-
+card(El(G)) = card(U)*card(Cosets(U, G)).
 
 Lemma.
 Let M be a set.
@@ -310,13 +358,13 @@ Lemma.
 Let M be a set.
 Let G be a group.
 Let f be a groupaction from G on M.
-OrbitsNotTriv(f, G, M) is a set such that for all elements N of OrbitsNotTriv(f, G, M) N is a set.
+Every element of OrbitsNotTriv(f, G, M) is a set.
 
 Lemma.
 Let M be a set.
 Let G be a group.
 Let f be a groupaction from G on M.
-OrbitsNotTriv(f, G, M) is disjunct collection.
+OrbitsNotTriv(f, G, M) is a disjunct collection.
 
 Lemma.
 Let M be a set.
@@ -355,27 +403,54 @@ Let G be a group.
 Let f be a groupaction from G on M.
 Union(OrbitsNotTriv(f, G, M)) \-/ fixedPoints(M, G, f) = M.
 
+Lemma.
+Let M be a finite set.
+Let G be a group.
+Let f be a groupaction from G on M.
+fixedPoints(M, G, f) is a finite set.
+Proof.
+  Let us show that  every element of fixedPoints(M, G, f) is an element of M.
+    Let x be an element of fixedPoints(M, G, f).
+    Then x is an element of M.
+  end.
+
+   fixedPoints(M, G, f) is a subset of M.
+
+   Therefore the thesis.
+Qed.
+
 Signature.
 Let p be a prime number.
-A group of order p is a group H  such that
+A group of order p is a finite group H such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
-
-Axiom cardUnion2.
-Let M be a set such that for all elements N of M N is a set.
+Axiom cardUnion3.
+Let M be a finite set such that every element of M is a finite set.
 Let k be an integer.
 If M is disjunct collection and  for all elements N of M  k | card(N) then
 k | card(Union(M)).
 
-
 Lemma.
-Let M be a set.
+Let M be a finite set.
 Let p be a prime number.
 Let G be a group of order p.
 Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
 Proof.
+
+[prove off]
+  OrbitsNotTriv(f, G, M) is a finite set.
+  Proof.
+    Union(OrbitsNotTriv(f, G, M)) is a subset of M.
+  end.
+[/prove]
 Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
+  OrbitsNotTriv(f, G, M) is a finite set.
+
+  Every element of OrbitsNotTriv(f, G, M) is a finite set.
+
+  p is an integer.
+
   Let us show that for all elements N1 of OrbitsNotTriv(f, G, M) p | card(N1).
     Let N be an element of OrbitsNotTriv(f, G, M).
 
@@ -396,9 +471,15 @@ Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
     Hence card(El(G)) = card(Stab(x, f, G, M))*card(N) and card(N) | card(El(G)).
     Therefore p | card(N).
   end.
+
+  (1) OrbitsNotTriv(f, G, M) is a finite set such that every element of OrbitsNotTriv(f, G, M) is a finite set.
+  (2) p is an integer.
+  (3) OrbitsNotTriv(f, G, M) is a disjunct collection and for all elements N of OrbitsNotTriv(f, G, M) p | card(N).
+
+  Therefore the thesis (by cardUnion3, 1, 2, 3).
 end.
  
-The cardinality of M is equal to card(fixedPoints(M, G, f)) + card(Union(OrbitsNotTriv(f, G, M))).
+We have card(M) = card(fixedPoints(M, G, f)) + card(Union(OrbitsNotTriv(f, G, M))).
 
-Hence card(M) = card(fixedPoints(M, G, f)) (mod p).
+Therefore  card(M) = card(fixedPoints(M, G, f)) (mod p).
 qed.
