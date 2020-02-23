@@ -373,12 +373,12 @@ Let f be a groupaction from G on M.
 Union(OrbitsNotTriv(f, G, M)) = M \\ fixedPoints(M, G, f).
 Proof.
 Let us show that every element of Union(OrbitsNotTriv(f, G, M)) is an element of  M \\ fixedPoints(M, G, f).
-Let x be an element of Union(OrbitsNotTriv(f, G, M)).
-Take an element y of M such that x is an element of Orbit(y, f, G, M) and y is not an element of fixedPoints(M, G, f).
-x is an element of M.
-x is not an element of fixedPoints(M, G, f).
-fixedPoints(M , G, f) is a subset of M.
-Hence x is an element of M \\ fixedPoints(M, G, f).
+  Let x be an element of Union(OrbitsNotTriv(f, G, M)).
+  Take an element y of M such that x is an element of Orbit(y, f, G, M) and y is not an element of fixedPoints(M, G, f).
+  x is an element of M.
+  x is not an element of fixedPoints(M, G, f).
+  fixedPoints(M , G, f) is a subset of M.
+  Hence x is an element of M \\ fixedPoints(M, G, f).
 end.
 
 Let us show that every element of M \\ fixedPoints(M, G, f) is an element of Union(OrbitsNotTriv(f, G, M)).
@@ -425,10 +425,12 @@ A group of order p is a finite group H such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
 Axiom cardUnion3.
-Let M be a finite set such that every element of M is a finite set.
+Let M be a set.
 Let k be an integer.
-If M is disjunct collection and  for all elements N of M  k | card(N) then
-k | card(Union(M)).
+If M is a finite set such that every element of M is a finite set
+and M is disjunct collection
+and for all elements N of M k | card(N)
+then k | card(Union(M)).
 
 Lemma.
 Let M be a finite set.
@@ -438,14 +440,12 @@ Let f be a groupaction from G on M.
 card(fixedPoints(M, G, f)) = card(M) (mod p).
 Proof.
 
-[prove off]
-  OrbitsNotTriv(f, G, M) is a finite set.
-  Proof.
-    Union(OrbitsNotTriv(f, G, M)) is a subset of M.
-  end.
-[/prove]
+Union(OrbitsNotTriv(f, G, M)) is a subset of M.
+
 Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
+  [prove off]
   OrbitsNotTriv(f, G, M) is a finite set.
+  [/prove]
 
   Every element of OrbitsNotTriv(f, G, M) is a finite set.
 
@@ -473,10 +473,9 @@ Let us show that p | card(Union(OrbitsNotTriv(f, G, M))).
   end.
 
   (1) OrbitsNotTriv(f, G, M) is a finite set such that every element of OrbitsNotTriv(f, G, M) is a finite set.
-  (2) p is an integer.
   (3) OrbitsNotTriv(f, G, M) is a disjunct collection and for all elements N of OrbitsNotTriv(f, G, M) p | card(N).
 
-  Therefore the thesis (by cardUnion3, 1, 2, 3).
+  Therefore  p | card(Union(OrbitsNotTriv(f, G, M))) (by cardUnion3, 1, 3).
 end.
  
 We have card(M) = card(fixedPoints(M, G, f)) + card(Union(OrbitsNotTriv(f, G, M))).
