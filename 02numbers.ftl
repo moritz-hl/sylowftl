@@ -5,24 +5,32 @@ Signature Integers. An integer is a notion.
 
 Signature Naturals. A natural number is an integer.
 
-Let a,b,c,n, m stand for integers.
+Let a,b,c,d,e,n,m stand for integers.
 
-Signature IntZero.  0 is a natural number.
-Signature IntOne.   1 is a natural number.
+Signature NatZero.  0 is a natural number.
+Signature NatOne.   1 is a natural number.
 
 Signature IntNeg.   -a is an integer.
 Signature IntPlus.  a + b is an integer.
 Signature IntMult.  a * b is an integer.
 
-Signature. Let b be a natural number.  a ^ b is an integer.
+Signature NatPot. Let b be a natural number.  a ^ b is an integer.
 
-Axiom. If a and b are natural numbers then a + b is a natural number.
-Axiom. If a and b are natural numbers then a * b is a natural number.
+Axiom NatPlus. If a and b are natural numbers then a + b is a natural number.
+Axiom NatMult. If a and b are natural numbers then a * b is a natural number.
 
-##Natural Numbers
-Signature. a < b is an atom.
+
+Signature NatLT. a < b is an atom.
+
+Let a is smaller than b stand for a < b.
+
+Axiom TriCh.
+a = b \/ a < b \/ b < a.
 
 Let a - b stand for a + (-b).
+
+Axiom NatSub.
+If a < b then b - a is natural number.
 
 Axiom AddAsso.      a + (b + c) = (a + b) + c.
 Axiom AddComm.      a + b = b + a.
@@ -41,19 +49,23 @@ Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
 Axiom PotInj.   Let p be an integer. Let n,m be natural numbers. (p ^ n = p ^  m) => n = m.
 
 Lemma MulZero.      a * 0 = 0 = 0 * a.
-Proof. a*(1+(-1)) = (a*1)+(a*(-1))=0. Qed.
+Proof.
+  a*(1+(-1)) = (a*1)+(a*(-1))=0.
+Qed.
 
 Lemma MulMinOne.    (-1) * a = -a = a * -1.
-Proof. a+(-1 * a)= (1*a)+(-1 * a) = 0.  Qed.
+Proof.
+  a+(-1 * a)= (1*a)+(-1 * a) = 0.
+Qed.
 
-Lemma.
+Lemma IntCanc.
 c != 0 /\ a * c = b * c => a = b.
 Proof.
-Assume c != 0 /\ a * c = b * c.
-
-(1) (a-b)*c = (a * c) - (b * c) = 0.
-
-Therefore a - b = 0 (by ZeroDiv, 1).
+  Assume c != 0 /\ a * c = b * c.
+  
+  (1) (a-b)*c = (a * c) - (b * c) = 0.
+  
+  Therefore a - b = 0 (by ZeroDiv, 1).
 Qed.
 
 Let a is nonzero stand for a != 0.
@@ -67,7 +79,7 @@ Definition Divisor. A divisor of b is a nonzero integer a
 Let a divides b stand for a is a divisor of b.
 Let a | b stand for a is a divisor of b.
 
-Lemma.
+Lemma DivPlus.
 q | a /\ q | b =>  q | (a + b).
 
 Definition EquMod.  a = b (mod q) iff q | a-b.
@@ -105,3 +117,31 @@ qed.
 Signature Prime.    a is prime is an atom.
 
 Let a prime stand for a prime nonzero integer.
+
+Lemma.
+Let p be a prime.
+Let a, b be natural numbers.
+If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide c then a = b.
+Proof.
+Assume n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide c.
+
+b is not smaller than a.
+Proof by Contradiction.
+  Assume b < a.
+
+  We have p^a = (p^(a-b))*(p^b).
+  [prove off]
+  Contradiction.
+  [/prove]
+end.
+
+a is not smaller than b.
+Proof by Contradiction.
+  Assume a < b.
+  [prove off]
+  Contradiction.
+  [/prove]
+end.
+
+Therefore the thesis.
+qed.

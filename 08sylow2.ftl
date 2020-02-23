@@ -122,16 +122,13 @@ Signature IntNeg.   -a is an integer.
 Signature IntPlus.  a + b is an integer.
 Signature IntMult.  a * b is an integer.
 
-Signature. Let b be a natural number.  a ^ b is an integer.
+Signature IntPot. Let b be a natural number.  a ^ b is an integer.
 
-Axiom. If a and b are natural numbers then a + b is a natural number.
-Axiom. If a and b are natural numbers then a * b is a natural number.
+Axiom NatPlus. If a and b are natural numbers then a + b is a natural number.
+Axiom NatMult. If a and b are natural numbers then a * b is a natural number.
 
 ##Natural Numbers
 Signature. a < b is an atom.
-
-Axiom TriCh.
-a = b \/ a < b \/ b < a.
 
 Let a - b stand for a + (-b).
 
@@ -151,11 +148,16 @@ Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
 
 Axiom PotInj.   Let p be an integer. Let n,m be natural numbers. (p ^ n = p ^  m) => n = m.
 
+Axiom. Let p be an integer. Let n, m be natural numbers. p ^ (n + m) = (p ^ n) * (p  ^ m).
+
+
 Axiom MulZero.      a * 0 = 0 = 0 * a.
 Axiom MulMinOne.    (-1) * a = -a = a * -1.
 
-Axiom.
+Axiom ZeroDiv2.
 c != 0 /\ a * c = b * c => a = b.
+
+
 
 Let a is nonzero stand for a != 0.
 Let p,q stand for nonzero integers.
@@ -226,7 +228,6 @@ Let M be a finite set.
 Let N be a subset of M.
 If card(M) = card(N) then M = N.
 
-
 Definition.
 a finite group is a group G such that El(G) is a finite set.
 
@@ -235,7 +236,6 @@ Let G be a finite group.
 Let U be a subgroup of G.
 U is a finite set.
 
-###
 Axiom.
 Let G be a finite group.
 Let U be a subgroup of G.
@@ -303,39 +303,24 @@ Let f be a groupaction from G on M.
 Let x << M.
 Stab(x,f, G, M) is a subgroup of G.
 
-Lemma.
+Axiom.
 Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Orbit(x,f, G, M) is a finite set.
-Proof.
-  Define h[g] = f[(g, x)] for g in El(G).
-  Dom(h) is a finite set.
-  Orbit(x, f, G, M) is a subset of Range(h).
-  Proof.
-    Let us show that every element of Orbit(x, f, G, M) is an element of Range(h).
-       (1) Let y be an element of Orbit(x, f, G, M).
-
-       We can take an element g1 of El(G) such that y = f[(g1, x)] (by 1).
-
-       Thus y is an element of Range(h).
-    end.
-  end.
-  Therefore Orbit(x, f, G, M) is a finite set.
-Qed.
-             
+       
 Lemma.
 Let M be a finite set.
 Let G be a group.
 Let f be a groupaction from G on M.
 fixedPoints(M, G, f) is a finite set.
 Proof.
-  Let us show that (1) every element of fixedPoints(M, G, f) is an element of M.
+  Let us show that  every element of fixedPoints(M, G, f) is an element of M.
     Let x be an element of fixedPoints(M, G, f).
     Then x is an element of M.
   end.
 
-   fixedPoints(M, G, f) is a subset of M (by 1).
+   fixedPoints(M, G, f) is a subset of M.
 
    Therefore the thesis.
 Qed.
@@ -379,23 +364,7 @@ Axiom SylSize.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
-#Proof.
-##Take natural numbers n, m such that card(U) = p^n and card(P) = p^m.
-##Let us show that n = m.
-#Assume the contrary.
-#Case m < n.
-#n-m is a natural number.
-#p^n = (p^(n-m))*(p^m).
-#(p^n)*Index(G, U) = card(El(G)).
-#(Index(G, U)*(p^(n-m)))*(p^m) = card(El(G)) = Index(G, P)*(p^m).
-#Hence (Index(G, U)*(p^(n-m))) = Index(G, P).
-#p | (Index(G, U)*(p^(n-m))).
-#contradiction.
-#end.
-#Case n < m.
-#end.
-#end.
-#Qed.
+
 
 Theorem Sylow2a.
 Let G be a finite group.

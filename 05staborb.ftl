@@ -1,5 +1,5 @@
 ###Stabilizer and Orbit
-
+[synonym set/-s]
 Let M, N denote sets.
 Let x << M stand for x is an element of M.
 
@@ -8,6 +8,29 @@ Prod(M,N) = { (x,y) | x << M and y << N }.
 
 Definition.
 A subset of M is a set N such that every element of N is an element of M.
+
+Definition.
+Let M be a set such that for all elements N of M N is a set.
+Union(M) = {x | There is an element N of M such that x is an element of N}.
+
+Definition.
+Let N1, N2 be a sets.
+N1 and N2 are disjunct iff there is no element x of N1 such that x is an element of N2.
+
+Definition.
+A disjunct collection is a set M such that 
+(for all elements N of M N is a set) and for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
+
+Definition.
+Let N1, N2 be sets.
+N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
+
+Definition.
+Let N1 be a set.
+Let N2 be a subset of N1.
+N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
+
+
 
 Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
@@ -21,6 +44,8 @@ Let f be a function. f is surjective onto M iff (f is from Dom(f) to M and for e
 Definition.
 Let f be a function. f is bijection from M to N iff (f is injective and f is from M to N) and (f is surjective onto M).
 
+Definition.
+Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
 
 Axiom FunExt.
 Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
@@ -31,9 +56,6 @@ Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] 
 
 Signature.
 A group is a notion.
-
-Signature.
-a finite group is a group.
 
 Let G denote a group.
 
@@ -187,69 +209,75 @@ A natural number is a nonnegative integer.
 Signature.
 A finite set is a set.
 
+Axiom.
+Let M be a finite set.
+Let N be a subset of M.
+N is a finite set.
+
+Axiom RanFin.
+Let f be a function such that Dom(f) is a finite set.
+Range(f) is a finite set.
+
+Axiom.
+Let M, N be finite set.
+Prod(M, N) is a finite set.
+
+Axiom.
+Let M be a finite set such that for all elements N of M N is a finite set.
+Union(M) is a finite set.
+
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
 Signature.
-Let M be a set.
+Let M be a finite set.
 card(M) is a natural number.
 
-
-Definition.
-Let M be a set such that for all elements N of M N is a set.
-Union(M) = {x | There is an element N of M such that x is an element of N}.
-
-Definition.
-Let N1, N2 be a sets.
-N1 and N2 are disjunct iff there is no element x of N1 such that x is an element of N2.
-
-Definition.
-Let N1, N2 be sets.
-N1 \-/ N2 = {x | x is an element of N1 or x is an element of N2}.
-
-Definition.
-Let N1 be a set.
-Let N2 be a subset of N1.
-N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
-
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
-
 Definition.
-Let M be a set such that for all elements N of M N is a set.
-M is disjunct collection iff for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
+a finite group is a group G such that El(G) is a finite set.
+
 
 Axiom cardUnion.
-Let M be a set such that for all elements N of M N is a set.
-Assume M is disjunct collection.
-Assume that for all elements N1, N2 of M card(N1) = card(N2).
+Let M be a finite set such that for all elements N of M N is a finite set.
 Let N be an element of M.
-card(Union(M)) = card(N)*card(M).
+If M is disjunct collection and for all elements N1, N2 of M card(N1) = card(N2)
+then card(Union(M)) = card(N)*card(M).
 
 Axiom.
-Let N1, N2 be sets.
+Let N1, N2 be finite sets.
 card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and f is injective and f is surjective onto N2).
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 If card(M) != 0 then there is an element x of M such that x = x.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 Assume 1 < card(M).
 Let x be an element of M.
 Then there is an element y of M such that x != y.
 
 Axiom.
-Let M be a set.
+Let M be a finite set.
 Let N be a subset of M.
 If card(M) = card(N) then M = N.
 
+Axiom.
+Let G be a finite group.
+Let U be a subgroup of G.
+LeftCosets(U, G) is a finite set.
 
 Definition.
+Let G be a finite group.
 Let U be a subgroup of G.
 Index(G, U) = card(LeftCosets(U, G)).
 
@@ -263,7 +291,7 @@ Let U be a subgroup of G.
 LeftCosets(U, G) is disjunct collection.
 
 Axiom Lagrange.
-Let G be a group.
+Let G be a finite group.
 Let U be a subgroup of G.
 card(Union(LeftCosets(U, G))) = card(U)*card(LeftCosets(U, G)).
 
@@ -311,7 +339,6 @@ end.
 Therefore the thesis.
 Qed.
 
-
 Lemma.
 Let M be a set.
 Let G be a group.
@@ -320,6 +347,7 @@ Let x << M.
 Let g, h be elements of El(G).
 If LeftCoset(g, Stab(x, f, G, M), G) = LeftCoset(h, Stab(x, f, G, M), G) then f[(g, x)] = f[(h, x)].
 
+##"Welldefined" by the previous Lemma.
 Axiom.
 Let M be a set.
 Let G be a group.
@@ -330,8 +358,29 @@ h is from LeftCosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
 and (for all elements i of El(G) h[LeftCoset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
 
 Lemma.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x << M.
+Orbit(x,f, G, M) is a finite set.
+Proof.
+  Define h[g] = f[(g, x)] for g in El(G).
+  Dom(h) is a finite set.
+  Orbit(x, f, G, M) is a subset of Range(h).
+  Proof.
+    Let us show that every element of Orbit(x, f, G, M) is an element of Range(h).
+       (1) Let y be an element of Orbit(x, f, G, M).
+
+       We can take an element g1 of El(G) such that y = f[(g1, x)] (by 1).
+
+       Thus y is an element of Range(h).
+    end.
+  end.
+  Therefore Orbit(x, f, G, M) is a finite set.
+Qed.
+
+Lemma.
 Let M be a set.
-Let G be a group.
+Let G be a finite group.
 Let f be a groupaction from G on M.
 Let x << M.
 Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).

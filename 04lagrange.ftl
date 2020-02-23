@@ -225,7 +225,7 @@ Let M be a finite set.
 Let N be a subset of M.
 N is a finite set.
 
-Axiom.
+Axiom RanFin.
 Let f be a function such that Dom(f) is a finite set.
 Range(f) is a finite set.
 
@@ -245,13 +245,11 @@ Definition.
 a finite group is a group G such that El(G) is a finite set.
 
 
-
 Axiom cardUnion.
 Let M be a finite set such that for all elements N of M N is a finite set.
 Let N be an element of M.
 If M is disjunct collection and for all elements N1, N2 of M card(N1) = card(N2)
 then card(Union(M)) = card(N)*card(M).
-
 
 Axiom.
 Let N1, N2 be finite sets.
@@ -261,12 +259,16 @@ Axiom.
 Let U be a subgroup of G.
 El(G) = Union(LeftCosets(U, G)).
 
-###
-Axiom.
+Lemma.
 Let G be a finite group.
 Let U be a subgroup of G.
 LeftCosets(U, G) is a finite set.
-###
+Proof.
+Define f[g] = LeftCoset(g, U, G) for g in El(G).
+LeftCosets(U, G) is a subset of  Range(f).
+Therefore the thesis.
+Qed.
+
 
 Definition.
 Let G be a finite group.
