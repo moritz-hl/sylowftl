@@ -47,6 +47,8 @@ Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
 Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
 
 Axiom PotInj.   Let p be an integer. Let n,m be natural numbers. (p ^ n = p ^  m) => n = m.
+Axiom. Let p be an integer. Let n, m be natural numbers. p ^ (n + m) = (p ^ n) * (p  ^ m).
+
 
 Lemma MulZero.      a * 0 = 0 = 0 * a.
 Proof.
@@ -124,29 +126,70 @@ Let p be a prime number.
 Let k be a natural number.
 If k | p^n then k = 1 or p | k.
 
+Axiom.
+Let k be a natural number.
+k != 0 => p | p^k.
+
+Axiom.
+If a < b then b - a != 0.
+
+Axiom PotNotZero.
+Let k be a natural number.
+p ^ k  != 0.
+
 Lemma.
 Let p be a prime.
 Let a, b be natural numbers.
-If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide c then a = b.
+If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d then a = b.
 Proof.
-Assume n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide c.
+Assume n = (p^a)*c and n = (p^b)*d and p does not divide c and p does not divide d.
 
 b is not smaller than a.
 Proof by Contradiction.
   Assume b < a.
-
   We have p^a = (p^(a-b))*(p^b).
-  [prove off]
+
+  (1) (p^a)*c = (p^b)*d.
+  (2) ((p^(a-b))*(p^b))*c = (p^b)*d.
+  (3) ((p^b)*(p^(a-b)))*c = (p^b)*d (by 1, MulComm).
+  (4) (p^b)*((p^(a-b))*c) = (p^b)*d (by 3, MulAsso).
+  (5) ((p^(a-b))*c)*(p^b) = d*(p^b) (by 4, MulComm).
+  
+  (6)((p^(a-b))*c) = d (by 5, IntCanc, PotNotZero).
+  
+  a-b != 0.
+
+  p is a divisor of p^(a-b).
+  p is a divisor of ((p^(a-b))*c).
+
+  p does divide d.
+  p does not divide  d.
+
   Contradiction.
-  [/prove]
 end.
 
 a is not smaller than b.
 Proof by Contradiction.
   Assume a < b.
-  [prove off]
+  We have p^b = (p^(b-a))*(p^a).
+
+  (1) (p^b)*d = (p^a)*c.
+  (2) ((p^(b-a))*(p^a))*d = (p^a)*c.
+  (3) ((p^a)*(p^(b-a)))*d = (p^a)*c (by 1, MulComm).
+  (4) (p^a)*((p^(b-a))*d) = (p^a)*c (by 3, MulAsso).
+  (5) ((p^(b-a))*d)*(p^a) = c*(p^a) (by 4, MulComm).
+  
+  (6)((p^(b-a))*d) = c (by 5, IntCanc, PotNotZero).
+  
+  b-a != 0.
+
+  p is a divisor of p^(b-a).
+  p is a divisor of ((p^(b-a))*d).
+
+  p does divide c.
+  p does not divide  c.
+
   Contradiction.
-  [/prove]
 end.
 
 Therefore the thesis.

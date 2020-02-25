@@ -113,7 +113,7 @@ Signature Integers. An integer is a notion.
 
 Signature Naturals. A natural number is an integer.
 
-Let a,b,c,n, m stand for integers.
+Let a,b,c,d,n, m stand for integers.
 
 Signature IntZero.  0 is a natural number.
 Signature IntOne.   1 is a natural number.
@@ -190,6 +190,11 @@ Signature Prime.    a is prime is an atom.
 
 Let a prime stand for a prime nonzero integer.
 
+Axiom DLogN.
+Let p be a prime.
+Let a, b be natural numbers.
+If n = (p^a)*c and n = (p^b)*d and p does not divide c and p does not divide d then a = b.
+
 Signature.
 A finite set is a set.
 
@@ -253,7 +258,7 @@ El(G) = Union(Cosets(U, G)).
 Axiom Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*card(Cosets(U, G)).
+card(El(G)) = card(U)*Index(G, U).
 
 ###Groupactions
 Definition.
@@ -359,11 +364,24 @@ Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
 
-###Todo
-Axiom SylSize.
+Lemma SylSize.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
+Proof.
+Take natural numbers n, m such that p^n = card(U) and p^m = card(P).
+
+card(El(G)) = (p^n)*Index(G, U) 
+  and card(El(G)) = (p^m)*Index(G, P) 
+  and p does not divide Index(G, U)
+  and p does not divide Index(G, P).
+
+[prove off]
+Thus we have n = m (by DLOG).
+[/prove]
+
+Therefore the thesis.
+Qed.
 
 
 Theorem Sylow2a.
