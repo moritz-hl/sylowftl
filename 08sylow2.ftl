@@ -1,4 +1,4 @@
-##Sylow2
+[synonym set/-s]
 
 Let M, N denote sets.
 Let x << M stand for x is an element of M.
@@ -10,20 +10,43 @@ Definition.
 A subset of M is a set N such that every element of N is an element of M.
 
 Definition.
+Let M be a set.
+M is empty iff there is no element x of M such that x = x.
+
+Definition.
+Let M be a set such that for all elements N of M N is a set.
+\-/ M = {x | There is an element N of M such that x is an element of N}.
+
+Definition.
+Let N1, N2 be sets.
+N1 \-/ N2 = {x | x is an element of N1 or x is  an element of N2}.
+
+Definition.
+Let N1 be a set.
+Let N2 be a subset of N1.
+N1 \\ N2 = {x | x is an element of N1 and (x is not an element of N2)}.
+
+Definition.
+Let N1, N2 be a sets.
+N1 and N2 are disjunct iff there is no element x of N1 such that x is an element of N2.
+
+Definition.
+A disjunct collection is a set M such that 
+(for all elements N of M N is a set) and for all elements N1, N2 of M (N1 = N2 or ( N1 and N2 are disjunct)).
+
+Definition.
 Let f be a function. Let M,N be sets. f is from M to N iff Dom(f) = M and for every element x of M f[x] is an element of N.
 
 Definition.
 Let f be a function. Range(f) = {f[x] | x << Dom(f)}.
 
-Axiom FunExt.
-Let f,g be functions. If Dom(f) = Dom(g) and for every element x of Dom(f) f[x] = g[x] then f = g.
+Definition.
+Let f be a function. f is injective iff for all elements x,y of Dom(f) we have (x!=y => f[x] != f[y]).
 
 Definition.
-Let M be a set.
-M is empty iff there is no element x of M such that x = x.
+Let f be a function. f is surjective onto M iff (f is from Dom(f) to M and for every y << M there is an element x of Dom(f) such that f[x]=y).
 
-Lemma.
-M is not empty iff there is an element x of M such that x = x.
+### BEGIN 01
 
 [synonym group/-s]
 [synonym subgroup/-s]
@@ -40,29 +63,30 @@ Signature.
 One(G) is an object.
 
 Axiom.
-One(G) is an element of  El(G).
+One(G) << El(G).
 
 Signature.
 Let a, b be elements of El(G).
 a *^{G} b is an element of El(G).
 
 Signature.
-Inv(G) is an function from El(G) to El(G).
+Let a be an element of El(G).
+Inv(a, G) is an element of El(G).
 
 Axiom Assoc.
 Let x, y, z be elements of El(G). x *^{G} ( y *^{G} z) = (x *^{G} y) *^{G} z. 
 
 Axiom InvOne.
-Let x be an element of El(G). Then x *^{G} Inv(G)[x] = One(G) =  Inv(G)[x] *^{G} x.
+Let x be an element of El(G). Then x *^{G} Inv(x, G) = One(G) = Inv(x, G) *^{G} x.
 
 Axiom MulOne.
 Let x be an element of El(G). Then x *^{G} One(G) = x =  One(G) *^{G} x.
 
-Lemma.
+Axiom InvUniq.
 Let x, y be elements of El(G).
-If x *^{G} y = One(G) then y = Inv(G)[x].
+If x *^{G} y = One(G) then y = Inv(x, G).
 
-Lemma.
+Axiom OneUniq.
 Let x, y be elements of El(G).
 If x *^{G} y = x then y = One(G).
 
@@ -70,7 +94,7 @@ Definition.
 A subgroup of G is set H such that
 (H is a subset of El(G))
 and (One(G) << H)
-and (for every x << H Inv(G)[x] << H)
+and (for every x << H Inv(x, G) << H)
 and (for all elements x, y of H x *^{G} y << H).
 
 Definition.
@@ -78,33 +102,76 @@ Let U be a subgroup of G.
 Gr(U, G) is a group H such that
 (El(H) = U)
 and (One(H) = One(G))
-and (for every x << U Inv(H)[x] = Inv(G)[x])
+and (for every x << U Inv(x, H) = Inv(x, G))
 and (for all elements x, y of U x *^{Gr(U, G)} y = x *^{G} y).
 
+Axiom.
+Let G be a group.
+Let H be a subset of El(G).
+Assume ((There is a x << H such that x = x) and (for all elements  y, z of H  z *^{G} Inv(y, G) << H)).
+Then H is a subgroup of G.
 
 Definition.
 Let g be an element of El(G).
 Let H be a subgroup of G.
 Coset(g, H, G) = {g *^{G} h | h << H}.
 
-Axiom CosetEq.
+Axiom.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
-Inv(G)[g2]*^{G}  g1 << H iff Coset(g1, H, G) = Coset(g2, H, G).
+Assume Coset(g1, H, G) and Coset(g2, H, G) are not disjunct.
+Then Inv(g2, G) *^{G} g1 << H.
+
+Axiom.
+Let H be a subgroup of G.
+Let g1, g2 be elements of El(G).
+If Inv(g2, G) *^{G} g1 << H
+Then Coset(g1, H, G) = Coset(g2, H, G).
+
+Axiom.
+Let H be a subgroup of G.
+Let g1, g2 be elements of El(G).
+If Coset(g1, H, G) and  Coset(g2, H, G) are not disjunct
+then Coset(g1, H, G) = Coset(g2, H, G).
+
+Axiom CosEq.
+Let H be a subgroup of G.
+Let g1, g2 be elements of El(G).
+Inv(g2, G)*^{G} g1 << H iff Coset(g1, H, G) = Coset(g2, H, G).
 
 Definition.
 Let H be a subgroup of G.
 Cosets(H, G) = {Coset(g, H, G) | g << El(G)}.
 
+[synonym coset/-s]
+Let a coset of H in G denote an element of Cosets(H, G).
+
+Axiom.
+Let U be a subgroup of G.
+El(G) = \-/ Cosets(U, G).
+
+Axiom.
+Let G be a group.
+Let U be a subgroup of G.
+Cosets(U, G) is a disjunct collection.
+
+Axiom.
+Let G be a group.
+Let U be a subgroup of G.
+U is a coset of U in G.
 
 Definition.
 Let g be an element of El(G).
 Let U be a subgroup of G.
-Conjugate(g, U, G) = {(g *^{G} (u *^{G} Inv(G)[g]))| u is an element of U}.
+Conjugate(g, U, G) = {(g *^{G} (u *^{G} Inv(g, G)))| u is an element of U}.
 
 Definition.
 Let U, V be subgroups of G.
 U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
+
+## END 01
+
+### BEGIN 02
 
 [synonym integer/-s]
 [synonym number/-s]
@@ -113,24 +180,36 @@ Signature Integers. An integer is a notion.
 
 Signature Naturals. A natural number is an integer.
 
-Let a,b,c,d,n, m stand for integers.
+Let a,b,c,d,e,n,m stand for integers.
 
-Signature IntZero.  0 is a natural number.
-Signature IntOne.   1 is a natural number.
+Signature NatZero.  0 is a natural number.
+Signature NatOne.   1 is a natural number.
 
 Signature IntNeg.   -a is an integer.
 Signature IntPlus.  a + b is an integer.
 Signature IntMult.  a * b is an integer.
 
-Signature IntPot. Let b be a natural number.  a ^ b is an integer.
+Signature NatPot. Let b be a natural number.  a ^ b is an integer.
 
 Axiom NatPlus. If a and b are natural numbers then a + b is a natural number.
 Axiom NatMult. If a and b are natural numbers then a * b is a natural number.
 
-##Natural Numbers
-Signature. a < b is an atom.
+
+Signature NatLT. a < b is an atom.
+
+Let a is smaller than b stand for a < b.
+
+Axiom TriCh.
+a = b \/ a < b \/ b < a.
+
+Axiom.
+If a < b then a != b.
+
 
 Let a - b stand for a + (-b).
+
+Axiom NatSub.
+If a < b then b - a is natural number.
 
 Axiom AddAsso.      a + (b + c) = (a + b) + c.
 Axiom AddComm.      a + b = b + a.
@@ -147,17 +226,16 @@ Axiom Distrib.      a * (b + c) = (a*b) + (a*c) and
 Axiom ZeroDiv.      a != 0 /\ b != 0 => a * b != 0.
 
 Axiom PotInj.   Let p be an integer. Let n,m be natural numbers. (p ^ n = p ^  m) => n = m.
-
-Axiom. Let p be an integer. Let n, m be natural numbers. p ^ (n + m) = (p ^ n) * (p  ^ m).
+Axiom PotAdd. Let p be an integer. Let n, m be natural numbers. p ^ (n + m) = (p ^ n) * (p  ^ m).
+Axiom PotNotZero. Let p be an integer. Let k be a natural number. p ^ k  != 0.
 
 
 Axiom MulZero.      a * 0 = 0 = 0 * a.
+
 Axiom MulMinOne.    (-1) * a = -a = a * -1.
 
-Axiom ZeroDiv2.
+Axiom IntCanc.
 c != 0 /\ a * c = b * c => a = b.
-
-
 
 Let a is nonzero stand for a != 0.
 Let p,q stand for nonzero integers.
@@ -170,7 +248,7 @@ Definition Divisor. A divisor of b is a nonzero integer a
 Let a divides b stand for a is a divisor of b.
 Let a | b stand for a is a divisor of b.
 
-Axiom.
+Axiom DivPlus.
 q | a /\ q | b =>  q | (a + b).
 
 Definition EquMod.  a = b (mod q) iff q | a-b.
@@ -185,15 +263,30 @@ Axiom EquModSym.    a = b (mod q) => b = a (mod q).
 Axiom EquModTrn.    a = b (mod q) /\ b = c (mod q) => a = c (mod q).
 
 Axiom EquModMul. a = b (mod p * q) => a = b (mod p) /\ a = b (mod q).
+[/ontored]
 
 Signature Prime.    a is prime is an atom.
 
 Let a prime stand for a prime nonzero integer.
 
+Axiom.
+Let n be a natural number.
+Let p be a prime number.
+Let k be a natural number.
+If k | p^n then k = 1 or p | k.
+
+Axiom.
+Let k be a natural number.
+k != 0 => p | p^k.
+
 Axiom DLogN.
 Let p be a prime.
 Let a, b be natural numbers.
-If n = (p^a)*c and n = (p^b)*d and p does not divide c and p does not divide d then a = b.
+If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d then a = b.
+
+## END 02
+
+## BEGIN 03
 
 Signature.
 A finite set is a set.
@@ -211,35 +304,63 @@ Axiom.
 Let M, N be finite set.
 Prod(M, N) is a finite set.
 
-
-Definition.
-Let M be a set such that for all elements N of M N is a set.
-Union(M) = {x | There is an element N of M such that x is an element of N}.
-
-Axiom.
-Let M be a set such that for all elements N of M N is a finite set.
-Union(M) is a finite set.
-
 Signature.
 Let M be a finite set.
 card(M) is a natural number.
 
 Axiom.
 Let M be a finite set.
-If card(M) != 0 then M is not empty.
-
-Axiom.
-Let M be a finite set.
 Let N be a subset of M.
 If card(M) = card(N) then M = N.
 
-Definition.
-a finite group is a group G such that El(G) is a finite set.
+Axiom.
+Let M be a set such that for all elements N of M N is a finite set.
+\-/ M is a finite set.
 
-Lemma.
-Let G be a finite group.
+
+Axiom cardUnion.
+Let  M be a finite set such that for all elements N of M N is a finite set.
+Assume M is a disjunct collection.
+Assume that for all elements N1, N2 of M card(N1) = card(N2).
+Let N be an element of M.
+card(\-/M) = card(N)*card(M).
+
+Axiom cardUnion2.
+Let M be a set.
+Let k be an integer.
+If M is a finite set such that every element of M is a finite set
+and M is disjunct collection
+and for all elements N of M k | card(N)
+then k | card(\-/ M).
+
+Axiom.
+Let N1, N2 be finite sets.
+card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and f is injective and f is surjective onto N2).
+
+Axiom.
+Let M be a finite set.
+If card(M) != 0 then there is an element x of M such that x = x.
+
+Axiom.
+Let M be a finite set.
+card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
+
+Axiom.
+Let M be a finite set.
+Assume 1 < card(M).
+Let x be an element of M.
+Then there is an element y of M such that x != y.
+
+### END 03
+
+### BEGIN 04
+
+Definition.
+A finite group is a group G such that El(G) is a finite set.
+
+Axiom.
 Let U be a subgroup of G.
-U is a finite set.
+El(G) = \-/ Cosets(U, G).
 
 Axiom.
 Let G be a finite group.
@@ -252,15 +373,19 @@ Let U be a subgroup of G.
 Index(G, U) = card(Cosets(U, G)).
 
 Axiom.
-Let U be a subgroup of G.
-El(G) = Union(Cosets(U, G)).
+Let G be a finite group.
+Let U, V be subgroups of G such that V and U are conjugates in G.
+Then card(U) = card(V).
 
 Axiom Lagrange.
 Let G be a finite group.
 Let U be a subgroup of G.
-card(El(G)) = card(U)*Index(G, U).
+card(El(G)) = card(U)*card(Cosets(U, G)).
 
-###Groupactions
+### END 04
+
+### BEGIN 05
+
 Definition.
 Let M be a set.
 Let G be a group.
@@ -270,6 +395,152 @@ and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
 f[((a *^{G}  b), x)] = f[(a, f[(b, x)])].
 
+Definition.
+Let M be a set.
+Let G be a group.
+Let f be a function from Prod(El(G), M) to M.
+Let x be an element of M.
+Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
+
+
+Definition.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x << M.
+Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x << M.
+Stab(x,f, G, M) is a subgroup of G.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x << M.
+There is a function h such that
+h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+
+Axiom.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x << M.
+Orbit(x,f, G, M) is a finite set.
+
+Axiom.
+Let M be a set.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x << M.
+Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
+
+### END 05
+
+### BEGIN 06
+
+Definition.
+Let M be a set.
+Let G be a group.
+Let f be a function from Prod(El(G), M) to M.
+A fixedpoint of f on G on M  is an element y of M such that
+for every element a of El(G) f[(a, y)] = y.
+
+Definition.
+Let M be a set.
+Let G be a group.
+Let f be a function from Prod(El(G), M) to M.
+fixedPoints(M, G, f) = {y | y is a fixedpoint of f on G on M}.
+
+Axiom.
+Let M be a set.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+Let x be an element of M.
+x is a  fixedpoint of f on G on M iff card(Orbit(x, f, G, M)) = 1.
+
+Axiom OrbitsIntersect.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
+x1 is an element of Orbit(x2, f, G, M).
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
+Then Orbit(x1, f, G, M) = Orbit(x2, f, G, M).
+
+Definition.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+OrbitsNotFix(f, G, M) = {Orbit(x, f, G, M) | x is an element of M and x is not a fixedpoint of f on G on M}.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+Every element of OrbitsNotFix(f, G, M) is a set.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+OrbitsNotFix(f, G, M) is a disjunct collection.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+\-/ OrbitsNotFix(f, G, M) = M \\ fixedPoints(M, G, f).
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+\-/  OrbitsNotFix(f, G, M) and fixedPoints(M, G, f) are disjunct.
+
+Axiom.
+Let M be a set.
+Let G be a group.
+Let f be a groupaction from G on M.
+(\-/ OrbitsNotFix(f, G, M)) \-/ fixedPoints(M, G, f) = M.
+
+Axiom.
+Let M be a finite set.
+Let G be a finite group.
+Let f be a groupaction from G on M.
+OrbitsNotFix(f, G, M) is a finite set.
+
+Axiom.
+Let M be a finite set.
+Let G be a group.
+Let f be a groupaction from G on M.
+fixedPoints(M, G, f) is a finite set.
+
+Signature.
+Let p be a prime number.
+A group of order p is a finite group H such that
+(there is a natural number n such that card(El(H)) = p ^ n).
+
+Axiom.
+Let M be a finite set.
+Let p be a prime number.
+Let G be a group of order p.
+Let f be a groupaction from G on M.
+card(fixedPoints(M, G, f)) = card(M) (mod p).
+
+### END 06
+
+
+### BEGIN 07
 Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
@@ -283,108 +554,41 @@ Let P be a subgroup of G.
 Let U be a subgroup of G.
 Op(U, P, G) is a groupaction from Gr(U, G) on Cosets(P, G).
 
-Definition.
-Let f be a function from Prod(El(G), M) to M.
-Let x be an element of M.
-Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
+### END 07
 
-Definition.
-Let f be a groupaction from G on M.
-A fixedpoint on M on G of f is an element y of M such that
-for every element a of El(G) f[(a, y)] = y.
-
-Definition.
-Let G be a group.
-Let f be a groupaction from G on M.
-fixedPoints(M, G, f) = {y | y is a fixedpoint on M on G of f}.
-
-Definition.
-Let f be a groupaction from G on M.
-Let x << M.
-Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
-
-Axiom.
-Let f be a groupaction from G on M.
-Let x << M.
-Stab(x,f, G, M) is a subgroup of G.
-
-Axiom.
-Let G be a finite group.
-Let f be a groupaction from G on M.
-Let x << M.
-Orbit(x,f, G, M) is a finite set.
-       
-Lemma.
-Let M be a finite set.
-Let G be a group.
-Let f be a groupaction from G on M.
-fixedPoints(M, G, f) is a finite set.
-Proof.
-  Let us show that  every element of fixedPoints(M, G, f) is an element of M.
-    Let x be an element of fixedPoints(M, G, f).
-    Then x is an element of M.
-  end.
-
-   fixedPoints(M, G, f) is a subset of M.
-
-   Therefore the thesis.
-Qed.
-
-Axiom.
-Let G be a finite group.
-Let f be a groupaction from G on M.
-Let x << M.
-Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
+######
 
 Signature.
-A group of order p is a finite group H such that
-(there is a natural number n such that card(El(H)) = p ^ n).
-
-Signature.
+Let p be a prime number.
 A subgroup of G of order p is a subgroup U of G such that
 (Gr(U, G) is a group of order p).
 
-
-###Fixed Points Lemma.
-Axiom FixPointsMod.
-Let M be a finite set.
-Let G be a group of order p.
-Let f be a groupaction from G on M.
-card(fixedPoints(M, G, f)) = card(M) (mod p).
-
-Axiom ConjSize.
-Let G be a finite group.
-Let g be an element of El(G).
-Let U be a subgroup of G.
-card(Conjugate(g, U, G)) = card(U).
-
-
 Definition.
+Let p be a prime number.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
-
 Lemma SylSize.
+Let p be a prime.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 card(U) = card(P).
 Proof.
 Take natural numbers n, m such that p^n = card(U) and p^m = card(P).
 
-card(El(G)) = (p^n)*Index(G, U) 
+(1) card(El(G)) = (p^n)*Index(G, U) 
   and card(El(G)) = (p^m)*Index(G, P) 
   and p does not divide Index(G, U)
   and p does not divide Index(G, P).
 
-[prove off]
-Thus we have n = m (by DLOG).
-[/prove]
+Thus we have n = m (by DLogN, 1).
 
 Therefore the thesis.
 Qed.
 
 
 Theorem Sylow2a.
+Let p be a prime.
 Let G be a finite group.
 Let P be an element of Syl(p, G).
 Let U be a subgroup of G of order p.
@@ -401,27 +605,28 @@ Proof.
   We can take an element x of fixedPoints(Cosets(P, G), Gr(U, G),  f)
   and an element g of El(G) such that x = Coset(g, P, G).
   
-  Let us show that every element of Conjugate(Inv(G)[g], U, G) is an element of P.
-    Let h  be an element of Conjugate(Inv(G)[g], U, G).
+  Let us show that every element of Conjugate(Inv(g, G), U, G) is an element of P.
+    Let h  be an element of Conjugate(Inv(g, G), U, G).
 
-    Take an element u of U such that h = Inv(G)[g] *^{G} (u *^{G}  g).
+    Take an element u of U such that h = Inv(g, G) *^{G} (u *^{G}  g).
 
-    We have Coset(g, P, G) = f[(u,x)] =  Coset((u *^{G} g) ,P, G).
+    We have Coset(g, P, G) = f[(u,x)] = Coset((u *^{G} g) ,P, G).
 
-    Therefore Inv(G)[g] *^{G} (u *^{G}  g) is an element of P (By CosetEq).
+    Therefore Inv(g, G) *^{G} (u *^{G}  g) is an element of P.
 
     Thus h is an element of P.
   end.
 Qed.
 
 Theorem Sylow2b.
+Let p be a prime.
 Let G be a finite group.
 Let P, U be elements of Syl(p, G).
 P and U are conjugates in G.
 Proof.
   Take an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
 
-  card(Conjugate(g, U, G)) = card(U) = card(P) (by SylSize, ConjSize).
+  card(Conjugate(g, U, G)) = card(U) = card(P).
 
   Hence Conjugate(g, U, G) = P.
 qed.

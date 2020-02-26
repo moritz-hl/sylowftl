@@ -169,9 +169,9 @@ Definition.
 Let U, V be subgroups of G.
 U and V are conjugates in G iff there is an element g of El(G) such that U = Conjugate(g, V, G).
 
-## END 01
+### END 01
 
-#####
+### BEGIN 07 
 
 Definition.
 Let M be a set.
@@ -182,37 +182,6 @@ and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
 f[((a *^{G}  b), x)] = f[(a, f[(b, x)])].
 
-Lemma.
-Let P be a subgroup of G.
-Let U be a subgroup of G.
-Let u be an element of U.
-Let x, y be elements of El(G) such that Coset(x, P, G) = Coset(y, P, G). 
-Then every element of Coset(u *^{G} x, P, G) is an element of  Coset(u *^{G} y, P, G).
-Proof.
-    Let i be an element of Coset(u *^{G} x, P, G).
-    Take an element p of P such that i =  (u *^{G} x) *^{G} p.
-    Then we have Inv(u, G) *^{G} i = Inv(u, G) *^{G} ((u *^{G} x) *^{G} p)
-     =((Inv(u, G) *^{G} u ) *^{G} x) *^{G} p
-    = x *^{G} p.
-    Inv(u, G) *^{G} i is an element of Coset(x, P, G).
-    Therefore Inv(u, G) *^{G} i is an element of Coset(y, P, G)
-    and i is an element of Coset(u *^{G} y, P, G).
-qed.
-
-Lemma.
-Let P be a subgroup of G.
-Let U be a subgroup of G.
-Let u be an element of U.
-Let x, y be elements of El(G) such that Coset(x, P, G) = Coset(y, P, G). 
-Then Coset(u *^{G} x, P, G) = Coset(u *^{G} y, P, G).
-Proof.
-  Every element of Coset(u *^{G} x, P, G) is an element of  Coset(u *^{G} y, P, G).
-  Every element of Coset(u *^{G} y, P, G) is an element of  Coset(u *^{G} x, P, G).
-
-  Therefore the thesis.
-Qed.
-
-###Welldefined by the previous Lemma.
 Definition.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
@@ -221,32 +190,9 @@ such that f is from Prod(El(Gr(U, G)), Cosets(P, G)) to Cosets(P, G) and
 for all elements u of U for all elements x of El(G) 
 f[(u, Coset(x, P, G))] = Coset(u *^{G}  x,P, G).
 
-Lemma.
+Axiom.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
 Op(U, P, G) is a groupaction from Gr(U, G) on Cosets(P, G).
-Proof.
-Take a function f such that f = Op(U, P, G).
-Take a group H such that  H = Gr(U, G).
-Take a set M such that M = Cosets(P, G).
 
-For every element x of M we have f[(One(H), x)] = x.
-
-Let us show that for every element x of M for all elements a, b of El(H)
- f[(a *^{H} b, x)] =  f[(a,  f[(b, x)])].
-  Let x be an element of M.
-  Let a, b be elements of El(H).
-
-  Take an element g of El(G) such that x = Coset(g, P, G).
-
-  We have f[(b, x)] = Coset(b *^{G} g,P, G).
-
-  f[(a, f[(b, x)])] = Coset(a *^{G} (b *^{G} g),P, G).
-
-  f[(a *^{H}  b, x)] = Coset((a *^{G} b)*^{G} g,P, G).
-
-  Thus f[(a, f[(b, x)])] = f[(a *^{H} b, x)].
-end.
-
-Therefore the thesis.
-Qed.
+### END 07
