@@ -288,8 +288,7 @@ If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d th
 
 ## END 02
 
-## BEGIN 03
-
+###BEGIN 03
 
 Signature.
 A finite set is a set.
@@ -320,6 +319,13 @@ Axiom.
 Let M be a set such that for all elements N of M N is a finite set.
 \-/ M is a finite set.
 
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
+Axiom.
+Let N1, N2 be finite sets.
+If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
 Axiom cardUnion.
 Let  M be a finite set such that for all elements N of M N is a finite set.
@@ -392,7 +398,7 @@ card(El(G)) = card(U)*card(Cosets(U, G)).
 Definition.
 Let M be a set.
 Let G be a group.
-A groupaction from G on M is a function f
+A group action from G on M is a function f
 such that f is from Prod(El(G), M) to M
 and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
@@ -403,30 +409,30 @@ Let M be a set.
 Let G be a group.
 Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
-Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
+Orbit(x, f, M, G) = { f[(a, x)] | a << El(G)}.
 
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
+Stab(x,f, M, G) = {y | y << El(G) and f[(y, x)] = x}.
 
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) is a subgroup of G.
+Stab(x,f,M, G) is a subgroup of G.
 Proof.
 
-One(G) is an element of Stab(x, f, G, M).
+One(G) is an element of Stab(x, f, M, G).
 
-Let us show that for all elements y, z of Stab(x, f, G, M)  z *^{G} Inv(y, G) << Stab(x, f, G, M).
-  Let y, z be elements of Stab(x, f, G, M).
+Let us show that for all elements y, z of Stab(x, f, M, G)  z *^{G} Inv(y, G) << Stab(x, f, M, G).
+  Let y, z be elements of Stab(x, f, M, G).
   We have f[(z *^{G} Inv(y, G), x)] = x.
-  Therefore z *^{G} Inv(y, G) is an element of Stab(x, f, G, M).
+  Therefore z *^{G} Inv(y, G) is an element of Stab(x, f, M, G).
 end.
 
 Therefore the thesis.
@@ -435,74 +441,74 @@ Qed.
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
 Let g, h be elements of El(G).
-If Coset(g, Stab(x, f, G, M), G) = Coset(h, Stab(x, f, G, M), G) then f[(g, x)] = f[(h, x)].
+If Coset(g, Stab(x, f, M, G), G) = Coset(h, Stab(x, f, M, G), G) then f[(g, x)] = f[(h, x)].
 
 ##"Welldefined" by the previous Lemma.
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
 There is a function h such that
-h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, M, G), G) to Orbit(x, f, M, G)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, M, G),G)] = f[(i, x)]).
 
 Lemma.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Orbit(x,f, G, M) is a finite set.
+Orbit(x,f, M, G) is a finite set.
 Proof.
   Define h[g] = f[(g, x)] for g in El(G).
   Dom(h) is a finite set.
-  Orbit(x, f, G, M) is a subset of Range(h).
+  Orbit(x, f, M, G) is a subset of Range(h).
   Proof.
-    Let us show that every element of Orbit(x, f, G, M) is an element of Range(h).
-       (1) Let y be an element of Orbit(x, f, G, M).
+    Let us show that every element of Orbit(x, f, M, G) is an element of Range(h).
+       (1) Let y be an element of Orbit(x, f, M, G).
 
        We can take an element g1 of El(G) such that y = f[(g1, x)] (by 1).
 
        Thus y is an element of Range(h).
     end.
   end.
-  Therefore Orbit(x, f, G, M) is a finite set.
+  Therefore Orbit(x, f, M, G) is a finite set.
 Qed.
 
 Lemma.
 Let M be a set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
+Index(G, Stab(x, f, M, G)) = card(Orbit(x, f, M, G)).
 Proof.
 
 Take a function h such that
-h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, M, G), G) to Orbit(x, f, M, G)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, M, G),G)] = f[(i, x)]).
 
-h is surjective onto Orbit(x, f, G, M).
+h is surjective onto Orbit(x, f, M, G).
 Proof.
-  Let us show that for every element y of Orbit(x, f, G, M) there is an element z of Dom(f) such that f[z] = y.
-    Let y be an element of Orbit(x, f, G, M).
+  Let us show that for every element y of Orbit(x, f, M, G) there is an element z of Dom(f) such that f[z] = y.
+    Let y be an element of Orbit(x, f, M, G).
     Take an element i of El(G) such that f[(i, x)] = y.
-    Then we have h[Coset(i,Stab(x, f, G, M),G)] = y.
+    Then we have h[Coset(i,Stab(x, f, M, G),G)] = y.
   end.
 end.
 
 h is injective.
 Proof.
-  Let us show that for all elements h1, h2 of Cosets(Stab(x, f, G, M), G) if h[h1] = h[h2] then h1 = h2.
-    Let h1, h2 be elements of Cosets(Stab(x, f, G, M), G) such that h[h1] =h[h2].
+  Let us show that for all elements h1, h2 of Cosets(Stab(x, f, M, G), G) if h[h1] = h[h2] then h1 = h2.
+    Let h1, h2 be elements of Cosets(Stab(x, f, M, G), G) such that h[h1] =h[h2].
     
-    Take elements g1, g2 of El(G) such that h1 = Coset(g1,Stab(x, f, G, M),G) and h2 = Coset(g2, Stab(x, f, G, M),G).
+    Take elements g1, g2 of El(G) such that h1 = Coset(g1,Stab(x, f, M, G),G) and h2 = Coset(g2, Stab(x, f, M, G),G).
   
     Then f[(g1, x)] = f[(g2, x)].
     f[((Inv(g2, G) *^{G} g1), x)] = f[((Inv(g2, G)*^{G} g2), x)] = x.
     
-    Thus Inv(g2, G) *^{G} g1 is an element of Stab(x, f, G, M).
+    Thus Inv(g2, G) *^{G} g1 is an element of Stab(x, f, M, G).
     Therefore h1 = h2.
   end.
 end.

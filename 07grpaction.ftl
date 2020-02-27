@@ -176,7 +176,7 @@ U and V are conjugates in G iff there is an element g of El(G) such that U = Con
 Definition.
 Let M be a set.
 Let G be a group.
-A groupaction from G on M is a function f
+A group action from G on M is a function f
 such that f is from Prod(El(G), M) to M
 and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
@@ -187,7 +187,7 @@ Let P be a subgroup of G.
 Let U be a subgroup of G.
 Let u be an element of U.
 Let x, y be elements of El(G) such that Coset(x, P, G) = Coset(y, P, G). 
-Then every element of Coset(u *^{G} x, P, G) is an element of  Coset(u *^{G} y, P, G).
+Every element of Coset(u *^{G} x, P, G) is an element of  Coset(u *^{G} y, P, G).
 Proof.
     Let i be an element of Coset(u *^{G} x, P, G).
     Take an element p of P such that i =  (u *^{G} x) *^{G} p.
@@ -204,7 +204,7 @@ Let P be a subgroup of G.
 Let U be a subgroup of G.
 Let u be an element of U.
 Let x, y be elements of El(G) such that Coset(x, P, G) = Coset(y, P, G). 
-Then Coset(u *^{G} x, P, G) = Coset(u *^{G} y, P, G).
+Coset(u *^{G} x, P, G) = Coset(u *^{G} y, P, G).
 Proof.
   Every element of Coset(u *^{G} x, P, G) is an element of  Coset(u *^{G} y, P, G).
   Every element of Coset(u *^{G} y, P, G) is an element of  Coset(u *^{G} x, P, G).
@@ -224,7 +224,7 @@ f[(u, Coset(x, P, G))] = Coset(u *^{G}  x,P, G).
 Lemma.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(U, P, G) is a groupaction from Gr(U, G) on Cosets(P, G).
+Op(U, P, G) is a group action from Gr(U, G) on Cosets(P, G).
 Proof.
 Take a function f such that f = Op(U, P, G).
 Take a group H such that  H = Gr(U, G).

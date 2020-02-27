@@ -1,5 +1,4 @@
 [synonym set/-s]
-
 Let M, N denote sets.
 Let x << M stand for x is an element of M.
 
@@ -147,7 +146,7 @@ Let a prime stand for a prime nonzero integer.
 
 Axiom.
 Let n be a natural number.
-Let p be a prime number.
+Let p be a prime.
 Let k be a natural number.
 If k | p^n then k = 1 or p | k.
 
@@ -161,6 +160,8 @@ Let a, b be natural numbers.
 If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d then a = b.
 
 ###END 02
+
+###############################################################
 
 Signature.
 A finite set is a set.
@@ -199,12 +200,13 @@ Axiom.
 Let N1, N2 be finite sets.
 If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
-Axiom cardUnion.
-Let  M be a finite set such that for all elements N of M N is a finite set.
-Assume M is a disjunct collection.
-Assume that for all elements N1, N2 of M card(N1) = card(N2).
+Axiom cardUnion1.
+Let M be a set.
 Let N be an element of M.
-card(\-/M) = card(N)*card(M).
+If M is a finite set such that every element of M is a finite set
+and M is a disjunct collection 
+and for all elements N1, N2 of M card(N1) = card(N2)
+then card(\-/M) = card(N)*card(M).
 
 Axiom cardUnion2.
 Let M be a set.
@@ -220,14 +222,14 @@ card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and 
 
 Axiom.
 Let M be a finite set.
-If card(M) != 0 then there is an element x of M such that x = x.
+If card(M) != 0 then M is not empty.
 
 Axiom.
 Let M be a finite set.
-card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
+card(M) = 1 iff there is y <<  M such that for all x << M x = y.
 
 Axiom.
 Let M be a finite set.
 Assume 1 < card(M).
 Let x be an element of M.
-Then there is an element y of M such that x != y.
+There is y <<  M such that x != y.

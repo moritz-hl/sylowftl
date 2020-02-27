@@ -203,8 +203,7 @@ Axiom TriCh.
 a = b \/ a < b \/ b < a.
 
 Axiom.
-If a < b then a != b.
-
+a < b iff  a != b.
 
 Let a - b stand for a + (-b).
 
@@ -271,7 +270,7 @@ Let a prime stand for a prime nonzero integer.
 
 Axiom.
 Let n be a natural number.
-Let p be a prime number.
+Let p be a prime.
 Let k be a natural number.
 If k | p^n then k = 1 or p | k.
 
@@ -339,8 +338,7 @@ card(N1) = card(N2) iff there is a function f such that (f is from N1 to N2 and 
 
 Axiom.
 Let M be a finite set.
-If card(M) != 0 then there is an element x of M such that x = x.
-
+If card(M) != 0 then M is not empty.
 Axiom.
 Let M be a finite set.
 card(M) = 1 iff there is an element y of M such that for all elements x of M x = y.
@@ -383,13 +381,12 @@ Let U be a subgroup of G.
 card(El(G)) = card(U)*card(Cosets(U, G)).
 
 ### END 04
-
 ### BEGIN 05
 
 Definition.
 Let M be a set.
 Let G be a group.
-A groupaction from G on M is a function f
+A group action from G on M is a function f
 such that f is from Prod(El(G), M) to M
 and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
@@ -400,44 +397,45 @@ Let M be a set.
 Let G be a group.
 Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
-Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
+Orbit(x, f, M, G) = { f[(a, x)] | a << El(G)}.
 
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
+Stab(x,f, M, G) = {y | y << El(G) and f[(y, x)] = x}.
 
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) is a subgroup of G.
+Stab(x,f,M, G) is a subgroup of G.
 
+##"Welldefined" by the previous Lemma.
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
 There is a function h such that
-h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, M, G), G) to Orbit(x, f, M, G)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, M, G),G)] = f[(i, x)]).
 
 Axiom.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Orbit(x,f, G, M) is a finite set.
+Orbit(x,f, M, G) is a finite set.
 
 Axiom.
 Let M be a set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
+Index(G, Stab(x, f, M, G)) = card(Orbit(x, f, M, G)).
 
 ### END 05
 
@@ -446,96 +444,48 @@ Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-A fixedpoint of f on G on M  is an element y of M such that
+Let f be a group action from G on M.
+A fixed point of f on M on G is an element y of M such that
 for every element a of El(G) f[(a, y)] = y.
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-fixedPoints(M, G, f) = {y | y is a fixedpoint of f on G on M}.
+Let f be a group action from G on M.
+fixedPoints(f, M, G) = {y | y is a fixed point of f on M on G}.
+
+Axiom.
+Let M be a finite set.
+Let G be a group.
+Let f be a group action from G on M.
+fixedPoints(f, M, G) is a finite set.
 
 Axiom.
 Let M be a set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x be an element of M.
-x is a  fixedpoint of f on G on M iff card(Orbit(x, f, G, M)) = 1.
+x is a fixed point of f on M on G iff card(Orbit(x, f, M, G)) = 1.
 
-Axiom OrbitsIntersect.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
-x1 is an element of Orbit(x2, f, G, M).
 
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
-Then Orbit(x1, f, G, M) = Orbit(x2, f, G, M).
-
-Definition.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) = {Orbit(x, f, G, M) | x is an element of M and x is not a fixedpoint of f on G on M}.
-
-Axiom.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-Every element of OrbitsNotFix(f, G, M) is a set.
-
-Axiom.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) is a disjunct collection.
-
-Axiom.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-\-/ OrbitsNotFix(f, G, M) = M \\ fixedPoints(M, G, f).
-
-Axiom.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-\-/  OrbitsNotFix(f, G, M) and fixedPoints(M, G, f) are disjunct.
-
-Axiom.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-(\-/ OrbitsNotFix(f, G, M)) \-/ fixedPoints(M, G, f) = M.
-
-Axiom.
-Let M be a finite set.
-Let G be a finite group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) is a finite set.
-
-Axiom.
-Let M be a finite set.
-Let G be a group.
-Let f be a groupaction from G on M.
-fixedPoints(M, G, f) is a finite set.
+Let f be a group action from G on M.
+Let x1, x2 be elements of M such that Orbit(x1,  f, M, G) and Orbit(x2,  f, M, G) are not disjunct.
+Then Orbit(x1,  f, M, G) = Orbit(x2, f, M, G).
 
 Signature.
-Let p be a prime number.
+Let p be a prime.
 A group of order p is a finite group H such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
 Axiom.
 Let M be a finite set.
-Let p be a prime number.
+Let p be a prime.
 Let G be a group of order p.
-Let f be a groupaction from G on M.
-card(fixedPoints(M, G, f)) = card(M) (mod p).
+Let f be a group action from G on M.
+card(fixedPoints(f, M, G)) = card(M) (mod p).
 
 ### END 06
 
@@ -552,19 +502,19 @@ f[(u, Coset(x, P, G))] = Coset(u *^{G}  x,P, G).
 Axiom.
 Let P be a subgroup of G.
 Let U be a subgroup of G.
-Op(U, P, G) is a groupaction from Gr(U, G) on Cosets(P, G).
+Op(U, P, G) is a group action from Gr(U, G) on Cosets(P, G).
 
 ### END 07
 
-######
+###############################################################
 
 Signature.
-Let p be a prime number.
+Let p be a prime.
 A subgroup of G of order p is a subgroup U of G such that
 (Gr(U, G) is a group of order p).
 
 Definition.
-Let p be a prime number.
+Let p be a prime.
 Let G be a finite group.
 Syl(p, G) = {P | P is a subgroup of G of order p and  not (p | Index(G, P))}.
 
@@ -592,17 +542,17 @@ Let p be a prime.
 Let G be a finite group.
 Let P be an element of Syl(p, G).
 Let U be a subgroup of G of order p.
-Then there is an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
+There is an element g of El(G) such that Conjugate(g, U, G) is a subset of P.
 Proof.
-  Take a groupaction f from Gr(U, G) on Cosets(P, G) such that f = Op(U, P, G).
+  Take a group action f from Gr(U, G) on Cosets(P, G) such that f = Op(U, P, G).
   
-  Let us show that card(fixedPoints(Cosets(P, G), Gr(U, G), f)) !=  0.
-     We have card(fixedPoints(Cosets(P, G), Gr(U, G), f)) = Index(G, P) (mod p).
+  Let us show that card(fixedPoints(f, Cosets(P, G), Gr(U, G))) !=  0.
+     We have card(fixedPoints(f, Cosets(P, G), Gr(U, G))) = Index(G, P) (mod p).
              p does not divide Index(G, P).
      Therefore Index(G, P) != 0 (mod p).
   end.
   
-  We can take an element x of fixedPoints(Cosets(P, G), Gr(U, G),  f)
+  We can take an element x of fixedPoints(f, Cosets(P, G), Gr(U, G))
   and an element g of El(G) such that x = Coset(g, P, G).
   
   Let us show that every element of Conjugate(Inv(g, G), U, G) is an element of P.

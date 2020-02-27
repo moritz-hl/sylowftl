@@ -289,9 +289,7 @@ Let a, b be natural numbers.
 If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d then a = b.
 
 ## END 02
-
-## BEGIN 03
-
+###BEGIN 03
 
 Signature.
 A finite set is a set.
@@ -322,6 +320,13 @@ Axiom.
 Let M be a set such that for all elements N of M N is a finite set.
 \-/ M is a finite set.
 
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
+Axiom.
+Let N1, N2 be finite sets.
+If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
 Axiom cardUnion.
 Let  M be a finite set such that for all elements N of M N is a finite set.
@@ -354,7 +359,7 @@ Axiom.
 Let M be a finite set.
 Assume 1 < card(M).
 Let x be an element of M.
-Then there is an element y of M such that x != y.
+There is an element y of M such that x != y.
 
 ### END 03
 
@@ -380,7 +385,7 @@ Index(G, U) = card(Cosets(U, G)).
 Lemma.
 Let G be a finite group.
 Let U, V be subgroups of G such that V and U are conjugates in G.
-Then card(U) = card(V).
+card(U) = card(V).
 Proof.
 Take an element g of El(G) such that V = Conjugate(g, U, G).
 Define f[u] = g *^{G} (u *^{G} Inv(g, G)) for u in U.

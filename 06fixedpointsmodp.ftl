@@ -46,7 +46,6 @@ Let f be a function. f is injective iff for all elements x,y of Dom(f) we have (
 Definition.
 Let f be a function. f is surjective onto M iff (f is from Dom(f) to M and for every y << M there is an element x of Dom(f) such that f[x]=y).
 
-
 ### BEGIN 01
 
 [synonym group/-s]
@@ -289,8 +288,7 @@ If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d th
 
 ## END 02
 
-## BEGIN 03
-
+###BEGIN 03
 
 Signature.
 A finite set is a set.
@@ -321,6 +319,13 @@ Axiom.
 Let M be a set such that for all elements N of M N is a finite set.
 \-/ M is a finite set.
 
+Axiom.
+Let N1, N2 be finite sets.
+N1 \-/ N2 is a finite set.
+
+Axiom.
+Let N1, N2 be finite sets.
+If N1 and N2 are disjunct then card(N1 \-/ N2) = card(N1) + card(N2).
 
 Axiom cardUnion.
 Let  M be a finite set such that for all elements N of M N is a finite set.
@@ -393,7 +398,7 @@ card(El(G)) = card(U)*card(Cosets(U, G)).
 Definition.
 Let M be a set.
 Let G be a group.
-A groupaction from G on M is a function f
+A group action from G on M is a function f
 such that f is from Prod(El(G), M) to M
 and (for every element x of M f[(One(G), x)] = x)
 and for every element x of M for all elements a, b of El(G)
@@ -404,77 +409,95 @@ Let M be a set.
 Let G be a group.
 Let f be a function from Prod(El(G), M) to M.
 Let x be an element of M.
-Orbit(x, f, G, M) = { f[(a, x)] | a << El(G)}.
+Orbit(x, f, M, G) = { f[(a, x)] | a << El(G)}.
 
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) = {y | y << El(G) and f[(y, x)] = x}.
+Stab(x,f, M, G) = {y | y << El(G) and f[(y, x)] = x}.
 
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Stab(x,f, G, M) is a subgroup of G.
+Stab(x,f,M, G) is a subgroup of G.
 
+##"Welldefined" by the previous Lemma.
 Axiom.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
 There is a function h such that
-h is from Cosets(Stab(x, f, G, M), G) to Orbit(x, f, G, M)
-and (for all elements i of El(G) h[Coset(i,Stab(x, f, G, M),G)] = f[(i, x)]).
+h is from Cosets(Stab(x, f, M, G), G) to Orbit(x, f, M, G)
+and (for all elements i of El(G) h[Coset(i,Stab(x, f, M, G),G)] = f[(i, x)]).
 
 Axiom.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Orbit(x,f, G, M) is a finite set.
+Orbit(x,f, M, G) is a finite set.
 
 Axiom.
 Let M be a set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x << M.
-Index(G, Stab(x, f, G, M)) = card(Orbit(x, f, G, M)).
+Index(G, Stab(x, f, M, G)) = card(Orbit(x, f, M, G)).
 
 ### END 05
 
+###############################################################
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-A fixedpoint of f on G on M  is an element y of M such that
+Let f be a group action from G on M.
+A fixed point of f on M on G is an element y of M such that
 for every element a of El(G) f[(a, y)] = y.
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a function from Prod(El(G), M) to M.
-fixedPoints(M, G, f) = {y | y is a fixedpoint of f on G on M}.
+Let f be a group action from G on M.
+fixedPoints(f, M, G) = {y | y is a fixed point of f on M on G}.
+
+Lemma.
+Let M be a finite set.
+Let G be a group.
+Let f be a group action from G on M.
+fixedPoints(f, M, G) is a finite set.
+Proof.
+  Let us show that  every fixed point of f on M on G is an element of M.
+    Let x be a fixed point of f on M on G.
+    Then x is an element of M.
+  end.
+
+   fixedPoints(f, M, G) is a subset of M.
+
+   Therefore the thesis.
+Qed.
 
 Lemma.
 Let M be a set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
+Let f be a group action from G on M.
 Let x be an element of M.
-x is a  fixedpoint of f on G on M iff card(Orbit(x, f, G, M)) = 1.
+x is a fixed point of f on M on G iff card(Orbit(x, f, M, G)) = 1.
 
 
 Lemma OrbitsIntersect.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
-x1 is an element of Orbit(x2, f, G, M).
+Let f be a group action from G on M.
+Let x1, x2 be elements of M such that Orbit(x1, f, M, G) and Orbit(x2, f, M ,G) are not disjunct.
+x1 is an element of Orbit(x2,  f, M, G).
 Proof.
-Take y <<  M such that y << Orbit(x1, f, G, M) and y << Orbit(x2, f, G, M).
+Take y <<  M such that y << Orbit(x1, f, M, G) and y << Orbit(x2, f, M, G).
 Take g1 << El(G) such that f[(g1, x1)] = y.
 Take g2 << El(G) such that f[(g2, x2)] = y.
 
@@ -486,151 +509,134 @@ Qed.
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-Let x1, x2 be elements of M such that Orbit(x1, f, G, M) and Orbit(x2, f, G, M) are not disjunct.
-Then Orbit(x1, f, G, M) = Orbit(x2, f, G, M).
+Let f be a group action from G on M.
+Let x1, x2 be elements of M such that Orbit(x1,  f, M, G) and Orbit(x2,  f, M, G) are not disjunct.
+Orbit(x1,  f, M, G) = Orbit(x2, f, M, G).
 Proof.
-Let us show that every element of Orbit(x1, f, G, M) is an element of Orbit(x2, f, G, M).
-  Let x3 be an element of Orbit(x1, f, G, M).
-  x1 is an element of Orbit(x2, f, G, M) (by OrbitsIntersect).
-  Thus x3 is an element of Orbit(x2, f, G, M).
+Let us show that every element of Orbit(x1,  f, M, G) is an element of Orbit(x2,  f, M, G).
+  Let x3 be an element of Orbit(x1,  f, M, G).
+  x1 is an element of Orbit(x2,  f, M, G) (by OrbitsIntersect).
+  Thus x3 is an element of Orbit(x2,  f, M, G).
 end.
-Let us show that every element of Orbit(x2, f, G, M) is an element of Orbit(x1, f, G, M).
-  Let x3 be an element of Orbit(x2, f, G, M).
-  x2 is an element of Orbit(x1, f, G, M) (by OrbitsIntersect).
-  Thus x3 is an element of Orbit(x1, f, G, M).
+Let us show that every element of Orbit(x2, f, M, G) is an element of Orbit(x1,  f, M, G).
+  Let x3 be an element of Orbit(x2, f, M, G).
+  x2 is an element of Orbit(x1,  f, M, G) (by OrbitsIntersect).
+  Thus x3 is an element of Orbit(x1,  f, M, G).
 end.
 Qed.
 
 Definition.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) = {Orbit(x, f, G, M) | x is an element of M and x is not a fixedpoint of f on G on M}.
+Let f be a group action from G on M.
+OrbitsNotFix(f, M, G) = {Orbit(x,  f, M, G) | x is an element of M and x is not a fixed point of f on M on G}.
 
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-Every element of OrbitsNotFix(f, G, M) is a set.
+Let f be a group action from G on M.
+OrbitsNotFix(f, M, G) is a disjunct collection.
 
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) is a disjunct collection.
-
-Lemma.
-Let M be a set.
-Let G be a group.
-Let f be a groupaction from G on M.
-\-/ OrbitsNotFix(f, G, M) = M \\ fixedPoints(M, G, f).
+Let f be a group action from G on M.
+\-/ OrbitsNotFix( f, M, G) = M \\ fixedPoints(f, M, G).
 Proof.
-Let us show that every element of \-/ OrbitsNotFix(f, G, M) is an element of  M \\ fixedPoints(M, G, f).
-  Let x be an element of  \-/ OrbitsNotFix(f, G, M).
-  Take an element y of M such that x is an element of Orbit(y, f, G, M) and y is not an element of fixedPoints(M, G, f).
+Let us show that every element of \-/ OrbitsNotFix( f, M, G) is an element of  M \\ fixedPoints(f, M, G).
+  Let x be an element of  \-/ OrbitsNotFix( f, M, G).
+  Take an element y of M such that x is an element of Orbit(y,  f, M, G) and y is not an element of fixedPoints(f, M, G).
   x is an element of M.
-  x is not a fixedpoint of f on G on M.
-  fixedPoints(M , G, f) is a subset of M.
-  Hence x is an element of M \\ fixedPoints(M, G, f).
+  x is not a fixed point of f on M on G.
+  fixedPoints(f, M , G) is a subset of M.
+  Therefore  x is an element of M \\ fixedPoints(f, M, G).
 end.
 
-Let us show that every element of M \\ fixedPoints(M, G, f) is an element of  \-/ OrbitsNotFix(f, G, M).
-  Let x be an element of M \\ fixedPoints(M , G, f).
+Let us show that every element of M \\ fixedPoints(f, M, G) is an element of  \-/ OrbitsNotFix( f, M, G).
+  Let x be an element of M \\ fixedPoints(f, M , G).
   x is an element of M.
-  x is not a fixedpoint of f on G on M.
-  Orbit(x, f, G, M) is an element of OrbitsNotFix(f, G, M).
-  x is an element of Orbit(x, f, G, M).
-  Thus x is an element of  \-/ OrbitsNotFix(f, G, M).
+  x is not a fixed point of f on M on G.
+  Orbit(x, f, M, G) is an element of OrbitsNotFix( f, M, G).
+  x is an element of Orbit(x,  f, M, G).
+  Therefore  x is an element of  \-/ OrbitsNotFix( f, M, G).
 end.
 qed.
 
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
- \-/  OrbitsNotFix(f, G, M) and fixedPoints(M, G, f) are disjunct.
+Let f be a group action from G on M.
+ \-/  OrbitsNotFix( f, M, G) and fixedPoints(f, M, G) are disjunct.
 
 Lemma.
 Let M be a set.
 Let G be a group.
-Let f be a groupaction from G on M.
-( \-/ OrbitsNotFix(f, G, M)) \-/ fixedPoints(M, G, f) = M.
+Let f be a group action from G on M.
+( \-/ OrbitsNotFix( f, M, G)) \-/ fixedPoints( f, M, G) = M.
 
 Lemma.
 Let M be a finite set.
 Let G be a finite group.
-Let f be a groupaction from G on M.
-OrbitsNotFix(f, G, M) is a finite set.
+Let f be a group action from G on M.
+OrbitsNotFix( f, M, G) is a finite set.
 Proof.
-Define h[x] = Orbit(x, f, G, M) for x in M.
+Define h[x] = Orbit(x,  f, M, G) for x in M.
 
-OrbitsNotFix(f, G, M) is a subset of Range(h).
+OrbitsNotFix( f, M, G) is a subset of Range(h).
 Qed.
 
 Lemma.
 Let M be a finite set.
-Let G be a group.
-Let f be a groupaction from G on M.
-fixedPoints(M, G, f) is a finite set.
-Proof.
-  Let us show that  every fixedpoint of f on G on M is an element of M.
-    Let x be a fixedpoint of f on G on M.
-    Then x is an element of M.
-  end.
-
-   fixedPoints(M, G, f) is a subset of M.
-
-   Therefore the thesis.
-Qed.
+Let G be a finite group.
+Let f be a group action from G on M.
+card(M) = card(( \-/ OrbitsNotFix( f, M, G)) \-/ fixedPoints( f, M, G)) 
+= card(fixedPoints(f, M, G)) + card(\-/ OrbitsNotFix( f, M, G)).
 
 Signature.
-Let p be a prime number.
+Let p be a prime.
 A group of order p is a finite group H such that
 (there is a natural number n such that card(El(H)) = p ^ n).
 
-
-
 Lemma.
 Let M be a finite set.
-Let p be a prime number.
+Let p be a prime.
 Let G be a group of order p.
-Let f be a groupaction from G on M.
-card(fixedPoints(M, G, f)) = card(M) (mod p).
+Let f be a group action from G on M.
+card(fixedPoints(f, M, G)) = card(M) (mod p).
 Proof.
 
-\-/ OrbitsNotFix(f, G, M) is a subset of M.
+\-/ OrbitsNotFix(f, M, G) is a subset of M.
 
-Let us show that p | card( \-/  OrbitsNotFix(f, G, M)).
+Let us show that p | card( \-/  OrbitsNotFix( f, M, G)).
 
-  Let us show that for all elements N1 of OrbitsNotFix(f, G, M) p | card(N1).
+  Let us show that for all elements N1 of OrbitsNotFix( f, M, G) p | card(N1).
 
-    Let N be an element of OrbitsNotFix(f, G, M).
+    Let N be an element of OrbitsNotFix( f, M, G).
 
-    Take an element x of M such that N = Orbit(x, f, G, M).
+    Take an element x of M such that N = Orbit(x, f, M, G).
     
     Let us show that card(N) != 1.
       Assume the contrary.
        
-      x is not a fixedPoint of f on G on M .
+      x is not a fixed point of f on M on G .
       x is an element of N.
-      Thus x is a fixedPoint of f on G on M .
+      Thus x is a fixed point of f on M on G.
 
       Contradiction.
     end.
 
-    We have card(N) = Index(G, Stab(x, f, G, M)).
-    Hence card(El(G)) = card(Stab(x, f, G, M))*card(N) and card(N) | card(El(G)).
+    We have card(N) = Index(G, Stab(x, f, M, G)).
+    Hence card(El(G)) = card(Stab(x,  f, M, G))*card(N) and card(N) | card(El(G)).
     Therefore p | card(N).
   end.
 
-  (1) OrbitsNotFix(f, G, M) is a finite set such that every element of OrbitsNotFix(f, G, M) is a finite set.
-  (2) OrbitsNotFix(f, G, M) is a disjunct collection and for all elements N of OrbitsNotFix(f, G, M) p | card(N).
+  (1) OrbitsNotFix( f, M, G) is a finite set such that every element of OrbitsNotFix( f, M, G) is a finite set.
+  (2) OrbitsNotFix( f, M, G) is a disjunct collection and for all elements N of OrbitsNotFix( f, M, G) p | card(N).
 
-  Therefore  p | card(\-/ OrbitsNotFix(f, G, M)) (by cardUnion2, 1, 2).
+  Therefore  p | card(\-/ OrbitsNotFix( f, M, G)) (by cardUnion2, 1, 2).
 end.
- 
-We have card(M) = card(fixedPoints(M, G, f)) + card( \-/ OrbitsNotFix(f, G, M)).
 
-Therefore  card(M) = card(fixedPoints(M, G, f)) (mod p).
+We have card(M) = card(fixedPoints(f, M, G)) + card(\-/ OrbitsNotFix( f, M, G)).
+
+Therefore  card(M) = card(fixedPoints(f, M, G)) (mod p).
 qed.

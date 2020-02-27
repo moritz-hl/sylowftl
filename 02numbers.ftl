@@ -27,7 +27,7 @@ Axiom TriCh.
 a = b \/ a < b \/ b < a.
 
 Axiom.
-If a < b then a != b.
+a < b iff a != b.
 
 Let a - b stand for a + (-b).
 
@@ -125,7 +125,7 @@ Let a prime stand for a prime nonzero integer.
 
 Axiom.
 Let n be a natural number.
-Let p be a prime number.
+Let p be a prime.
 Let k be a natural number.
 If k | p^n then k = 1 or p | k.
 

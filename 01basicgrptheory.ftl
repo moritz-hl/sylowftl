@@ -76,10 +76,10 @@ Axiom Assoc.
 Let x, y, z be elements of El(G). x *^{G} ( y *^{G} z) = (x *^{G} y) *^{G} z. 
 
 Axiom InvOne.
-Let x be an element of El(G). Then x *^{G} Inv(x, G) = One(G) = Inv(x, G) *^{G} x.
+Let x be an element of El(G). x *^{G} Inv(x, G) = One(G) = Inv(x, G) *^{G} x.
 
 Axiom MulOne.
-Let x be an element of El(G). Then x *^{G} One(G) = x =  One(G) *^{G} x.
+Let x be an element of El(G). x *^{G} One(G) = x =  One(G) *^{G} x.
 
 Lemma InvUniq.
 Let x, y be elements of El(G).
@@ -108,7 +108,7 @@ Lemma.
 Let G be a group.
 Let H be a subset of El(G).
 Assume ((There is a x << H such that x = x) and (for all elements  y, z of H  z *^{G} Inv(y, G) << H)).
-Then H is a subgroup of G.
+H is a subgroup of G.
 Proof.
   One(G) << H.
     Proof.
@@ -142,7 +142,7 @@ Lemma.
 Let H be a subgroup of G.
 Let g1, g2 be elements of El(G).
 Assume Coset(g1, H, G) and Coset(g2, H, G) are not disjunct.
-Then Inv(g2, G) *^{G} g1 << H.
+Inv(g2, G) *^{G} g1 << H.
 Proof.
   Take y << El(G) such that (y << Coset(g1, H, G) and y << Coset(g2, H, G)).
   Take b << H such that y = g1 *^{G} b.
@@ -208,7 +208,7 @@ El(G) = \-/ Cosets(U, G).
 Proof.
 Let us show that every element of El(G) is an element of \-/ Cosets(U, G).
   Let g be an element of El(G).
-  Then g is an element of Coset(g, U, G).
+  g is an element of Coset(g, U, G).
 end.
 
 Let us show that every element of \-/ Cosets(U, G) is an element of El(G).
