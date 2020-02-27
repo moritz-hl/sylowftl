@@ -74,9 +74,8 @@
 \author{Moritz Hartlieb, Jonas Lippert}
 
 \begin{document}
+\pagenumbering{gobble}
 \maketitle
-\newpage
-
 \newpage
 \pagenumbering{arabic}
 
@@ -271,6 +270,7 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	\newpage
 	
 	
+
 	\subsection{Sylow 2 in Lean}
 \section{Vergleich}
 \section{Diskussion}
