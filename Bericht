@@ -22,8 +22,22 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[varg]{txfonts}
+\usepackage{verbatim}
 
 
+% Lean
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amssymb}
+
+\usepackage{color}
+\definecolor{keywordcolor}{rgb}{0.7, 0.1, 0.1}   % red
+\definecolor{commentcolor}{rgb}{0.4, 0.4, 0.4}   % grey
+\definecolor{symbolcolor}{rgb}{0.0, 0.1, 0.6}    % blue
+\definecolor{sortcolor}{rgb}{0.1, 0.5, 0.1}      % green
+
+\usepackage{listings}
+\def\lstlanguagefiles{lstlean.tex}
+\lstset{language=lean}
 
 % b) Lemma, Satz, Theorem usw. 
 %\theoremstyle{plain}
@@ -53,6 +67,7 @@
 \newcommand{\e}{e^{2\pi i\xi x}}
 \newcommand{\me}{e^{-2\pi i\xi x}}
 \newcommand{\fa}{\;\forall\,}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 
 \title{Eine Formalisierung des zweiten Satzes von Sylow aus der Gruppentheorie in Naproche im Vergleich zu einer Implementierung in Lean}
 
@@ -65,24 +80,24 @@
 \newpage
 \pagenumbering{arabic}
 
-\section{Einführung}
+\section{Einleitung}
 
-Der zweite Satz von Sylow lautet wie folgt.\\\\
+Der zweite Satz von Sylow lautet wie folgt:\\\\
 \textbf{Satz.}
 	Sei $p$ eine Primzahl und $G$ eine endliche Gruppe mit $|G|=p^{r}*m$, sodass $p\nmid m$. Sei $U \leq G$ eine $p$-Untergruppe, und sei $P \leq G$ eine $p$-Sylowgruppe. Dann gilt:
 	\begin{enumerate}
 		\item Es gibt ein $g\in G$ mit $$gUg^{-1}\subseteq P.$$
 		\item Je zwei $p$-Sylowgruppen sind konjugiert.
 	\end{enumerate}
-Die Beweisidee ist, die Untergruppe $U$ auf den Linksnebenklassen von $P$ operieren zu lassen. Bezüglich dieser Gruppenoperation existieren Fixpunkte, weil deren Anzahl nach Bahnenfornmel kongruent zur Anzahl der Nebenklassen von $P$ (mod $p$) ist. Da $P\in$ Syl$_{p}(G)$, gilt nach Definition $p\nmid |G/P|$.
+Die Beweisidee ist, die Untergruppe $U$ auf den Linksnebenklassen von $P$ operieren zu lassen. Bezüglich dieser Gruppenoperation existieren Fixpunkte, weil deren Anzahl nach Bahnenformel kongruent zur Anzahl der Nebenklassen von $P$ (mod $p$) ist. Da $P\in$ Syl$_{p}(G)$, gilt nach Definition $p\nmid |G/P|$.
 
 Ein solcher Fixpunkt $gP$ mit $g\in G$ liefert dann $gUg^{-1}\subseteq P.$
 \\
 
-Es werden also zunächst Grundbegriffe der Mengenlehre und Gruppentheorie sowie natürliche Zahlen, Primzahlen und Teilbarkeitseigenschaften benötigt. Hierzu bieten sich unterschiedliche Herangehensweisen an. 
+Es werden also zunächst Grundbegriffe der Gruppentheorie, endliche Mengen sowie natürliche Zahlen, Primzahlen und Modulo-Rechnung benötigt. Hierzu bieten sich unterschiedliche Herangehensweisen an. 
 Es stellt sich heraus, dass Naproche für kleine Theorien gut geeignet ist, deren Grundlagen axiomatisch eingeführt werden, die ihrerseits in einer eigenen Theorie entwickelt werden (können). Die Implementierung in Lean baut hingegen auf bereits formalisierte Grundlagen auf und ist somit Teil einer einzigen großen Theorie der Mathematik. 
 
-Interessant ist im weiteren Verlauf die Formalisierung von Nebenklassen. Um unnötige Begriffsbildung im Sinne einer kleinen Theorie zu vermeiden, bietet sich in Naproche eine direkte Konstruktion an: $$Coset\left(g, H, G\right) \coloneqq \left\{\,g *^{G} h \st h << H\,\right\}.$$ Anschließend ist zu zeigen, dass $G$ disjunkte Vereinigung von Nebenklassen bzgl. einer beliebigen Untergruppe $H$ ist.
+Interessant ist die Formalisierung von Nebenklassen. Um unnötige Begriffsbildung im Sinne einer kleinen Theorie zu vermeiden, bietet sich in Naproche eine direkte Konstruktion an: $$Coset\left(g, H, G\right) \coloneqq \left\{\,g *^{G} h \st h << H\,\right\}.$$ Anschließend ist zu zeigen, dass $G$ disjunkte Vereinigung von Nebenklassen bzgl. einer beliebigen Untergruppe $H$ ist.
 In Lean wird dagegen bzgl. einer Untergruppe $S$ von $G$ folgende Äquivalenzrelation auf $G$ eingeführt: $$x\sim_{S} y :\Leftrightarrow x^{-1}*y\in S.$$
 Lean erlaubt uns, den Quotient $G/\sim_{S}$ zu betrachten. Es wird verwendet, dass $x\sim_{S} y$ genau dann, wenn $xS$ und $yS$ die selbe Nebenklasse repräsentieren. \\
 
@@ -92,7 +107,171 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
  
 \section{Formalisierung in Naproche}
 \section{Formalisierung in Lean}
+	\subsection{Quotienten in Lean}
+	Endliche Mengen und Nebenklassen sind in Lean als Quotient formalisiert.
+	In der core-Library von Lean sind folgende Konstanten definiert:
+	\begin{lstlisting}
+		constant quot : Π {α : Sort u}, (α → α → Prop) → Sort u
+		constant quot.mk :
+		Π {α : Sort u} (r : α → α → Prop), α → quot r
+		axiom quot.ind :
+		∀ {α : Sort u} {r : α → α → Prop} {β : quot r → Prop},
+		(∀ a, β (quot.mk r a)) → ∀ (q : quot r), β q
+		axiom quot.sound :
+		∀ {α : Type u} {r : α → α → Prop} {a b : α},
+		r a b → quot.mk r a = quot.mk r b
+		constant quot.lift :
+		Π {α : Sort u} {r : α → α → Prop} {β : Sort u} (f : α → β)),
+		(∀ a b, r a b → f a = f b) → quot r → β
+	\end{lstlisting}
+	Die Klasse von \lstinline{a} in \lstinline{quot r }wird durch \lstinline{quot.mk r a }erzeugt.
+	Das Induktionsaxiom stellt sicher, dass alle Elemente von \lstinline{quot r }von der Form \lstinline{quot.mk r a }sind.
+	Die Lifting-Eigenschaft erlaubt es, eine Funktion, die identifizierte Elemente auf den gleichen Wert abbildet, auf \lstinline{quot r }zu liften.
+	Ein \lstinline{setoid $\alpha$ }ist ein Typ \lstinline{$\alpha$} zusammen mit einer Äquivalenzrelation:
+	\begin{lstlisting}
+	class setoid (α : Sort u) :=
+	(r : α → α → Prop) (iseqv : equivalence r)
+	\end{lstlisting} 
+	Der \lstinline{quotient s }auf einem \lstinline{s : setoid $\alpha$ }ist dann der Qutient bzgl. einer Äquivalenzrelation:
+	\begin{lstlisting}
+	def quotient {α : Sort u} (s : setoid α) :=
+	@quot α setoid.r
+	\end{lstlisting}
+	Die obigen Eigenschaften von \lstinline{quot} werden anschließend auf \lstinline|quotient| übertragen.
+	\subsection{Endliche Mengen in Lean}
+	Endliche Mengen werden auf Basis von Listen definiert. Zunächst erhält man Multimengen als Quotienten, indem Permutationen mit Hilfe der Äquivalenzrelation \lstinline|perm| miteinander identifiziert werden:
+	\begin{lstlisting}
+	inductive perm : list α → list α → Prop
+	| nil   : perm [] []
+	| skip  : Π (x : α) {l₁ l₂ : list α},
+											perm l₁ l₂ → perm (x::l₁) (x::l₂)
+	| swap  : Π (x y : α) (l : list α), perm (y::x::l) (x::y::l)
+	| trans : Π {l₁ l₂ l₃ : list α}, perm l₁ l₂ → perm l₂ l₃ → perm l₁ l₃
+	\end{lstlisting}
+	Unter Verwendung des Beweises \lstinline|perm.eqv|, dass \lstinline|perm| eine Äquivalenzrelation ist, wird eine Instanz von \lstinline|setoid list $\alpha$ |eingeführt, welche dann in der Definition der Multimenge Verwendung findet:
+	\begin{lstlisting}
+	instance is_setoid (α) : setoid (list α) :=
+	setoid.mk (@perm α) (perm.eqv α)
+	
+	def {u} multiset (α : Type u) : Type u :=
+	quotient (list.is_setoid α)
+	\end{lstlisting}
+	Eine Multimenge wird zur endlichen Menge, wenn sie keine Duplikate beinhaltet:
+	\begin{lstlisting}
+	structure finset (α : Type*) :=
+	(val : multiset α)
+	(nodup : nodup val)
+	\end{lstlisting}
+	Die Definition von \lstinline|nodup| für Multimengen basiert auf \lstinline|nodup| für Listen. 
+	\begin{lstlisting}
+	def nodup : list α → Prop := pairwise (≠)
+	\end{lstlisting}
+	Hierbei prüft \lstinline|pairwise|, ob die Relation \lstinline|$\neq$| paarweise gilt.
+	\begin{lstlisting}
+	variables (R : α → α → Prop)
+	inductive pairwise : list α → Prop
+	| nil {} : pairwise []
+	| cons : ∀ {a : α} {l : list α}, (∀ a' ∈ l, R a a') → pairwise l → pairwise (a::l)
+	\end{lstlisting}
+	Jetzt wird \lstinline|nodup| für Listen auf Multimengen geliftet. Dazu werden \lstinline|quot.lift$\_$on| folgende Parameter übergeben: der Quotient \lstinline|s|, die zu liftende(?) Funktion \lstinline|nodup| und ein Beweis, dass Permutation keine Duplikate erzeugt. Hierbei wird das Lean-interne Axiom \lstinline|propext| verwendet, nach dem äquivalente Propositionen gleich sind.
+	\begin{lstlisting}
+	def nodup (s : multiset α) : Prop :=
+	quot.lift_on s nodup (λ s t p, propext $\$$ perm_nodup p)
+	
+	def quot.lift_on {α : Sort u} {β : Sort v} {r : α → α → Prop} 
+	(q : quot r) (f : α → β) (c : ∀ a b, r a b → f a = f b) : β 
+	
+	theorem perm_nodup {l₁ l₂ : list α} : l₁ ~ l₂ → (nodup l₁ ↔ nodup l₂)
+	\end{lstlisting}
+	Der Beweis von \lstinline|perm$\_$nodup| kann in perm.lean nachgelesen werden.
+	\newpage
+	
+	
+	\subsection{MOD in Lean}
+	%Um die Formalisierung von \lstinline|a ≡ b [MOD n]| zu illustrieren, wollen wir den %Beweis des folgenden Lemmas nachvollziehen:
+	%\begin{lstlisting}
+	%lemma mod_zero (a : nat) : a % 0 = a :=
+	%begin
+	%rw mod_def,
+	%have h : ¬ (0 < 0 ∧ 0 ≤ a),
+	%simp [lt_irrefl],
+	%simp [if_neg, h]
+	%end
+	%\end{lstlisting}
+	Die Definition von $x\Mod{y}$ auf den natürlichen Zahlen basiert auf der Wohlfundiertheit der $<$-Relation auf $\N$: 
+	\begin{lstlisting}
+	inductive acc {α : Sort u} (r : α → α → Prop) : α → Prop
+	| intro (x : α) (h : ∀ y, r y x → acc y) : acc x
+	
+	parameters {α : Sort u} {r : α → α → Prop}
+	
+	local infix `≺`:50    := r
+	
+	inductive well_founded {α : Sort u} (r : α → α → Prop) : Prop
+	| intro (h : ∀ a, acc r a) : well_founded
+	
+	class has_well_founded (α : Sort u) : Type u :=
+	(r : α → α → Prop) (wf : well_founded r)
+	
+	\end{lstlisting}
+	Ein Element \lstinline|x : $\alpha$| kann nur die Eigenschaft \lstinline|acc| haben, falls ein \enquote{kleinstes} Element bzgl. der Relation \lstinline|R| existiert. Entsprechend wird ein Rekursions- und Induktionsprinzip für wohlfundierte Relationen eingeführt, auf die hier nicht näher eingegangen werden soll. Wichtig ist der Spezialfall, dass sich über wohlfundierte Relationen Funktionen definieren lassen (siehe \lstinline|def fix|):
+	\begin{lstlisting}
+	parameter hwf : well_founded r
+	variable {C : α → Sort v}
+	variable F : Π x, (Π y, y ≺ x → C y) → C x
+	
+	def fix_F (x : α) (a : acc r x) : C x :=
+	acc.rec_on a (λ x₁ ac₁ ih, F x₁ ih)
+	
+	lemma fix_F_eq (x : α) (acx : acc r x) :
+	fix_F F x acx = F x (λ (y : α) (p : y ≺ x), fix_F F y (acc.inv acx p)) :=
+	acc.drec (λ x r ih, rfl) acx
+	
+	variables {α : Sort u} {C : α → Sort v} {r : α → α → Prop}
+	
+	def fix (hwf : well_founded r) (F : Π x, (Π y, r y x → C y) → C x) (x : α) : C x :=
+	fix_F F x (apply hwf x)
 
+	lemma fix_eq (hwf : well_founded r) (F : Π x, (Π y, r y x → C y) → C x) (x : α) :
+	fix hwf F x = F x (λ y h, fix hwf F y) :=
+	fix_F_eq F x (apply hwf x)
+	\end{lstlisting}
+	Ist eine Funktion \lstinline|F| gegeben, welche die Werte \lstinline|C x| für bekannte Werte \lstinline|C y| der \enquote{kleineren} Elemente \lstinline|y $\prec$ x| liefert, so ist nach \lstinline|fix| die Funktion \lstinline|C| für alle \lstinline|x : $\alpha$| definiert. Die äquivalente Formulierung wird im weiteren Verlauf nützlich sein.
+	Für \lstinline|F| setzen wir
+	\begin{lstlisting}
+	private def mod.F (x : nat) (f : Π x₁, x₁ < x → nat → nat) (y : nat) : nat :=
+	if h : 0 < y ∧ y ≤ x then f (x - y) (div_rec_lemma h) y else x
+	\end{lstlisting}
+	und damit \lstinline|C| auf \lstinline|$\N\to\N\to\N$|. Hier wurde folgendes Lemma benutzt:
+	\begin{lstlisting}
+	div_rec_lemma {x y : nat} : 0 <	 y ∧ y ≤ x → x - y < 	x.
+	\end{lstlisting}
+	Wir können nun \lstinline|mod| und damit eine Instanz der Typenklasse \lstinline|class has$\_$mod |definieren, die bereits in \lstinline|core.lean| vordefiniert ist. Sie besitzt einzig den Konstruktor \lstinline|has$\_$mod.mod : $\N\to\N\to\N$|.
+	\begin{lstlisting}
+	protected def mod := well_founded.fix lt_wf mod.F
+	
+	instance : has_mod nat :=
+	⟨nat.mod⟩
+	\end{lstlisting}
+	Die Infixnotation für \lstinline|has$\_$mod.mod n m |ist \lstinline|n % m|.
+	Durch das folgende Hilfslemma erhalten wir Zugriff auf die definierende Eigenschaft: 
+	\begin{lstlisting}
+	lemma mod_def_aux (x y : nat) : x % y = if h : 0 < y ∧ y ≤ x then (x - y) % y else x :=
+	congr_fun (well_founded.fix_eq lt_wf mod.F x) y
+	
+	lemma mod_def (x y : nat) : x % y = if 0 < y ∧ y ≤ x then (x - y) % y else x :=
+	by have h := mod_def_aux x y; rwa [dif_eq_if] at h
+	\end{lstlisting}
+	Letztere Formulierung vereinfacht die Schreibweise auf Basis unterschiedlicher Verwendungsmöglichkeiten von \lstinline|if...then...else|. Details können in der Datei \lstinline|logic.lean| nachgeschlagen werden. Weiter wird \lstinline|a ≡ b [MOD n]| definiert:
+	\begin{lstlisting}
+	def modeq (n a b : ℕ) := a % n = b % n
+	
+	notation a ` ≡ `:50 b ` [MOD `:50 n `]`:0 := modeq n a b
+	\end{lstlisting}
+	\newpage
+	
+	
+	\subsection{Sylow 2 in Lean}
 \section{Vergleich}
 \section{Diskussion}
 \section{Bibliographie}
