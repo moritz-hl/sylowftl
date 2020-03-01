@@ -23,6 +23,7 @@
 \usepackage{amssymb}
 \usepackage[varg]{txfonts}
 \usepackage{verbatim}
+\usepackage{MnSymbol}
 
 
 % Lean
@@ -30,7 +31,7 @@
 %\usepackage{amssymb}
 
 \usepackage{color}
-\definecolor{keywordcolor}{rgb}{0.7, 0.1, 0.1}   % red
+\definecolor{keywordcolor}{rgb}{0.0, 0.1, 0.6}    % red {0.7, 0.1, 0.1}
 \definecolor{commentcolor}{rgb}{0.4, 0.4, 0.4}   % grey
 \definecolor{symbolcolor}{rgb}{0.0, 0.1, 0.6}    % blue
 \definecolor{sortcolor}{rgb}{0.1, 0.5, 0.1}      % green
@@ -68,6 +69,7 @@
 \newcommand{\me}{e^{-2\pi i\xi x}}
 \newcommand{\fa}{\;\forall\,}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\ls}[1]{\lstinline|#1|}
 
 \title{Eine Formalisierung des zweiten Satzes von Sylow aus der Gruppentheorie in Naproche im Vergleich zu einer Implementierung in Lean}
 
@@ -105,6 +107,7 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
  
  
 \section{Formalisierung in Naproche}
+\newpage
 \section{Formalisierung in Lean}
 	\subsection{Quotienten in Lean}
 	Endliche Mengen und Nebenklassen sind in Lean als Quotient formalisiert.
@@ -118,25 +121,27 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 		(∀ a, β (quot.mk r a)) → ∀ (q : quot r), β q
 		axiom quot.sound :
 		∀ {α : Type u} {r : α → α → Prop} {a b : α},
-		r a b → quot.mk r a = quot.mk r b
+		r a b → quot.mk r a =$\hspace*{0cm}$ quot.mk r b
 		constant quot.lift :
 		Π {α : Sort u} {r : α → α → Prop} {β : Sort u} (f : α → β)),
-		(∀ a b, r a b → f a = f b) → quot r → β
+		(∀ a b, r a b → f a =$\hspace*{0cm}$ f b) → quot r → β
 	\end{lstlisting}
 	Die Klasse von \lstinline{a} in \lstinline{quot r }wird durch \lstinline{quot.mk r a }erzeugt.
 	Das Induktionsaxiom stellt sicher, dass alle Elemente von \lstinline{quot r }von der Form \lstinline{quot.mk r a }sind.
-	Die Lifting-Eigenschaft erlaubt es, eine Funktion, die identifizierte Elemente auf den gleichen Wert abbildet, auf \lstinline{quot r }zu liften.
+	Die Lifting-Eigenschaft erlaubt es, geeignete Funktionen auf \lstinline{quot r }zu liften.\\
 	Ein \lstinline{setoid $\alpha$ }ist ein Typ \lstinline{$\alpha$} zusammen mit einer Äquivalenzrelation:
 	\begin{lstlisting}
 	class setoid (α : Sort u) :=
 	(r : α → α → Prop) (iseqv : equivalence r)
 	\end{lstlisting} 
-	Der \lstinline{quotient s }auf einem \lstinline{s : setoid $\alpha$ }ist dann der Qutient bzgl. einer Äquivalenzrelation:
+	Der \lstinline{quotient s }auf einem \lstinline{s : setoid $\alpha$ }ist dann der Quotient bzgl. einer Äquivalenzrelation:
 	\begin{lstlisting}
 	def quotient {α : Sort u} (s : setoid α) :=
 	@quot α setoid.r
 	\end{lstlisting}
 	Die obigen Eigenschaften von \lstinline{quot} werden anschließend auf \lstinline|quotient| übertragen.
+	\newpage
+	
 	\subsection{Endliche Mengen in Lean}
 	Endliche Mengen werden auf Basis von Listen definiert. Zunächst erhält man Multimengen als Quotienten, indem Permutationen mit Hilfe der Äquivalenzrelation \lstinline|perm| miteinander identifiziert werden:
 	\begin{lstlisting}
@@ -172,24 +177,31 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	| nil {} : pairwise []
 	| cons : ∀ {a : α} {l : list α}, (∀ a' ∈ l, R a a') → pairwise l → pairwise (a::l)
 	\end{lstlisting}
-	Jetzt wird \lstinline|nodup| für Listen auf Multimengen geliftet. Dazu werden \lstinline|quot.lift$\_$on| folgende Parameter übergeben: der Quotient \lstinline|s|, die zu liftende(?) Funktion \lstinline|nodup| und ein Beweis, dass Permutation keine Duplikate erzeugt. Hierbei wird das Lean-interne Axiom \lstinline|propext| verwendet, nach dem äquivalente Propositionen gleich sind.
+	Jetzt wird \lstinline|nodup| für Listen auf Multimengen geliftet. Dazu werden \lstinline|quot.lift$\_$on| folgende Parameter übergeben: der Quotient \lstinline|s|, die zu liftende Funktion \lstinline|nodup| und ein Beweis, dass Permutation keine Duplikate erzeugt: Aus den zwei Listen \lstinline|s t| und dem Beweis \lstinline|p|, dass diese in Relation bzgl. \lstinline|perm| zueinander stehen, erzeugt \lstinline|perm$\_$nodup| die Äquivalenz \lstinline|nodup s $\Leftrightarrow$ nodup t|. Dann wird das Lean-interne Axiom \lstinline|propext| verwendet, nach dem äquivalente Propositionen gleich sind.
+	(Die Rechtsklammerung bei der Funktionseinsetzung wird hier durch $\$$ gewährleistet.)
 	\begin{lstlisting}
 	def nodup (s : multiset α) : Prop :=
 	quot.lift_on s nodup (λ s t p, propext $\$$ perm_nodup p)
 	
 	def quot.lift_on {α : Sort u} {β : Sort v} {r : α → α → Prop} 
-	(q : quot r) (f : α → β) (c : ∀ a b, r a b → f a = f b) : β 
+	(q : quot r) (f : α → β) (c : ∀ a b, r a b → f a =$\hspace*{0cm}$ f b) : β 
 	
-	theorem perm_nodup {l₁ l₂ : list α} : l₁ ~ l₂ → (nodup l₁ ↔ nodup l₂)
+	theorem perm_nodup {l₁ l₂ : list α} : l₁ ~ l₂ → 
+	(nodup l₁ ↔ nodup l₂)
 	\end{lstlisting}
 	Der Beweis von \lstinline|perm$\_$nodup| kann in perm.lean nachgelesen werden.
-	\newpage
+	In der Regel wird nicht \ls{finset} direkt verwendet, sondern die Typenklasse \ls{fintype}, sodass der Typ \ls{$\alpha$} selber endlich ist.
+	\begin{lstlisting}
+	class fintype (α : Type*) :=
+	(elems : finset α)
+	(complete : ∀ x : α, x ∈ elems)
+	\end{lstlisting}
 	
 	
 	\subsection{MOD in Lean}
 	%Um die Formalisierung von \lstinline|a ≡ b [MOD n]| zu illustrieren, wollen wir den %Beweis des folgenden Lemmas nachvollziehen:
 	%\begin{lstlisting}
-	%lemma mod_zero (a : nat) : a % 0 = a :=
+	%lemma mod_zero (a : nat) : a % 0 =$\hspace*{0cm}$ a :=
 	%begin
 	%rw mod_def,
 	%have h : ¬ (0 < 0 ∧ 0 ≤ a),
@@ -211,9 +223,8 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	
 	class has_well_founded (α : Sort u) : Type u :=
 	(r : α → α → Prop) (wf : well_founded r)
-	
 	\end{lstlisting}
-	Ein Element \lstinline|x : $\alpha$| kann nur die Eigenschaft \lstinline|acc| haben, falls ein \enquote{kleinstes} Element bzgl. der Relation \lstinline|R| existiert. Entsprechend wird ein Rekursions- und Induktionsprinzip für wohlfundierte Relationen eingeführt, auf die hier nicht näher eingegangen werden soll. Wichtig ist der Spezialfall, dass sich über wohlfundierte Relationen Funktionen definieren lassen (siehe \lstinline|def fix|):
+	Ein Element \lstinline|x : $\alpha$| kann nur die Eigenschaft \lstinline|acc| haben, falls ein \enquote{kleinstes} Element bzgl. der Relation \lstinline|R| existiert. Entsprechend wird ein Rekursions- und Induktionsprinzip für wohlfundierte Relationen eingeführt, auf die hier nicht näher eingegangen werden soll. Wichtig ist der Spezialfall, dass sich über wohlfundierte Relationen Funktionen definieren lassen (siehe \lstinline|def fix| weiter unten):
 	\begin{lstlisting}
 	parameter hwf : well_founded r
 	variable {C : α → Sort v}
@@ -221,57 +232,203 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	
 	def fix_F (x : α) (a : acc r x) : C x :=
 	acc.rec_on a (λ x₁ ac₁ ih, F x₁ ih)
-	
-	lemma fix_F_eq (x : α) (acx : acc r x) :
-	fix_F F x acx = F x (λ (y : α) (p : y ≺ x), fix_F F y (acc.inv acx p)) :=
-	acc.drec (λ x r ih, rfl) acx
-	
+	\end{lstlisting}
+	Die Konstruktion des Fixpunktes nimmt gemäß \lstinline|acc.rec_on| einen Beweis \lstinline|a| für \lstinline|acc r x| und liefert \lstinline|C x|, falls folgender Sachverhalt gegeben ist:
+	\begin{lstlisting}
+	($\Pi$ ($x_{1}$ : $\alpha$), ($\forall$ (y : $\alpha$), r y $x_{1}$ $\to$ acc r y) $\to$ 
+	($\Pi$ (y : $\alpha$), r y $x_{1}$ $\to$ C y) $\to$ C $x_{1}$)
+	\end{lstlisting}
+	Durch \lstinline|acc.rec_on| erhalten wir über den Konstruktor \lstinline|intro|:
+	\begin{enumerate}
+		\item[] \lstinline|$x_{1}$ : $\alpha$|
+		\item[] \lstinline|$ac_{1}$ : $\forall$ (y : $\alpha$), r y $x_{1}$ $\to$ acc r y|
+		\item[] \lstinline|ih : $\Pi$ (y : $\alpha$), r y $x_{1}$ $\to$ C y|
+	\end{enumerate}
+	\lstinline|F| liefert das Gewünschte. Wir können die Fixpunkteigenschaft nun auf wohldefinierte Relationen übertragen:
+	\begin{lstlisting}
 	variables {α : Sort u} {C : α → Sort v} {r : α → α → Prop}
 	
 	def fix (hwf : well_founded r) (F : Π x, (Π y, r y x → C y) → C x) (x : α) : C x :=
 	fix_F F x (apply hwf x)
-
-	lemma fix_eq (hwf : well_founded r) (F : Π x, (Π y, r y x → C y) → C x) (x : α) :
-	fix hwf F x = F x (λ y h, fix hwf F y) :=
-	fix_F_eq F x (apply hwf x)
 	\end{lstlisting}
-	Ist eine Funktion \lstinline|F| gegeben, welche die Werte \lstinline|C x| für bekannte Werte \lstinline|C y| der \enquote{kleineren} Elemente \lstinline|y $\prec$ x| liefert, so ist nach \lstinline|fix| die Funktion \lstinline|C| für alle \lstinline|x : $\alpha$| definiert. Die äquivalente Formulierung wird im weiteren Verlauf nützlich sein.
+	Ist eine Funktion \lstinline|F| gegeben, welche die Werte \lstinline|C x| für bekannte Werte \lstinline|C y| der \enquote{kleineren} Elemente \lstinline|y $\prec$ x| liefert, so ist nach \lstinline|fix| die Funktion \lstinline|C| für alle \lstinline|x : $\alpha$| definiert. 
 	Für \lstinline|F| setzen wir
 	\begin{lstlisting}
 	private def mod.F (x : nat) (f : Π x₁, x₁ < x → nat → nat) (y : nat) : nat :=
 	if h : 0 < y ∧ y ≤ x then f (x - y) (div_rec_lemma h) y else x
 	\end{lstlisting}
-	und damit \lstinline|C| auf \lstinline|$\N\to\N\to\N$|. Hier wurde folgendes Lemma benutzt:
+	und damit \lstinline|C| auf \lstinline|$\N\to\N\to\N$|. Hier wurde folgendes Lemma verwendet:
 	\begin{lstlisting}
 	div_rec_lemma {x y : nat} : 0 <	 y ∧ y ≤ x → x - y < 	x.
 	\end{lstlisting}
-	Wir können nun \lstinline|mod| und damit eine Instanz der Typenklasse \lstinline|class has$\_$mod |definieren, die bereits in \lstinline|core.lean| vordefiniert ist. Sie besitzt einzig den Konstruktor \lstinline|has$\_$mod.mod : $\N\to\N\to\N$|.
+	Weiter können wir \lstinline|mod| und damit eine Instanz der Typenklasse \lstinline|class has$\_$mod |definieren, die bereits in \lstinline|core.lean| vordefiniert ist. Sie besitzt einzig den Konstruktor \lstinline|has$\_$mod.mod : $\N\to\N\to\N$|.
 	\begin{lstlisting}
-	protected def mod := well_founded.fix lt_wf mod.F
+	protected def mod := fix lt_wf mod.F
 	
 	instance : has_mod nat :=
 	⟨nat.mod⟩
 	\end{lstlisting}
 	Die Infixnotation für \lstinline|has$\_$mod.mod n m |ist \lstinline|n % m|.
-	Durch das folgende Hilfslemma erhalten wir Zugriff auf die definierende Eigenschaft: 
+	Schließlich wird \lstinline|a ≡ b [MOD n]| definiert:
 	\begin{lstlisting}
-	lemma mod_def_aux (x y : nat) : x % y = if h : 0 < y ∧ y ≤ x then (x - y) % y else x :=
-	congr_fun (well_founded.fix_eq lt_wf mod.F x) y
-	
-	lemma mod_def (x y : nat) : x % y = if 0 < y ∧ y ≤ x then (x - y) % y else x :=
-	by have h := mod_def_aux x y; rwa [dif_eq_if] at h
-	\end{lstlisting}
-	Letztere Formulierung vereinfacht die Schreibweise auf Basis unterschiedlicher Verwendungsmöglichkeiten von \lstinline|if...then...else|. Details können in der Datei \lstinline|logic.lean| nachgeschlagen werden. Weiter wird \lstinline|a ≡ b [MOD n]| definiert:
-	\begin{lstlisting}
-	def modeq (n a b : ℕ) := a % n = b % n
+	def modeq (n a b : ℕ) := a % n =$\hspace*{0cm}$ b % n
 	
 	notation a ` ≡ `:50 b ` [MOD `:50 n `]`:0 := modeq n a b
 	\end{lstlisting}
-	\newpage
+
+
+
+
+	\subsection{Gruppen in Lean}
+	Gruppen werden sukzessive durch Erweiterungen von \lstinline|type calsses| definiert:
+	\begin{lstlisting}
+	class has_mul (α : Type u) := (mul : α → α → α)
 	
+	infix * := has_mul.mul
 	
+	class semigroup (α : Type u) extends has_mul α :=
+	(mul_assoc : ∀ a b c : α, a * b * c = a * (b * c))
+	
+	class monoid (α : Type u) extends semigroup α, has_one α :=
+	(one_mul : ∀ a : α, 1 * a = a) (mul_one : ∀ a : α, a * 1 = a)
+	
+	class group (α : Type u) extends monoid α, has_inv α :=
+	(mul_left_inv : ∀ a : α, a⁻¹ * a = 1)
+	\end{lstlisting}
+	Entsprechendes gilt für Untergruppen
+	\begin{lstlisting}
+	variables {α : Type*} [monoid α] {s : set α}
+	
+	class is_submonoid (s : set α) : Prop :=
+	(one_mem : (1:α) ∈ s)
+	(mul_mem {a b} : a ∈ s → b ∈ s → a * b ∈ s)
+	
+	class is_subgroup (s : set α) extends is_submonoid s : Prop :=
+	(inv_mem {a} : a ∈ s → a⁻¹ ∈ s)
+	\end{lstlisting}
+	und Gruppenaktionen:
+	\begin{lstlisting}
+	class has_scalar (α : Type u) (γ : Type v) := 
+	(smul : α → γ → γ)
+
+	infixr ` • `:73 := has_scalar.smul
+	
+	class mul_action (α : Type u) (β : Type v) [monoid α] extends has_scalar α β :=
+	(one_smul : ∀ b : β, (1 : α) • b = b)
+	(mul_smul : ∀ (x y : α) (b : β), (x * y) • b = x • y • b)
+	\end{lstlisting}
+	Es folgen die üblichen Definitionen bzgl. Gruppenaktionen.
+	\begin{lstlisting}
+	variables (α) [monoid α] [mul_action α β]
+	
+	def orbit (b : β) := set.range (λ x : α, x • b)
+	
+	variables (α) (β)
+	
+	def stabilizer (b : β) : set α :=
+	{x : α | x • b = b}
+	
+	def fixed_points : set β := {b : β | ∀ x, x ∈ stabilizer α b}
+	\end{lstlisting}
+	Von zentraler Bedeutung für den Beweis des 2. Sylow-Satzes ist das folgende Lemma.
+	\begin{lstlisting}
+	lemma card_modeq_card_fixed_points [fintype α] [fintype G] 
+	[fintype (fixed_points G α)]
+	{p n : ℕ} (hp : nat.prime p) (h : card G = p ^ n) : 
+	card α ≡ card (fixed_points G α) [MOD p]
+	\end{lstlisting}
+	Später wird \ls{G} durch eine p-Untergruppe \ls{H} von \ls{G}, und \lstinline|$\alpha$| durch die Nebenklassen einer p-Sylowgruppe \ls{K} ersetzt. Nebenklassen werden als Quotient bzgl. der Relation \lstinline|left_rel| definiert:
+	\begin{lstlisting}
+	def left_rel [group α] (s : set α) [is_subgroup s] : setoid α :=
+	⟨λ x y, x⁻¹ * y ∈ s,
+	assume x, by simp [is_submonoid.one_mem],
+	assume x y hxy,
+	have (x⁻¹ * y)⁻¹ ∈ s, from is_subgroup.inv_mem hxy,
+	by simpa using this,
+	assume x y z hxy hyz,
+	have x⁻¹ * y * (y⁻¹ * z) ∈ s, from is_submonoid.mul_mem hxy hyz,
+	by simpa [mul_assoc] using this⟩
+	
+	def left_cosets [group α] (s : set α) [is_subgroup s] : Type* := quotient (left_rel s)
+	\end{lstlisting}
+	Für eine Untergruppe \ls{H} von \ls{G} ist dann \ls{left_rel H} ein \ls{setoid G} mit entsprechender Relation und dem zugehörigen Beweis, dass es sich um eine Äquivalenzrelation handelt.
+	Mithilfe dieser Definition wird eine Instanz von \ls{fintype} bzgl. \lstinline|left_costes H| erstellt:
+	\begin{lstlisting}
+	noncomputable instance [fintype G] (H : set G) [is_subgroup H] :  fintype (left_cosets H) := 
+	quotient.fintype (left_rel H)
+	\end{lstlisting}
+	Der Grund dafür, dass die Instanz als \ls{noncomputable} markiert werden muss, ist die Verwendung von \ls{decidable.eq} in \ls{quotient.fintype}. Das geht auf den Umstand zurück, dass das Bild einer Funktion auf einem endlichen Typ wieder ein endlicher Typ \ls{$\beta$} ist. Hierbei wird das Bild zunächst als Multimenge betrachtet. Anschließend werden eventuelle Duplikate durch den Operator \ls{to_finset} entfernt, was die Entscheidbarkeit der Gleichheitsrelation auf $\beta$ voraussetzt.
+	Um den 2. Sylowsatz in Lean zu formulieren, fehlen noch die Definitionen des \ls{conjugate_set} und der $p$-Sylowgruppen:
+	\begin{lstlisting}
+	def conjugate_set (x : G) (H : set G) : set G :=
+	(λ n, x⁻¹ * n * x) ⁻¹' H
+	
+	class is_sylow [fintype G] (H : set G) {p : ℕ} (hp : prime p) extends is_subgroup H : Prop := 
+	(card_eq : card H = p ^ dlogn p (card G))
+	
+	lemma sylow_2 [fintype G] {p : ℕ} (hp : nat.prime p)
+	(H K : set G) [is_sylow H hp] [is_sylow K hp] :
+	∃ g : G, H = conjugate_set g K 
+	\end{lstlisting}
+	\ls{dlogn p (card G)} ist die Vielfachheit von \ls{p} in \ls{card G}.\\\\
+	\ls{#print axioms sylow.sylow_2} zeigt, dass \ls{propext}, \ls{quot.sound} und \ls{calssical.choice} verwendet wird.\\\\                                        
+	\ls{quot.sound} wird benötigt, um zu beweisen, dass das kanonische Operieren einer Untergruppe \ls{H} auf den Nebenklassen einer Untergruppe \ls{K} eine Gruppenaktion ist:
+	\begin{lstlisting}
+	def mul_left_cosets (L₁ L₂ : set G) [is_subgroup L₂] [is_subgroup L₁]
+	(x : L₂) (y : left_cosets L₁) : left_cosets L₁ :=
+	quotient.lift_on y (λ y, $\lsem$(x : G) * y$\rsem$) 
+	(λ a b (hab : _ ∈ L₁), quotient.sound 
+	(show _ ∈ L₁, by rwa [mul_inv_rev, ← mul_assoc, mul_assoc (a⁻¹), inv_mul_self, mul_one]))
+	\end{lstlisting}
+	Dafür soll die Funktion \ls{(λ y, $\lsem$(x : G) * y$\rsem$)} auf Nebenklassen geliftet werden. Für zwei Elemente \ls{a} und \ls{b}, die bzgl. \ls{left_rel} äquivalent sind, ist also zu zeigen, dass
+	\begin{lstlisting}
+	$\lsem$(x : G) * a$\rsem$ = $\lsem$(x : G) * b$\rsem$.
+	\end{lstlisting}
+	Mit \ls{quot_sound} genügt dann ein Beweis dafür, dass die erzeugenden Elemente äquivalent sind. Die nötigen Umformungen erledigt \ls{simp}.
+	
+	Im Beweis von Sylow 2 werden zunächst die vorangegangenen Resultate verwendet, um herzuleiten, dass die Anzahl der Fixpunkte bzgl. obiger Aktion ungleich Null ist. An dieser Stelle liefert \ls{classical.choice} einen solchen Fixpunkt, ohne den die Konstruktion eines geeigneten \ls{conjugate_set} nicht möglich wäre.
+\newpage
 
 	\subsection{Sylow 2 in Lean}
+	Wir wollen nun auf einige Details im Beweis des Satzes eingehen. Die ersten drei Hilfslemma 
+	\begin{lstlisting}
+	lemma sylow_2 [fintype G] {p : ℕ} (hp : nat.prime p)
+	(H K : set G) [is_sylow H hp] [is_sylow K hp] :
+	∃ g : G, H = conjugate_set g K :=
+	
+	have hs : card (left_cosets K) = card G / (p ^ dlogn p (card G)) := 
+	(nat.mul_right_inj (pos_pow_of_pos (dlogn p (card G)) hp.pos)).1
+	$\$$ by rw [← card_sylow K hp, ← card_eq_card_cosets_mul_card_subgroup, card_sylow K hp, 
+	nat.div_mul_cancel (dlogn_dvd _ hp.1)],
+	
+	have hmodeq : card G / (p ^ dlogn p (card G)) ≡ card (fixed_points H (left_cosets K)) [MOD p] := 
+	eq.subst hs (mul_action.card_modeq_card_fixed_points hp (card_sylow H hp)),
+	
+	have hfixed : 0 < card (fixed_points H (left_cosets K)) := nat.pos_of_ne_zero 
+	(λ h, (not_dvd_div_dlogn (fintype.card_pos_iff.2 ⟨(1 : G)⟩) hp.1) 
+	(by rwa [h, nat.modeq.modeq_zero_iff] at hmodeq)),
+
+	
+	let ⟨⟨x, hx⟩⟩ := fintype.card_pos_iff.1 hfixed in
+	begin
+	
+	revert hx,
+	
+	refine quotient.induction_on x
+	(λ g hg, ⟨g, set.eq_of_card_eq_of_subset _ _⟩),
+	{ 
+	rw [conjugate_set_eq_image, set.card_image_of_injective _ conj_inj_left,
+	card_sylow K hp, card_sylow H hp] },
+	{
+	assume y hy,
+	have : (y⁻¹ * g)⁻¹ * g ∈ K := 
+	quotient.exact ((mem_fixed_points' (left_cosets K)).1 hg $\lsem$y⁻¹ * g$\rsem$ 
+	⟨⟨y⁻¹, inv_mem hy⟩, rfl⟩),
+	simp [conjugate_set_eq_preimage], 
+	simp only [*, mul_assoc, mul_inv_rev] at *,
+	simp [*, inv_inv] at *}
+	end
+	\end{lstlisting}
 \section{Vergleich}
 \section{Diskussion}
 \section{Bibliographie}
