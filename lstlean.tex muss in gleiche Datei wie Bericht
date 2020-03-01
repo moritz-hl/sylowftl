@@ -59,9 +59,9 @@ morekeywords=[2]{Type, Prop, Type*, Type₀, Type₁, Type₂, Type₃},
 
 % Various symbols
 literate=
-{α}{{\ensuremath{\mathrm{\alpha\;}}}}1
-{β}{{\ensuremath{\mathrm{\beta\;}}}}1
-{γ}{{\ensuremath{\mathrm{\gamma\;}}}}1
+{α}{{\ensuremath{\mathrm{\alpha}}}}1
+{β}{{\ensuremath{\mathrm{\beta}}}}1
+{γ}{{\ensuremath{\mathrm{\gamma}}}}1
 {δ}{{\ensuremath{\mathrm{\delta}}}}1
 {ε}{{\ensuremath{\mathrm{\varepsilon}}}}1
 {ζ}{{\ensuremath{\mathrm{\zeta}}}}1
@@ -93,16 +93,16 @@ literate=
 
 {ℵ}{{\ensuremath{\aleph}}}1
 
-{≤}{{\ensuremath{\leq\;}}}1
-{≥}{{\ensuremath{\geq\;}}}1
+{≤}{{\ensuremath{\leq}}}1
+{≥}{{\ensuremath{\geq}}}1
 {≠}{{\ensuremath{\neq}}}1
-{=}{{\ensuremath{=\;}}}1
+{=}{{\ensuremath{=}}}1
 {≈}{{\ensuremath{\approx}}}1
-{≡}{{\ensuremath{\equiv\;}}}1
+{≡}{{\ensuremath{\equiv}}}1
 {≃}{{\ensuremath{\simeq}}}1
 
-{∣}{{\ensuremath{\mid\;}}}1
-{≺}{{\ensuremath{\prec\;}}}1
+{∣}{{\ensuremath{\mid}}}1
+{≺}{{\ensuremath{\prec}}}1
 
 {∂}{{\ensuremath{\partial}}}1
 {∆}{{\ensuremath{\triangle}}}1 % or \laplace?
@@ -134,7 +134,7 @@ literate=
 {⁻}{{\ensuremath{^{-}}}}1
 {▸}{{\ensuremath{\blacktriangleright}}}1
 
-{∧}{{\ensuremath{\wedge\;}}}1
+{∧}{{\ensuremath{\wedge}}}1
 {∨}{{\ensuremath{\vee}}}1
 {¬}{{\ensuremath{\neg}}}1
 {⊢}{{\ensuremath{\vdash}}}1
@@ -145,8 +145,9 @@ literate=
 {⟩}{{\ensuremath{\rangle}}}1
 
 {↦}{{\ensuremath{\mapsto}}}1
-{→}{{\ensuremath{\rightarrow\;}}}1
-{↔}{{\ensuremath{\leftrightarrow\;}}}1
+{→}{{\ensuremath{\rightarrow}}}1	
+%{←}{{\ensuremath{$\leftarrow$}}}1
+{↔}{{\ensuremath{\leftrightarrow}}}1
 {⇒}{{\ensuremath{\Rightarrow}}}1
 {⟹}{{\ensuremath{\Longrightarrow}}}1
 {⇐}{{\ensuremath{\Leftarrow}}}1
@@ -207,7 +208,7 @@ literate=
 {∃}{{\color{symbolcolor}\ensuremath{\exists}}}1
 {λ}{{\color{symbolcolor}\ensuremath{\mathrm{\lambda}}}}1
 
-{:=}{{\color{symbolcolor}:=\;}}1
+{:=}{{\color{symbolcolor}:=}}1
 {=}{{\color{symbolcolor}=}}1
 {<}{{\color{symbolcolor}<}}1
 {+}{{\color{symbolcolor}+}}1
@@ -222,7 +223,7 @@ morecomment=[l][\itshape \color{commentcolor}]{--},
 showstringspaces=false,
 
 % keep spaces
-keepspaces=false,
+keepspaces=true,
 
 % String delimiters
 morestring=[b]",
