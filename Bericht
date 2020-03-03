@@ -24,7 +24,9 @@
 \usepackage[varg]{txfonts}
 \usepackage{verbatim}
 \usepackage{MnSymbol}
-
+\usepackage{xfrac}
+\usepackage{faktor}
+\usepackage{xparse}
 
 % Lean
 %\usepackage[utf8x]{inputenc}
@@ -71,6 +73,18 @@
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \newcommand{\ls}[1]{\lstinline|#1|}
 
+\DeclareDocumentCommand{\fkr}{s m O{0.3} m O{-0.5}}{% \newfaktor[*]{#2}[#3]{#4}[#5] -> #2/#4
+	\setbox0=\hbox{\ensuremath{#2}}% Store numerator
+	\setbox1=\hbox{\ensuremath{\diagup}}% Store slash /
+	\setbox2=\hbox{\ensuremath{#4}}% Store denominator
+	\raisebox{#3\ht1}{\usebox0}% Numerator
+	\mkern-4mu\ifthenelse{\equal{#1}{\BooleanTrue}}% Slash /
+	{\diagup}% regular \faktor slash
+	{\rotatebox{-33}{\rule[#5\ht0]{0.3pt}{-#5\ht0+#3\ht0+\ht0}}}% tilted rule as a slash
+	\mkern-0mu%
+	\raisebox{#5\ht1}{\usebox2}% Denominator
+}
+
 \title{Eine Formalisierung des zweiten Satzes von Sylow aus der Gruppentheorie in Naproche im Vergleich zu einer Implementierung in Lean}
 
 \author{Moritz Hartlieb, Jonas Lippert}
@@ -83,30 +97,124 @@
 
 \section{Einleitung}
 
-Der zweite Satz von Sylow lautet wie folgt:\\\\
-\textbf{Satz.}
-	Sei $p$ eine Primzahl und $G$ eine endliche Gruppe mit $|G|=p^{r}*m$, sodass $p\nmid m$. Sei $U \leq G$ eine $p$-Untergruppe, und sei $P \leq G$ eine $p$-Sylowgruppe. Dann gilt:
+In der vorliegenden Arbeit stellen wir die Formalisierung des zweiten Sylow-Satzes in der Sprache Lean vor und vergleichen sie mit einer eigenen Formalisierung in Naproche.
+
+Zu Beginn seien die wichtigsten Definitionen und Resultate der Gruppentheorie skizziert auf Basis des Skripts \enquote{Eine Einführung in die Algebra
+	(Skript, WS 19/20, Bonn)} von Prof. Dr. Jan Schröer [1].
+
+\subsection{Theoretische Grundlagen}
+	Eine \df{Gruppe} ist eine Menge $G$ zusammen mit einer Abbildung $$\circ: G\times G\to G$$ $$(g,h) \mapsto g\circ h = gh$$ sodass gilt:
 	\begin{enumerate}
-		\item Es gibt ein $g\in G$ mit $$gUg^{-1}\subseteq P.$$
-		\item Je zwei $p$-Sylowgruppen sind konjugiert.
+		\item $\circ$ ist assoziativ.
+		\item Es gibt ein neutrales Element $e\in G$, sodass $e\circ g=g=g\circ e$ für alle $g\in G$.
+		\item Für alle $g\in G$ existiert ein inverses Element $g^{-1}\in G$, sodass $g\circ g^{-1}=g^{-1}\circ g=e$. 
 	\end{enumerate}
-Die Beweisidee ist, die Untergruppe $U$ auf den Linksnebenklassen von $P$ operieren zu lassen. Bezüglich dieser Gruppenoperation existieren Fixpunkte, weil deren Anzahl nach Bahnenformel kongruent zur Anzahl der Nebenklassen von $P$ (mod $p$) ist. Da $P\in$ Syl$_{p}(G)$, gilt nach Definition $p\nmid |G/P|$.
+	
+	Eine \df{Untergruppe} H von G, H $\leq$ G, ist eine Teilmenge von G mit
+	\begin{enumerate}
+		\item $e\in H$.
+		\item H ist abgeschlossen bzgl. $\circ$ und Inversenbildung.
+	\end{enumerate}
+	
+	Seien H $\leq$ G gegeben. Für $g \in G$ ist $$gH\coloneqq\{gh\st h\in H\}$$ die \df{Nebenklasse} von H zu g. Es bezeichne $\fkr{G}{H}$ die Klasse der Nebenklassen von H. Weiter sei $$[G : H] \coloneqq |\fkr{G}{H}|$$ der \df{Index} von H zu G.\\\\
+	Zwei Untergruppen $H_{1}$ und $H_{2}$ von $G$ sind \df{konjugiert}, falls es ein $g\in G$ gibt
+	mit $$H_{1}=gH_{2}g^{-1}\coloneqq \{g\ h\ g^{-1}\st h\in H\}.$$
+	
+	\begin{Lemma}
+		Seien H $\leq$ G gegeben. Für $g_{1}, g_{2}\in G$ gilt:
+		\begin{enumerate}
+			\item $g_{1}H \cap g_{2}H \neq \emptyset \iff g_{1}H = g_{2}H \iff g_{1}^{-1}g_{2}\in H$
+			\item Für alle $g\in G$ is die Abbildung $$H \to gH$$ $$h \mapsto gh$$ bijektiv. Insbesondere gilt im endlichen Fall $|H|=|gH|$.
+		\end{enumerate}
+	\begin{flushright}
+		$\square$
+	\end{flushright}
+	\end{Lemma}
+	
+	\begin{Lemma}[Lagrange]
+		Seien H $\leq$ G endlich. Dann folgt aus vorherigem Lemma:
+		$$|G|=[G : H] \cdot |H|.$$
+	\begin{flushright}
+		$\square$
+	\end{flushright}
+	\end{Lemma}
+	
+	Für eine Gruppe $G$ und eine nichtleere Menge $X$ ist die Abbildung
+	$$\phi:G\times X \to X$$
+	$$(g,x) \mapsto g.x$$
+	eine \df{Gruppenaktion}, falls gilt:
+	\begin{enumerate}
+		\item $1.x=x$ für alle $x\in X$.
+		\item $(gh).x=g.(h.x)$ für alle $g,h\in G$ und $x\in X$.
+	\end{enumerate}
+	Weiter definieren wir für $x\in X$:
+	\begin{enumerate}
+		\item den \df{Orbit} $G.x\coloneqq \{g.x\st g\in G\}$ von $x$,
+		\item den \df{Stabilisator} $G_{x}\coloneqq \{g\in G\st g.x=x\}$ von $x$,
+		\item die Menge der \df{Fixpunkte} $X^{G}\coloneqq\{x\in X\st g.x=x\text{ für alle }g\in G\}$ von $X$.
+	\end{enumerate}
+	
+	\begin{Lemma}
+		Sei $G$ eine Gruppe und $X$ nichtleer. Die Funktion
+		$$\fkr{G}{G_{x}} \to G.x$$
+		$$(g\ G_{x})\mapsto g.x$$
+		ist bijektiv.
+	\begin{flushright}
+		$\square$
+	\end{flushright}
+	\end{Lemma}
+	
+	Wie wir in Lemma 1.1 gesehen haben, ist eine Gruppe $G$ disjunkte Vereinigung der Nebenklassen bzgl. einer Untergruppe $H\leq G$. Zusammen mit Lemma 1.3 erhalten wir, dass $X$ disjunkte Vereinigung der Orbits bzgl. einer Gruppenaktion ist und die Kardinalität der Orbits entsprechend Lagrange die Gruppenordnung teilen müssen.
+	
+	\begin{Lemma}[Bahnenformel]
+		Sei $G$ eine endliche Gruppe, sei $X\neq\emptyset$ endlich und seien $x_{1},...,x_{n}$ gegeben, sodass $X$ disjunkte Vereinigung der $G.x_{i}$ ist. Dann gilt 
+		$$|X|=\sum_{i=1}^{n}[G:G_{x_i}]=|X^{G}|+\sum\limits_{{1\leq i\leq n} \atop x_{i}\notin X^{G}} [G:G_{x_i}].$$
+	\begin{flushright}
+		$\square$
+	\end{flushright}
+	\end{Lemma}
+	
+	Falls $G$ eine $p$-Gruppe ist, das heißt $|G|=p^{r}$ für eine Primzahl $p$ und ein $r\in\N$, dann folgt:
+	\begin{Lemma}
+		$$|X| \equiv |X^{G}| \mod p.$$
+	\begin{flushright}
+		$\square$
+	\end{flushright}
+	\end{Lemma}
+	Für eine Gruppe $G$ mit $|G|=p^{r}m$, wobei $p$ prim und $p\nmid m$, ist die Menge der \df{$p$-Sylowgruppen} definiert durch
+	$$\text{Syl}_{p}(G)\coloneqq\{P\ \leq\ G\st \}.$$
+	
+	Wir können nun den zweiten Satz von Sylow definieren:
+	\begin{Theorem}
+		Sei $p$ eine Primzahl und $G$ eine endliche Gruppe mit $|G|=p^{r}*m$, sodass $p\nmid m$. Sei $U \leq G$ eine $p$-Untergruppe, und sei $P \leq G$ eine $p$-Sylowgruppe. Dann gilt:
+		\begin{enumerate}
+			\item Es gibt ein $g\in G$ mit $$gUg^{-1}\subseteq P.$$
+			\item Je zwei $p$-Sylowgruppen sind konjugiert.
+		\end{enumerate}
+	\begin{proof}
+		\begin{enumerate}
+			\item Setze $X\coloneqq\fkr{G}{P}$ und betrachte die Gruppenaktion
+						$$\phi:U\times X\to X$$
+						$$(u,gP)\mapsto ugP.$$
+						Nach Lemma 1.5 gilt $$|X|=[G : P]=m\equiv |X^{G}| \mod p.$$
+						Da $p\nmid m$, gilt $X^{G}\neq\emptyset$. Es existiert also ein $g\in G$, sodass $ugP=gP$ für alle $u\in U$.
+						Folglich ist $g^{-1}Ug\subseteq P$ und damit $U$ konjugiert zu $P$ bzgl. $g^{-1}$.
+			\item Dies gilt insbesondere im Falle $U\in \text{Syl}_{p}(G)$.
+		\end{enumerate}
+	\end{proof}
+	\end{Theorem}
 
-Ein solcher Fixpunkt $gP$ mit $g\in G$ liefert dann $gUg^{-1}\subseteq P.$
-\\
-
+\subsection{Vorüberlegungen zur Formalisierung}
 Es werden also zunächst Grundbegriffe der Gruppentheorie, endliche Mengen sowie natürliche Zahlen, Primzahlen und Modulo-Rechnung benötigt. Hierzu bieten sich unterschiedliche Herangehensweisen an. 
 Es stellt sich heraus, dass Naproche für kleine Theorien gut geeignet ist, deren Grundlagen axiomatisch eingeführt werden, die ihrerseits in einer eigenen Theorie entwickelt werden (können). Die Implementierung in Lean baut hingegen auf bereits formalisierte Grundlagen auf und ist somit Teil einer einzigen großen Theorie der Mathematik. 
 
-Interessant ist die Formalisierung von Nebenklassen. Um unnötige Begriffsbildung im Sinne einer kleinen Theorie zu vermeiden, bietet sich in Naproche eine direkte Konstruktion an: $$Coset\left(g, H, G\right) \coloneqq \left\{\,g *^{G} h \st h << H\,\right\}.$$ Anschließend ist zu zeigen, dass $G$ disjunkte Vereinigung von Nebenklassen bzgl. einer beliebigen Untergruppe $H$ ist.
+Interessant ist die Formalisierung von Nebenklassen. Im Sinne einer kleinen Theorie bietet sich in Naproche eine direkte Konstruktion an: $$Coset\left(g, H, G\right) \coloneqq \left\{\,g *^{G} h \st h << H\,\right\}.$$ Anschließend ist zu zeigen, dass $G$ disjunkte Vereinigung von Nebenklassen bzgl. einer beliebigen Untergruppe $H$ ist.
 In Lean wird dagegen bzgl. einer Untergruppe $S$ von $G$ folgende Äquivalenzrelation auf $G$ eingeführt: $$x\sim_{S} y :\Leftrightarrow x^{-1}*y\in S.$$
-Lean erlaubt uns, den Quotient $G/\sim_{S}$ zu betrachten. Es wird verwendet, dass $x\sim_{S} y$ genau dann, wenn $xS$ und $yS$ die selbe Nebenklasse repräsentieren. \\
+Lean erlaubt uns, den Quotient $\fkr{G}{\sim_{S}}[-0.2]$ zu betrachten. Hier wird Lemma 1.1 implizit verwendet.
+\paragraph*{}
+Im Folgenden wird zunächst auf die jeweiligen Formalisierungen im Detail eingegangen. Anschließend sollen Vor- und Nachteile der jeweiligen Sprachen verglichen und diskutiert werden.
 
-Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargestellt...
- 
- 
- 
-\section{Formalisierung in Naproche}
+
 \newpage
 \section{Formalisierung in Lean}
 	\subsection{Quotienten in Lean}
@@ -140,7 +248,6 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	@quot α setoid.r
 	\end{lstlisting}
 	Die obigen Eigenschaften von \lstinline{quot} werden anschließend auf \lstinline|quotient| übertragen.
-	\newpage
 	
 	\subsection{Endliche Mengen in Lean}
 	Endliche Mengen werden auf Basis von Listen definiert. Zunächst erhält man Multimengen als Quotienten, indem Permutationen mit Hilfe der Äquivalenzrelation \lstinline|perm| miteinander identifiziert werden:
@@ -244,7 +351,7 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 		\item[] \lstinline|$ac_{1}$ : $\forall$ (y : $\alpha$), r y $x_{1}$ $\to$ acc r y|
 		\item[] \lstinline|ih : $\Pi$ (y : $\alpha$), r y $x_{1}$ $\to$ C y|
 	\end{enumerate}
-	\lstinline|F| liefert das Gewünschte. Wir können die Fixpunkteigenschaft nun auf wohldefinierte Relationen übertragen:
+	\lstinline|F| liefert das Gewünschte. Wir können die Fixpunkteigenschaft nun auf wohlfundierte Relationen übertragen:
 	\begin{lstlisting}
 	variables {α : Sort u} {C : α → Sort v} {r : α → α → Prop}
 	
@@ -330,14 +437,7 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	
 	def fixed_points : set β := {b : β | ∀ x, x ∈ stabilizer α b}
 	\end{lstlisting}
-	Von zentraler Bedeutung für den Beweis des 2. Sylow-Satzes ist das folgende Lemma.
-	\begin{lstlisting}
-	lemma card_modeq_card_fixed_points [fintype α] [fintype G] 
-	[fintype (fixed_points G α)]
-	{p n : ℕ} (hp : nat.prime p) (h : card G = p ^ n) : 
-	card α ≡ card (fixed_points G α) [MOD p]
-	\end{lstlisting}
-	Später wird \ls{G} durch eine p-Untergruppe \ls{H} von \ls{G}, und \lstinline|$\alpha$| durch die Nebenklassen einer p-Sylowgruppe \ls{K} ersetzt. Nebenklassen werden als Quotient bzgl. der Relation \lstinline|left_rel| definiert:
+	Nebenklassen werden als Quotient bzgl. der Relation \lstinline|left_rel| definiert:
 	\begin{lstlisting}
 	def left_rel [group α] (s : set α) [is_subgroup s] : setoid α :=
 	⟨λ x y, x⁻¹ * y ∈ s,
@@ -387,10 +487,12 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	Mit \ls{quot_sound} genügt dann ein Beweis dafür, dass die erzeugenden Elemente äquivalent sind. Die nötigen Umformungen erledigt \ls{simp}.
 	
 	Im Beweis von Sylow 2 werden zunächst die vorangegangenen Resultate verwendet, um herzuleiten, dass die Anzahl der Fixpunkte bzgl. obiger Aktion ungleich Null ist. An dieser Stelle liefert \ls{classical.choice} einen solchen Fixpunkt, ohne den die Konstruktion eines geeigneten \ls{conjugate_set} nicht möglich wäre.
-\newpage
+
 
 	\subsection{Sylow 2 in Lean}
-	Wir wollen nun auf einige Details im Beweis des Satzes eingehen. Die ersten drei Hilfslemma 
+	Wir wollen nun auf einige Details im Beweis des Satzes eingehen. Die verwendeten Lemmata, die für das sukzessive Umformen via \ls{rw} oder \ls{simp} genutzt werden, sind dabei weder mathematisch noch hinsichtlich des Formalisierungsprozesses besonders interessant. Es werden zahlreiche technische Lemma über natürliche Zahlen, Kardinalitäten, Funktionen, etc. zusammengetragen, deren Beweise für den Menschen trivial und in Lean im Nachhinein teilweise nur sehr schwer verständlich sind. Es ist prinzipiell klar, dass es auf Basis der konstruierten Begriffe und Strukturen möglich ist, entsprechende Beweise für Lean verständlich zu formulieren und es genügt in der Regel zu wissen, dass sie existieren.
+	
+	Die ersten drei Hilfslemma liefern uns den gewünschten Fixpunkt.
 	\begin{lstlisting}
 	lemma sylow_2 [fintype G] {p : ℕ} (hp : nat.prime p)
 	(H K : set G) [is_sylow H hp] [is_sylow K hp] :
@@ -398,24 +500,65 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	
 	have hs : card (left_cosets K) = card G / (p ^ dlogn p (card G)) := 
 	(nat.mul_right_inj (pos_pow_of_pos (dlogn p (card G)) hp.pos)).1
-	$\$$ by rw [← card_sylow K hp, ← card_eq_card_cosets_mul_card_subgroup, card_sylow K hp, 
+	$\$$ by rw [ ← card_sylow K hp, ← card_eq_card_cosets_mul_card_subgroup, card_sylow K hp, 
 	nat.div_mul_cancel (dlogn_dvd _ hp.1)],
 	
 	have hmodeq : card G / (p ^ dlogn p (card G)) ≡ card (fixed_points H (left_cosets K)) [MOD p] := 
 	eq.subst hs (mul_action.card_modeq_card_fixed_points hp (card_sylow H hp)),
 	
-	have hfixed : 0 < card (fixed_points H (left_cosets K)) := nat.pos_of_ne_zero 
+	have hfixed : 0 < card (fixed_points H (left_cosets K)) := 
+	nat.pos_of_ne_zero 
 	(λ h, (not_dvd_div_dlogn (fintype.card_pos_iff.2 ⟨(1 : G)⟩) hp.1) 
 	(by rwa [h, nat.modeq.modeq_zero_iff] at hmodeq)),
-
+	\end{lstlisting}
+	Zunächst wird in \lstinline|hs| die Kardinalität der Klasse der Nebenklassen auf Basis der Definition von Sylow-Gruppen umgeformt. Hierbei wird das Lemma von Lagrange unter dem Namen \ls{card_eq_card_cosets_mul_card_subgroup} benutzt.
 	
+	In \ls{hmodeq} kommt die Lean-Version von Lemma (??) zur Anwendung: 
+	\begin{lstlisting}
+	lemma card_modeq_card_fixed_points [fintype α] [fintype G] 
+	[fintype (fixed_points G α)]
+	{p n : ℕ} (hp : nat.prime p) (h : card G = p ^ n) : 
+	card α ≡ card (fixed_points G α) [MOD p]
+	\end{lstlisting}
+	Durch Substitution wird das allgemeine Resultat auf den Spezialfall übertragen.
+	
+	Mit Hilfe von \ls{hmodeq} lässt sich schließlich \ls{hfixed} zeigen, dass nämlich die Kardinalität der Fixpunkte größer Null ist. Nach \ls{nat.pos_of_ne_zero} genügt es zu zeigen, dass die Kardinalität der Fixpunkte ungleich Null ist. Es wird also ein Beweis von \ls{false} gefordert unter Annahme \ls{h}, die Kardinalität sei gleich Null. Der Widerspruch wird erzeugt, in dem erst 
+	\begin{lstlisting}	
+	lemma not_dvd_div_dlogn {p a : ℕ} (ha : a > 0) (hp : p > 1) : 
+	¬p ∣ a / (p ^ dlogn p a)
+	\end{lstlisting}
+	auf \ls{a = card G} angewendet wird. Dass \ls{p} aber ein Teiler der rechten Seite sein muss, folgt aus der Annahme \ls{h} zusammen mit
+	\begin{lstlisting}
+	modeq_zero_iff : b ≡ 0 [MOD n] ↔ n ∣ b,
+	\end{lstlisting}
+	wobei \ls{b = card G / (p ^ dlogn p a)}.
+	
+	Um aus dem abstrakten Kardinalitäts-Argument einen konkreten Fixpunkt zu gewinnen, wird das Axiom \ls{classical.choice} in Form des Lemmas \ls{fintype.card_pos_iff} verwendet:
+	\begin{lstlisting}
 	let ⟨⟨x, hx⟩⟩ := fintype.card_pos_iff.1 hfixed in
+	
 	begin
 	
-	revert hx,
-	
+	revert hx
+	\end{lstlisting}
+	Die Taktik \ls{revert} generalisiert den Beweis \ls{hx}, dass \ls{x} ein Fixpunkt ist, sodass nun folgendes zu beweisen ist:
+	\begin{lstlisting}
+	x ∈ fixed_points H (left_cosets K) → 
+	(∃ (g : G), H = conjugate_set g K)
+	\end{lstlisting}
+	Der Grund dafür ist der, dass wir für die weitere Argumentation einen Vertreter \ls{g : G} für die Äquivalenzklasse \ls{x} benötigen. Dies wird möglich durch das Axiom \ls{quot.ind} in Form von \ls{quotient.induction_on}, nachdem es genügt, das Ziel für einen beliebigen Vertreter zu zeigen:
+	\begin{lstlisting}
 	refine quotient.induction_on x
-	(λ g hg, ⟨g, set.eq_of_card_eq_of_subset _ _⟩),
+	(λ g hg, ⟨g, set.eq_of_card_eq_of_subset _ _⟩)
+	\end{lstlisting}
+	Für ein Element \ls{g : G} und unter der Annahme \ls{hg}, dass \ls{$\lsem$g$\rsem$} ein Fixpunkt ist, bleibt nun die ursprünglich Aussage \ls{$\exists$(g : G), H = conjugate_set g K} zu zeigen.
+	Dem anonymen Konstruktor wurde zur Konstruktion der Existenzaussage das Element \ls{g} und folgendes Lemma übergeben:
+	\begin{lstlisting}
+	lemma eq_of_card_eq_of_subset {s t : set α} [fintype s] [fintype t]
+	(hcard : card s = card t) (hsub : s ⊆ t) : s = t
+	\end{lstlisting}
+	Durch die Verwendung der Taktik \ls{refine} und der zwei Unterstriche anstelle der Beweise \ls{hcard} und \ls{hsub}, werden diese Bedingungen als neue Ziele innerhalb des Taktik-Blocks erstellt, wobei das ursprüngliche Ziel als bewiesen gilt. Die beiden Beweise seien hier der Vollständigkeit halber aufgeführt, auch wenn die technischen Details nicht weiter interessant sind:
+	\begin{lstlisting}
 	{ 
 	rw [conjugate_set_eq_image, set.card_image_of_injective _ conj_inj_left,
 	card_sylow K hp, card_sylow H hp] },
@@ -429,6 +572,8 @@ Im Folgenden werden zunächst die jeweiligen Formalisierungen im Detail dargeste
 	simp [*, inv_inv] at *}
 	end
 	\end{lstlisting}
+\newpage
+\section{Formalisierung in Naproche}
 \section{Vergleich}
 \section{Diskussion}
 \section{Bibliographie}
