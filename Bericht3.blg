@@ -7,49 +7,51 @@ Warning--empty note in bibtex.a
 Warning--empty year in bibtex.c
 Warning--empty author in bibtex.d
 Warning--empty year in bibtex.d
+Warning--empty author in bibtex.h
+Warning--empty year in bibtex.h
 Warning--empty year in bibtex.f
 Warning--empty author in bibtex.g
 Warning--empty year in bibtex.g
 Warning--empty year in bibtex.e
-You've used 7 entries,
+You've used 8 entries,
             2481 wiz_defined-function locations,
-            578 strings with 5126 characters,
-and the built_in function-call counts, 1466 in all, are:
-= -- 139
+            581 strings with 5202 characters,
+and the built_in function-call counts, 1648 in all, are:
+= -- 158
 > -- 35
 < -- 5
-+ -- 25
++ -- 28
 - -- 10
-* -- 81
-:= -- 258
-add.period$ -- 19
-call.type$ -- 7
-change.case$ -- 14
+* -- 97
+:= -- 280
+add.period$ -- 21
+call.type$ -- 8
+change.case$ -- 16
 chr.to.int$ -- 6
-cite$ -- 17
-duplicate$ -- 84
-empty$ -- 124
+cite$ -- 21
+duplicate$ -- 96
+empty$ -- 143
 format.name$ -- 15
-if$ -- 283
-int.to.chr$ -- 2
-int.to.str$ -- 8
+if$ -- 321
+int.to.chr$ -- 3
+int.to.str$ -- 9
 missing$ -- 0
-newline$ -- 41
+newline$ -- 45
 num.names$ -- 15
-pop$ -- 44
+pop$ -- 51
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 8
 quote$ -- 0
-skip$ -- 51
+skip$ -- 57
 stack$ -- 0
-substring$ -- 16
-swap$ -- 9
+substring$ -- 19
+swap$ -- 11
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 49
-warning$ -- 8
+type$ -- 56
+warning$ -- 10
 while$ -- 10
 width$ -- 0
-write$ -- 83
-(There were 8 warnings)
+write$ -- 93
+(There were 10 warnings)
