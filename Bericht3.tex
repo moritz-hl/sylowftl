@@ -1928,7 +1928,7 @@ Theorem Sylow2a.
 
 Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean eine funktionale Programmiersprache ist und auf der Typentheorie basiert. Dies führt zu einer sehr technischen Aufbau des Lean-Beweises durch die Komposition von Lambda-Termen.
 
-Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben. Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'' umzusetzen, was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Siehe den Beweis in Abschnitt 3.8).
+Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben. Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'' umzusetzen, was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
 
 \lstset{language=lean}
 \begin{lstlisting}
@@ -1948,6 +1948,34 @@ Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell al
 \lstinline{instance subtype.group s : set α [is_subgroup] s : group s := ...} Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffasen lassen.
 Da Naproche keine solche Strukturen bereitstellt, benötigten wir hierfür die axiomatische geforderte Gruppe \verb!Gr(U, G)! (siehe Abschnitt 3.2).
 
+\subsection{Nebenklassen}
+
+Der Begriff der Nebenklassen ist in den vorliegenden Formalisierungen insofern interessant, als dass er in Lean und Naproche auf zwei verschiedene Arbeiten umgesetzt wird. 
+Während diese in Lean als Qoutienten eigenführt werden 
+\lstset{language = lean}
+\begin{lstlisting}
+	def left_rel [group α] (s : set α) [is_subgroup s] : setoid α :=
+	⟨λ x y, x⁻¹ * y ∈ s,
+	assume x, by simp [is_submonoid.one_mem],
+	assume x y hxy,
+	have (x⁻¹ * y)⁻¹ ∈ s, from is_subgroup.inv_mem hxy,
+	by simpa using this,
+	assume x y z hxy hyz,
+	have x⁻¹ * y * (y⁻¹ * z) ∈ s, from is_submonoid.mul_mem hxy hyz,
+	by simpa [mul_assoc] using this⟩
+	
+	def left_cosets [group α] (s : set α) [is_subgroup s] : Type* := quotient (left_rel s)
+    \end{lstlisting} haben wir uns in Naproche aufgrund des dort fehlenden Qoutientenbegriffes für eine mengenbasierte Definition entschieden:
+
+\lstset{language = ftl}
+    \begin{lstlisting}
+Definition.
+Let g be an element of El(G).
+Let H be a subgroup of G.
+Coset(g, H, G) = {g *^{G} h | h << H}.
+    \end{lstlisting}
+
+Das Lemma 1.1 beweist, dass beide Ansätze das gleiche metatheoretische Objekt beschreiben.
 \subsection{Funktionsdefinitionen}
 
 Während Lean als funktionale Programmiersprache verschieden Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt, stellt Naproche nur einen eigenschräkten naiven Funktions- und Begriff bereit. Während innerhalb von Beweisen durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M} Funktionen in Naproche definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
@@ -2016,7 +2044,7 @@ während Isabelle-Naproche nur \verb![Reasoner] goal failed! zurückgibt.
 
 \subsection{Begriffsbildung}
 
-Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 2.4 und 3.5) zu betrachten. Hier werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
+Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 4.4) zu betrachten. Hier werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
 
 Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in evtl. verschiedener Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch das hier momentan effizientere System Lean mithilfe der mathlib verifiziert werden würden.
 
@@ -2046,9 +2074,13 @@ Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können
 
 \end{itemize}
 
-\subsection{Ausblick}
+\subsection{Fazit}
 
-Zusammenfassend lässt 
+Zusammenfassend ist erkennbar geworden, dass die betrachteten Formalisierungssysteme recht unterschiedliche Ansätze verfolgen die verschiede Vor und Nachteile haben. Während Lean als typentheoretische funktionale Programmiersprache von der Möglichkeit des effizienten Einbindens von umfassenden Bibliotheken wie der mathlib sowie der interaktiven Unterstützung durch präzise Fehlermeldungen profitiert,
+liegt der Vorteil von Naproche im deklarativen Stil und der natürlichen Sprache, die es ermöglicht, Formalisierungen zu erstellen, die Texten der herkömmlichen Mathematik ähneln.
+Erstrebenswert wäre es, Möglichkeiten der Kombination der beiden Systeme zu schaffen, um auch größere mathematische Theorien in einem für herkömmliche Mathematiker verständlichen Stil zu formalisieren.
+
+\newpage
 
 \bibliography{biblio}
 
