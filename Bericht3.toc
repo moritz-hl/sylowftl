@@ -18,7 +18,7 @@
 \contentsline {subsection}{\numberline {3.7}Primzahlen}{24}
 \contentsline {subsection}{\numberline {3.8}Ein Lemma \IeC {\"u}ber Potenzen}{24}
 \contentsline {subsection}{\numberline {3.9}Endliche Mengen}{26}
-\contentsline {subsection}{\numberline {3.10}Der Satz von Lagrange}{28}
+\contentsline {subsection}{\numberline {3.10}Der Satz von Lagrange}{27}
 \contentsline {subsection}{\numberline {3.11}Gruppenaktionen}{30}
 \contentsline {subsection}{\numberline {3.12}Stabilisator und Orbit}{31}
 \contentsline {subsection}{\numberline {3.13}Fipunkte}{33}

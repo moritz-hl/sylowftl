@@ -924,13 +924,9 @@ U and V are conjugates in G iff there is an element g of El(G) such that U = Con
 
 \subsection{Zahlen}
 
-Da wir uns mit endlichen Gruppen, also insbesondere mit Kardinalitäten beschäftigen, führen wir nun ganze Zahlen axiomatisch ein. 
-Übernommen : Interessant, während MulZero, MulMinOne in der Beispieldatei nicht weiter bewiesen werden mussten, musste auf.
-
-Ein herkömmlicher mathematischer Text über die Sylowsätze behandelt auch nicht elementare Zahlentheorie sondern nimmt eine gewisse Vorkenntnis des Lesers an.
-
-In diesem Sinne führen wir auch die Zahlen abstrakt ein und fordern wohlbekannte Eigenschaften axiomatisch.
-
+Da wir uns mit endlichen Gruppen, also insbesondere mit Kardinalitäten beschäftigen, führen wir nun die ganzen Zahlen ein. 
+Herkömmliche Texte über die Sylowsätze \cite{bibtex.a} behandeln Fragen der elementaren Zahlentheorie nicht in der Tiefe, sondern setzen eine gewisse mathematischen Vorkenntnis voraus.
+In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann wohlbekannte Eigenschaften axiomatisch.
 
 \begin{lstlisting}
 	[synonym integer/-s]
@@ -1084,7 +1080,7 @@ Wichtigste Eigenschaft, das erste Axiom.
 \subsection{Ein Lemma über Potenzen}
 
 Das folgende Lemma wird eine zentrale Rolle im Beweis des zweiten Teiles des Satzes einnehmen.
-Wir liefern hier einen Beweis, der sich durch ein Symmetrieargument vereinfachen ließe. 
+Wir liefern hier einen Beweis, der sich durch ein Symmetrieargument vereinfachen ließe, welches sich jedoch in Naproche nicht abbilden lässt.
 
 \begin{lstlisting}
 	Lemma DLogN.
@@ -1389,7 +1385,7 @@ If Coset(g, Stab(x, f, M, G), G) = Coset(h, Stab(x, f, M, G), G) then f[(g, x)] 
 \subsection{Stabilisator und Orbit}
 
 Außerhalb von Beweisen lassen sich in Naproche keine Funktionen definieren. In der herkömmlichen Mathematik werden Funktionen oft definiert und erst nachträglich auf ''Wohldefiniertheit'' bzw. Repräsentantenunabhängigkeit überprüft.
-Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren. In diesem Text belassen wir es jedoch dabei, auf Metaebene begründet durch das vorangegange Lemma, die Existenz der folgenden Funktion als Axiom zu fordern.
+Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren. In diesem Text belassen wir es jedoch dabei -- auf Metaebene begründet durch das vorangegange Lemma -- die Existenz der folgenden Funktion als Axiom zu fordern.
 
 \begin{lstlisting}
 
@@ -1659,9 +1655,7 @@ Wir führen den Begriff des Fixpunktes und der Menge der Fixpunkte einer Gruppen
 
 \subsection{Eine Gruppenaktion}
 
-Um den zweiten Satz von Sylow zu beweisen,  muss eine explizite Gruppenaktion definiert werden.
-
-Im Gegensatz zur abstrakten Formulierung des Gruppen- und Zahlbegriffes in dieser Formalisierung lässt sich aufgrund der Formulierung der Definition von Gruppenaktion nun in Naproche zeigen, dass es sich bei dieser Funktion um eine Gruppenaktion handelt.
+Um den zweiten Satz von Sylow zu beweisen,  muss eine explizite Gruppenaktion definiert werden. Im Gegensatz zur abstrakten Formulierung des Gruppen- und Zahlbegriffes in dieser Formalisierung lässt sich aufgrund der Formulierung der Definition von Gruppenaktionen nun in Naproche zeigen, dass es sich bei dieser Funktion um eine Gruppenaktion handelt.
 
 \begin{lstlisting}
 Lemma.
