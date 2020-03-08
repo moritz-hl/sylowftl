@@ -35,9 +35,9 @@
 \contentsline {subsection}{\numberline {4.4}Funktionsdefinitionen}{43}
 \contentsline {subsection}{\numberline {4.5}Struktur}{44}
 \contentsline {subsection}{\numberline {4.6}Lesbarkeit}{44}
-\contentsline {subsection}{\numberline {4.7}Overloading}{44}
+\contentsline {subsection}{\numberline {4.7}Elaborating}{44}
 \contentsline {subsection}{\numberline {4.8}User Experience}{45}
 \contentsline {section}{\numberline {5}Diskussion}{46}
-\contentsline {subsection}{\numberline {5.1}Formalisierungskonventionen}{46}
+\contentsline {subsection}{\numberline {5.1}Begriffsbildung}{46}
 \contentsline {subsection}{\numberline {5.2}Vorschl\IeC {\"a}ge zur Weiterentwicklung an Naproche}{46}
-\contentsline {subsection}{\numberline {5.3}Lesbarkeit als Ziel}{47}
+\contentsline {subsection}{\numberline {5.3}Ausblick}{47}

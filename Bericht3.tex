@@ -743,7 +743,7 @@ If x *^{G} y = x then y = One(G).
 \subsection{Untergruppen}
 
 Untergruppen werden als Teilmengen von \verb!El(G)! eingeführt.
-Im Beweis von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es hier nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen dies hier auch als Axiom gefordert wird.
+Im Beweis von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es hier nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen dies hier als Axiom gefordert wird.
 
 
 \begin{lstlisting}
@@ -1932,26 +1932,17 @@ Theorem Sylow2a.
 
 \subsection{Beweisführung}
 
-Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean eine funktionale Programmiersprache ist und auf der Typentheorie basiert. Dies führt zu einer sehr technischen Aufbau des Lean-Beweises durch Kombination von Lambda-Termen.
+Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean eine funktionale Programmiersprache ist und auf der Typentheorie basiert. Dies führt zu einer sehr technischen Aufbau des Lean-Beweises durch die Komposition von Lambda-Termen.
 
-Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, d.h es handelt sich um eine Aneinanderreihung von Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! verifiziert werden.
-
-Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf struktureller Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben.
-
-Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse argumentative Methoden wie Symmetrie durch sogenannte ''Taktiken'' umzusetzen, die sich im deklarativen Stil von Naproche momentan nicht abbilden lassen (Siehe den Beweis in Abschnitt 3.8).
+Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben. Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'' umzusetzen, was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Siehe den Beweis in Abschnitt 3.8).
 
 \lstset{language=lean}
 \begin{lstlisting}
-example (x y : ℕ) (h : x = y) : y = x :=
-begin
-  revert x y,
-  intros,
-  symmetry,
-  assumption
-end
+    example (p q : Prop) (hp : p) (hq : q) : p ∧ q :=
+    by split; assumption
 \end{lstlisting}
 
-(Beispiel eines Taktik-Beweises in Lean unter Verwendung von \ls{symmetry} \cite{bibtex.e})
+(Beispiel eines Taktik-Beweises in Lean unter Verwendung der Taktikverknüpfung ";", die dazu führt, dass die Taktik \lstinline{assumption} auf alle verbleibenden \lstinline{subgoals} angewandt wird \cite{bibtex.e}.)
 
 \subsection{Algebraische Strukturen}
 
@@ -1965,25 +1956,19 @@ Da Naproche keine solche Strukturen bereitstellt, benötigten wir hierfür die a
 
 \subsection{Funktionsdefinitionen}
 
-
-Lean enthält als Funktionale Programmiersprache Möglichkeiten, Funktionen und Typklassen zu definieren und mit diesen zu arbeiten.
-
-Das Naproche System stellt auch einen Mengen, Funktionen bereit, dieser ist jedoch sehr . So ist es zum Beispiel nicht möglich außerhalb . Dies führt zu den angesprochenen Problemen (Siehe ).
-
+Während Lean als funktionale Programmiersprache verschieden Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt, stellt Naproche nur einen eigenschräkten naiven Funktions- und Begriff bereit. Während innerhalb von Beweisen durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M} Funktionen in Naproche definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
 
 \subsection{Struktur}
 
 In einem herkömmlichen Beweis \cite{bibtex.a} des zweiten Sylowsatzes findet man auch die Unterteilung in Kapitel welche sich in der Dateistruktur unserer Formalisierung wiederfindet. Allerdings werden im herkömmlichen Beweis grundlegende Eigenschaften von endlichen Kardinalitäten, endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden, wie dies in der Lean Formalisierung praktiziert wird.
 
-Es wäre wünschenswert, alle Dateien als Ganzes von Naproche verifizieren zu lassen. Hier scheitert das System, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden.
+Es wäre wünschenswert, alle Dateien als Ganzes von Naproche verifizieren zu lassen. Hier scheitert das System, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
 
-Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
-
-Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch \\ \verb!leanpkg build! in \verb!.olean! Binärdateien zu übersetzen, die vom Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
+Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
 
 \subsection{Lesbarkeit}
-In der vorangegangen Gegenüberstellung ist erkennbar, dass der deklarative Stil der Herangehensweise der herkömmlichen Mathematik ähnelt. So ist bis auf Layout- und Gestaltungsebene eine große oberflächliche Ähnlichkeit zwischen den Beweisen zu erkennen.
-\\Betrachte:
+In der vorangegangen Gegenüberstellung ist erkennbar, dass der deklarative Stil von Naproche / ForTheL sowie der Verwendung von kontrollierter natürlicher Sprache dazu führt, dass der Naproche-Text für herkömmliche Mathematiker lesbar ist. So ist bis auf die Layout- und Gestaltungsebene eine große oberflächliche Ähnlichkeit zwischen den Beweisen zu erkennen.
+Betrachte:
 \medskip
 
 Nach Lemma 1.5 gilt $$|X|=[G : P]\equiv |X^{G}| \mod p.$$
@@ -1997,12 +1982,15 @@ Nach Lemma 1.5 gilt $$|X|=[G : P]\equiv |X^{G}| \mod p.$$
 
 \medskip
 
-Im Gegensatz hierzu lässt sich die Formalisierung in Lean nur mit einer gewissen Vorkenntnis in funktionaler Programmierung und dem Beweisen mithilfe von Taktiken verstehen.
+Im Gegensatz hierzu lässt sich die Formalisierung in Lean nur mit einer gewissen Vorkenntnis in funktionaler Programmierung und dem Beweisen mithilfe von Taktiken verstehen. Beispielweise:
+\lstset{language=lean}
+\begin{lstlisting}
+    (λ h, (not_dvd_div_dlogn (fintype.card_pos_iff.2 ⟨(1 : G)⟩) hp.1) 
+\end{lstlisting}
 
+\subsection{Elaborating}
 
-\subsection{Overloading}
-
-Ein Vorteil von Lean gegenüber Naproche / ForTheL hinsichtlich der Lesbarkeit ist die Arbeit des ''Elaborators''. Aufgrund der strikten Typisierung ist Lean in der Lage, beispielsweise bei Ausdrücken der Form $a * b$ mit $a, b : G$ selbstständig zu ermitteln, dass es sich bei $*$ um die Verknüpfung von G handelt. Da dies in Naproche nicht möglich ist, entstehen sperrige Ausdrücke wie beispielsweise \verb!fixedPoints(Op(U, P, G), Cosets(P, G), Gr(U, G))!, die die Lesbarkeit des Naprochetextes vermindern.
+Ein Vorteil von Lean gegenüber Naproche / ForTheL hinsichtlich der Lesbarkeit ist das sogennante ''Elaborating''. Aufgrund der strikten Typisierung ist Lean in der Lage, beispielsweise bei Ausdrücken der Form $a * b$ mit $a, b : G$ selbstständig aus dem Kontext zu ermitteln, dass es sich bei $*$ um die Verknüpfung von G handelt. Da dies in Naproche nicht möglich ist, entstehen sperrige Ausdrücke wie beispielsweise \verb!fixedPoints(Op(U, P, G), Cosets(P, G),! \verb!Gr(U, G))!, die die Lesbarkeit des Naproche-Textes vermindern.
 In der herkömmlichen Mathematik findet sich hier oft ein Kompromiss. So werden an einigen Stellen die Abhängigkeiten gekennzeichnet, wie zum Beispiel im Ausdruck $\text{Syl}_{p}(G)$, während an anderen Stellen, wie in \textit{Je zwei $p$-Sylowgruppen sind konjugiert}, aus dem Kontext ersichtlich wird, welche Gruppe gemeint ist.
 
 \subsection{User Experience}
@@ -2015,13 +2003,24 @@ Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt da
 Hier scheint insbesondere der \verb!Reasoner! in Naproche eine Rolle zu spielen, der in unserer Arbeit große Schwierigkeiten hatte, Funktionsterme auf ontologische Korrektheit zu überprüfen, weswegen wir deren Einsatz auf ein Minimum reduzieren mussten.
 
 Schlussendlich würden beide Systeme von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
-Lean profititiert hier von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeile in welcher Form geändert werden müssen, um zu eine valide Datei zu erhalten. In Isabelle-Naproche 
+Lean profititiert hier von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
+Schreibt man beispielsweise anstatt \verb!contradiction! fälschlicherweise \verb!contradition!, so meldet Lean \verb!unknown identifier 'contradictio'! während Isabelle-Naproche \verb!unexpected .! erst am Ende der Zeile reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
+\begin{lstlisting}
+    contradiction tactic failed
+    state:
+    x y : ℕ,
+    h : x = y
+    ⊢ y = x
+\end{lstlisting}
+während Isabelle-Naproche nur \verb![Reasoner] goal failed! zurückgibt.
+
+
 
 \newpage
 
 \section{Diskussion}
 
-\subsection{Formalisierungskonventionen}
+\subsection{Begriffsbildung}
 
 Es ist aufgefallen, so ermöglichen gemeinsame Definition von mathematischen Begriffen
 
@@ -2036,33 +2035,30 @@ Interessant in diesem Kontext ist das Projekt Formal Abstracts \cite{bibtex.b}
 Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwicklung des Naprochesystems entstanden.
 
 \begin{itemize}
-\item So . Es wäre wünschenswert eine kanonischen Weg zu haben, in Naproche mit algebraischen Strukturen umzugehen. Auch einen Quotientenbegriff.
+\item Es wäre wünschenswert eine native 
 
 \item Definitionen von Funktionen undggf anderen mathematischen Objekten internalisieren.
 
-\item Verbesserung des Reasoners inbesondere hinsichtlich von Funktionenstermen. So wurde in einer früheren Version des Formalisierung des Sylowsatzes 
+\item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangehenden Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
+\item Unterscheiden von Axiomen so handelt es sich bei der Forderung von und wirkliche Axiome, während die Forderungen von bekannten Eigenschaften wie dem Axiome \verb!cardUnion1! in Abschnitt.
 
 
 \item Für die Einbindung von anderen Dateien existiert bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
 Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können.
 
 \item Hinsichtlich dem Einlesen von Datein ist eine weitere Idee, eine Möglichkeit zu schaffen, bereits verifizierte Texte einzulesen, ohne sie erneut verifizieren zu müssen.
-Dies führt momentan dazu, dass
+Dies führt momentan dazu, dass Olean Datein
 
-
-
-\item Bibliotheken vorkompilieren: erster Schritt: read Befehl
-\item Exportieren von Theoremen / Definitionen ... Speichern des Beweises zum späteren schnellen Zugriff wie durch olean Dateien.
-
-\item Unterscheiden von Axiomen und "Annahmen"
 \item Error Messages
+
 \item Betriebsysteme unterschiedliche Ergebnisse <- Überarbeiten (read, Funktionalität des Reasoners
+
 \item Dokumentation
 
 \end{itemize}
 
-\subsection{Lesbarkeit als Ziel}
+\subsection{Ausblick}
 
 Unsere Formalisierung (mit Latex Typesetting) sehr ähnlich zu Schröers Algebraskript.
 Der deklarative Stil ermöglicht dies.
