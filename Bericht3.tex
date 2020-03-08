@@ -1944,7 +1944,7 @@ Ein weiterer Unterschied ist die Behandlung von algebraischen Strukturen hinsich
 
 So existiert in Lean das System der Typenklassen, während in Naproche keine bis auf einen naiven Mengen und Funktionsbegriff keine Strukturelemente bereitgestellt werden.
 
-Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell als Erweiterung des Typenklasse Monoid entstehen, werden diese in der Naproche-Formalisierung als abstrakte Notion eingeführt. Exemplarisch stellt sich hier die Behandlung der Untergruppen heraus:
+Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell als Erweiterung des Typenklasse Monoid entstehen, werden diese in der Naproche-Formalisierung als abstrakte Notion eingeführt und so über allgemeine Gruppen argumentiert. Exemplarisch stellt sich hier die Behandlung der Untergruppen heraus:
 \lstinline{instance subtype.group s : set α [is_subgroup] s : group s := ...} Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffasen lassen.
 Da Naproche keine solche Strukturen bereitstellt, benötigten wir hierfür die axiomatische geforderte Gruppe \verb!Gr(U, G)! (siehe Abschnitt 3.2).
 
@@ -1954,7 +1954,7 @@ Während Lean als funktionale Programmiersprache verschieden Möglichkeiten zur 
 
 \subsection{Struktur}
 
-In einem herkömmlichen Beweis \cite{bibtex.a} des zweiten Sylowsatzes findet man auch die Unterteilung in Kapitel welche sich in der Dateistruktur unserer Formalisierung wiederfindet. Allerdings werden im herkömmlichen Beweis grundlegende Eigenschaften von endlichen Kardinalitäten, endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden, wie dies in der Lean Formalisierung praktiziert wird.
+In einem herkömmlichen Beweis \cite{bibtex.a} des zweiten Satzes von Sylow findet man auch die Unterteilung in Kapitel welche sich in der Dateistruktur unserer Formalisierung wiederfindet. Allerdings werden im herkömmlichen Beweis grundlegende Eigenschaften von endlichen Kardinalitäten, endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden, wie dies in der Lean-Formalisierung praktiziert wird.
 
 Es wäre wünschenswert, alle Dateien als Ganzes von Naproche verifizieren zu lassen. Hier scheitert das System, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
 
@@ -2016,13 +2016,11 @@ während Isabelle-Naproche nur \verb![Reasoner] goal failed! zurückgibt.
 
 \subsection{Begriffsbildung}
 
-Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe in der jeweiligen Sprache zu implementieren. Um dem übergeordneten Ziel des Formalisierens von mathematischen Theorien näherzukommen, ist es dahingehend wichtig, einen einheitlichen damit Formalisierungsprojekte voneinander profitieren können.
-Dieser Aspekt.
-Ein Beispiel hierfür ist die Implementierung der Nebenklassen. Hier nutzen verschiedene Ansätze, die jedoch auf Metaebene äquivalent sind.
+Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 2.4 und 3.5) zu betrachten. Hier werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
 
-interessant hier Möglichkeiten zu schaffen, andere Formalisierungen zu referenziern / einzubinden
+Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in evtl. verschiedener Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch das hier momentan effizientere System Lean mithilfe der mathlib verifiziert werden würden.
 
-Ist das Projekt Formal Abstracts \cite{bibtex.b}, dass zentrale Sätze der Mathematik in Lean formuliert.
+Hervorzuheben ist das Projekt ''Formal Abstracts'' \cite{bibtex.b}, das zentrale Sätze der Mathematik in Lean formuliert, um eine einheitliche Grundlage für weitere Formalisierungen zu schaffen.
 
 \subsection{Vorschläge zur Weiterentwicklung an Naproche}
 
