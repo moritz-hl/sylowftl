@@ -945,8 +945,8 @@ In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekann
 	Signature IntPlus.  a + b is an integer.
 	Signature IntMult.  a * b is an integer.
 	
-	Signature NatPot. Let b be a natural number.  a ^ b is an integer.
-	
+    Signature NatPot. Let b be a natural number.  a ^ b is an integer.
+    
 	Axiom NatPlus. If a and b are natural numbers then a + b is a natural number.
 	Axiom NatMult. If a and b are natural numbers then a * b is a natural number.
 	
@@ -1013,7 +1013,11 @@ In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekann
 						such that for some n (a * n = b).
 	
 	Let a divides b stand for a is a divisor of b.
-	Let a | b stand for a is a divisor of b.
+    Let a | b stand for a is a divisor of b.
+    
+    Axiom.
+	Let k be a natural number.
+	k != 0 => a | a^k.
 	
 	Lemma DivPlus.
 	q | a /\ q | b =>  q | (a + b).
@@ -1054,9 +1058,7 @@ In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekann
 
 \subsection{Primzahlen}
 
-Primzahlen.
-
-Wichtigste Eigenschaft, das erste Axiom.
+Auch den Begriff der Primzahl führen wir abstrakt ein. Bemerkenswert ist hier, dass nicht auf die herkömmliche Definition der Primzahlen zurückgegriffen wird, sondern im gesamten Beweis des zweiten Satzes von Sylow nur die durch das folgende Axiom geforderte Eigenschaft benötigt wird.
 
 \begin{lstlisting}
 
@@ -1070,9 +1072,7 @@ Wichtigste Eigenschaft, das erste Axiom.
 	Let k be a natural number.
 	If k | p^n then k = 1 or p | k.
 	
-	Axiom.
-	Let k be a natural number.
-	k != 0 => p | p^k.
+
 	
 
 \end{lstlisting}
@@ -1982,9 +1982,9 @@ Während Lean als funktionale Programmiersprache verschieden Möglichkeiten zur 
 
 \subsection{Struktur}
 
-In einem herkömmlichen Beweis \cite{bibtex.a} des zweiten Satzes von Sylow findet man auch die Unterteilung in Kapitel welche sich in der Dateistruktur unserer Formalisierung wiederfindet. Allerdings werden im herkömmlichen Beweis grundlegende Eigenschaften von endlichen Kardinalitäten, endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden, wie dies in der Lean-Formalisierung praktiziert wird.
+Im herkömmlicheen Beweis \cite{bibtex.a}  werden die grundlegende Eigenschaften von endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden. In der Lean-Formalisierung hingegen wird mithilfe der umfassenden mathlib ausgehend von grundlegenden typentheoretischen Definitionen eine abgeschlossene Theorie aufgebaut und verifiziert.
 
-Es wäre wünschenswert, alle Dateien als Ganzes von Naproche verifizieren zu lassen. Hier scheitert das System, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
+Es wäre wünschenswert die Naproche-Formalisierung als Ganzes verifizieren zu lassen. Hier scheitert jedoch das System aus Komplexitätsgründen, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
 
 Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
 
