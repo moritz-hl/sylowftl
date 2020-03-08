@@ -1,0 +1,80 @@
+% Listing style definition for the Lean Theorem Prover.
+% Defined by Jeremy Avigad, 2015, by modifying Assia Mahboubi's SSR style.
+% Unicode replacements taken from Olivier Verdier's unixode.sty
+
+\lstdefinelanguage{ftl} {
+
+% Anything betweeen $ becomes LaTeX math mode
+mathescape=true,
+% Comments may or not include Latex commands
+texcl=false,
+
+% keywords, list taken from lean-syntax.el
+morekeywords=[1]{
+Proof, end, Qed
+},
+
+% Sorts
+morekeywords=[2]{Lemma, Theorem, Axiom, Definition, Signature},
+
+morekeywords=[3]{let, Let, us, such, show, that, If, then, we, have, denote, assume, Assume}
+
+
+% Spaces are not displayed as a special character
+showstringspaces=false,
+
+% keep spaces
+keepspaces=true,
+
+% String delimiters
+
+% Size of tabulations
+tabsize=1,
+
+% Enables ASCII chars 128 to 255
+extendedchars=false,
+
+% Case sensitivity
+sensitive=true,
+
+% Automatic breaking of long lines
+breaklines=true,
+
+% Default style fors listingsred
+basicstyle=\ttfamily,
+
+% Position of captions is bottom
+captionpos=b,
+
+% Full flexible columns
+columns=[l]fullflexible,
+
+
+% Style for (listings') identifiers
+identifierstyle={\ttfamily\color{black}},
+% Note : highlighting of Coq identifiers is done through a new
+% delimiter definition through an lstset at the begining of the
+% document. Don't know how to do better.
+
+% Style for declaration keywords
+keywordstyle=[1]{\ttfamily\color{keywordcolor}},
+
+% Style for sorts
+keywordstyle=[2]{\ttfamily\color{sortcolor}},
+
+keywordstyle=[3]{\ttfamily\color{symbolcolor}},
+
+
+% Style for tactics keywords
+% keywordstyle=[3]{\ttfamily\color{tacticcolor}},
+
+% Style for attributes
+% keywordstyle=[4]{\ttfamily\color{attributecolor}},
+
+% Style for strings
+stringstyle=\ttfamily,
+
+% Style for comments
+% commentstyle={\ttfamily\footnotesize },
+
+}

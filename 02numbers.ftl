@@ -134,7 +134,6 @@ Let k be a natural number.
 k != 0 => p | p^k.
 
 Lemma DLogN.
-Let p be a prime.
 Let a, b be natural numbers.
 If n = (p^a)*c /\ n = (p^b)*d and p does not divide c and p does not divide d then a = b.
 Proof.
@@ -147,7 +146,7 @@ Proof by Contradiction.
 
   (1) (p^a)*c = (p^b)*d.
   (2) ((p^(a-b))*(p^b))*c = (p^b)*d.
-  (3) ((p^b)*(p^(a-b)))*c = (p^b)*d (by 1, MulComm).
+  (3) ((p^b)*(p^(a-b)))*c = (p^b)*d (by 2, MulComm).
   (4) (p^b)*((p^(a-b))*c) = (p^b)*d (by 3, MulAsso).
   (5) ((p^(a-b))*c)*(p^b) = d*(p^b) (by 4, MulComm).
   

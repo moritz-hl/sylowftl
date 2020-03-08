@@ -566,6 +566,8 @@ Proof.
 
     Thus h is an element of P.
   end.
+
+  Therefore the thesis.
 Qed.
 
 Theorem Sylow2b.
