@@ -925,8 +925,8 @@ U and V are conjugates in G iff there is an element g of El(G) such that U = Con
 \subsection{Zahlen}
 
 Da wir uns mit endlichen Gruppen, also insbesondere mit Kardinalitäten beschäftigen, führen wir nun die ganzen Zahlen ein. 
-Herkömmliche Texte über die Sylowsätze \cite{bibtex.a} behandeln Fragen der elementaren Zahlentheorie nicht in der Tiefe, sondern setzen eine gewisse mathematischen Vorkenntnis voraus.
-In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann wohlbekannte Eigenschaften axiomatisch.
+Herkömmliche Texte über die Sylowsätze \cite{bibtex.a} behandeln Fragen der elementaren Zahlentheorie nicht in voller Tiefe, sondern setzen eine gewisse mathematischen Vorkenntnis voraus.
+In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekannte Eigenschaften axiomatisch.
 
 \begin{lstlisting}
 	[synonym integer/-s]
@@ -2031,11 +2031,11 @@ Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwi
 \begin{itemize}
 \item So wäre es wünschenswert eine native Option zu haben, mit algebraischen Strukturen umzugehen, da diese Ausgangspunkt vieler mathematischer Theorien sind und momentan von Naproche nicht unterstützt werden. (Siehe Abschnitt 3.2 bezüglich der Formalisierung des Gruppenbegriffes).
 
-\item Des Weiteren Abschnitt 3.12.
+\item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Qoutientbegriff \verb!qout! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
 
 \item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangehenden Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
-\item Unterscheiden von Axiomen so handelt es sich bei der Forderung von und wirkliche Axiome, während die Forderungen von bekannten Eigenschaften wie dem Axiom \\ \verb!cardUnion1! in Abschnitt 3.9.
+\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einfügen des Bezeichners \verb!Presupposition! anstatt von \verb!Axiom!.)
 
 \item Für das Einbinden von anderen Dateien existiert in Isabelle-Naproche bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
 Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. Im Sinne der \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter in Texte einzubinden und so den von uns gewählten Ansatz des ''Exportierens'' von Theoremen als Axiome zu internaliseren.
@@ -2050,11 +2050,7 @@ Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können
 
 \subsection{Ausblick}
 
-Unsere Formalisierung (mit Latex Typesetting) sehr ähnlich zu Schröers Algebraskript.
-Der deklarative Stil ermöglicht dies.
-Lean in der Hinsicht anpassen.
-
-Interessant, den Ansatz von Lean auf natürlicherer Sprachebene.
+Zusammenfassend lässt 
 
 \bibliography{biblio}
 
