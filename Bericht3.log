@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.31)  8 MAR 2020 13:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.31)  8 MAR 2020 13:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1144,21 +1144,36 @@ Overfull \hbox (37.54437pt too wide) in paragraph at lines 2038--2039
 \T1/txr/m/n/12 Axio-me, wäh-rend die For-de-run-gen von be-kann-ten Ei-gen-schaf-ten wie dem Axio-me [][]\T1/txtt/m/n/12 cardUnion1
  []
 
-[46] (/Users/moritzhartlieb/Documents/uni/praktikum/Bericht3.bbl)
+[46] (/Users/moritzhartlieb/Documents/uni/praktikum/Bericht3.bbl
+Underfull \hbox (badness 2635) in paragraph at lines 23--28
+[]\T1/txr/m/n/12 M. Wen-zel.  ISA-BEL-LE/NA-PRO-CHE FOR AU-TO-MA-TIC PROOF-CHECKING
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--28
+\T1/txr/m/n/12 OF OR-DI-NA-RY MA-THE-MA-TI-CAL TEXTS.  $\T1/txtt/m/n/12 https : / / sketis . net / 2019 /
+ []
+
+
+Overfull \hbox (64.33505pt too wide) in paragraph at lines 23--28
+\T1/txtt/m/n/12 isabelle-[]naproche-[]for-[]automatic-[]proof-[]checking-[]of-[]ordinary-[]mathematical-[]texts$\T1/txr/m/n/12 . 
+ []
+
+)
 \tf@thm=\write5
 \openout5 = `Bericht3.thm'.
 
  [47] (/Users/moritzhartlieb/Documents/uni/praktikum/Bericht3.aux) ) 
 Here is how much of TeX's memory you used:
- 21663 strings out of 492649
- 375334 string characters out of 6129621
- 723209 words of memory out of 5000000
- 25213 multiletter control sequences out of 15000+600000
+ 21666 strings out of 492649
+ 375382 string characters out of 6129621
+ 723230 words of memory out of 5000000
+ 25216 multiletter control sequences out of 15000+600000
  593870 words of font info for 143 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  51i,8n,51p,10424b,1016s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolB.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolD.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolF.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolC.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolE.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/mnsymbol/MnSymbolA.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/mnsymbol/MnSymbol8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/rtcxr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/moritzhartlieb/Documents/uni/praktikum/Bericht3.pdf (50 pages, 213304 bytes).
+Output written on /Users/moritzhartlieb/Documents/uni/praktikum/Bericht3.pdf (50 pages, 214029 bytes).
 PDF statistics:
  246 PDF objects out of 1000 (max. 8388607)
  177 compressed objects within 2 object streams

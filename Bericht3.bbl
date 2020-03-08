@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -18,6 +18,13 @@ C.~Hughes.
 \bibitem[bib()]{bibtex.d}
 mathlib.
 \newblock \url{https://github.com/leanprover-community/mathlib}.
+
+\bibitem[Wenzel()]{bibtex.f}
+M.~Wenzel.
+\newblock {ISABELLE/NAPROCHE FOR AUTOMATIC PROOF-CHECKING OF ORDINARY
+  MATHEMATICAL TEXTS}.
+\newblock
+  \url{https://sketis.net/2019/isabelle-naproche-for-automatic-proof-checking-of-ordinary-mathematical-texts}.
 
 \bibitem[Avigad()]{bibtex.e}
 J.~Avigad.
