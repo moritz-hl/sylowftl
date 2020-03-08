@@ -2019,7 +2019,7 @@ In der herkömmlichen Mathematik findet sich hier oft ein Kompromiss. So werden 
 
 Wir wollen nun einige Aspekte des Arbeitens mit den beiden Systemen beschreiben.
 
-Ein Punkt ist hier die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Leantext in verschiedenen Umgebungen verifizieren. Für verschiedene Versionen von Lean gilt dies jedoch nicht. So ist zum Beispiel die ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel und musste deswegen angepasst werden.
+Ein Gesichtspunkt ist hier die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Lean-Text in verschiedenen Umgebungen verifizieren. Für verschiedene Versionen von Lean gilt dies jedoch nicht. So ist zum Beispiel die ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel und musste deswegen angepasst werden.
 Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt das Verändern weniger Zeilen im Quelltext häufig dazu, dass Aussagen an anderen Stellen, die vorher verifiziert wurden, nicht mehr verifiziert werden. Insbesondere ist hier das Zusammenarbeiten mehrerer Personen mit verschiedenen Betriebssystemen kritisch, da nach unserer Erfahrung unter Linux/Mac verifizierte Dateien unter Windows oftmals nicht ohne weitere Veränderungen verifiziert werden konnten. 
 
 Hier scheint insbesondere der \verb!Reasoner! in Naproche eine Rolle zu spielen, der in unserer Arbeit große Schwierigkeiten hatte, Funktionsterme auf ontologische Korrektheit zu überprüfen, weswegen wir deren Einsatz auf ein Minimum reduzieren mussten.
