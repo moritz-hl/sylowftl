@@ -102,8 +102,13 @@
 \author{Moritz Hartlieb, Jonas Lippert}
 
 \begin{document}
+
+
+
 \pagenumbering{gobble}
 \maketitle
+\newpage
+\tableofcontents
 \newpage
 \pagenumbering{arabic}
 
@@ -1981,7 +1986,7 @@ In der vorangegangen Gegenüberstellung ist erkennbar, dass der deklarative Stil
 \\Betrachte:
 \medskip
 
-Nach Lemma 1.5 gilt $$|X|=[G : P]=m\equiv |X^{G}| \mod p.$$
+Nach Lemma 1.5 gilt $$|X|=[G : P]\equiv |X^{G}| \mod p.$$
 
 \lstset{language=ftl, basicstyle = \fontsize{10}{13}\selectfont\ttfamily}
 \begin{lstlisting}
@@ -2004,17 +2009,13 @@ In der herkömmlichen Mathematik findet sich hier oft ein Kompromiss. So werden 
 
 Wir wollen nun einige Aspekte des Arbeitens mit den beiden Systemen beschreiben.
 
-Ein Punkt der hier eine Rolle spielt ist die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Leantext in verschiedenen Umgebungen verifizieren, da durch das .
-Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt das verändern von wenigen Zeilen im Quelltext häufig dazu, dass sich Aussagen an anderen Stellen, die vorher verifiziert wurden, nicht mehr verifiziert werden. Insbesondere ist hier das Zusammenarbeiten mehrerer Personen mit verschiedenen Betriebssystemen kritisch, da nach unserer Erfahrung unter Linux/Mac verifizierte Dateien unter Windows oftmals nicht verifiziert werden konnten. 
+Ein Punkt ist hier die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Leantext in verschiedenen Umgebungen verifizieren. Für verschiedene Versionen von Lean gilt dies jedoch nicht. So ist zum Beispiel die ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel und musste deswegen angepasst werden.
+Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt das Verändern weniger Zeilen im Quelltext häufig dazu, dass Aussagen an anderen Stellen, die vorher verifiziert wurden, nicht mehr verifiziert werden. Insbesondere ist hier das Zusammenarbeiten mehrerer Personen mit verschiedenen Betriebssystemen kritisch, da nach unserer Erfahrung unter Linux/Mac verifizierte Dateien unter Windows oftmals nicht ohne weitere Veränderungen verifiziert werden konnten. 
 
 Hier scheint insbesondere der \verb!Reasoner! in Naproche eine Rolle zu spielen, der in unserer Arbeit große Schwierigkeiten hatte, Funktionsterme auf ontologische Korrektheit zu überprüfen, weswegen wir deren Einsatz auf ein Minimum reduzieren mussten.
 
-
-So ist ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel.
-
-Schlechte Fehlermeldungen
-
-Dokumentationen.
+Schlussendlich würden beide Systeme von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
+Lean profititiert hier von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeile in welcher Form geändert werden müssen, um zu eine valide Datei zu erhalten. In Isabelle-Naproche 
 
 \newpage
 
