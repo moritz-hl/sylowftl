@@ -631,7 +631,7 @@ Grundsätzlich wäre es möglich diese Dateien über den Befehl \verb![read date
 
 Die Formalisierung ließ sich auf einem MacBook Pro (16 GB RAM, Intel i7 2,7 GhZ) von 2018 innerhalb der Isabelle-Naproche Umgebung\cite{bibtex.f} in rund 5 Minuten verifizieren. Fügt man jedoch alle Dateien aneinander, ohne die Theoreme jeweils durch Axiome zu ersetzen, dann ist Naproche nicht mehr in der Lage, den Beweis vollständig zu verifizieren.
 
-Der Dateien finden sich unter \url{https://github.com/moritz-hl/sylowftl}.
+Der Dateien finden sich unter \url{https://github.com/moritz-hl/sylowftl} \cite{bibtex.g}.
 
 \subsection{Grundlegende Definitionen}
 
@@ -2035,7 +2035,7 @@ Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwi
 
 \item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangehenden Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
-\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einfügen des Bezeichners \verb!Presupposition! anstatt von \verb!Axiom!.)
+\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
 
 \item Für das Einbinden von anderen Dateien existiert in Isabelle-Naproche bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
 Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. Im Sinne der \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter in Texte einzubinden und so den von uns gewählten Ansatz des ''Exportierens'' von Theoremen als Axiome zu internaliseren.

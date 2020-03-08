@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -15,9 +15,10 @@ C.~Hughes.
 \newblock {S}ylow.
 \newblock \url{https://github.com/ChrisHughes24/Sylow}.
 
-\bibitem[bib()]{bibtex.d}
+\bibitem[bib({\natexlab{a}})]{bibtex.d}
 mathlib.
-\newblock \url{https://github.com/leanprover-community/mathlib}.
+\newblock \url{https://github.com/leanprover-community/mathlib},
+  {\natexlab{a}}.
 
 \bibitem[Wenzel()]{bibtex.f}
 M.~Wenzel.
@@ -25,6 +26,10 @@ M.~Wenzel.
   MATHEMATICAL TEXTS}.
 \newblock
   \url{https://sketis.net/2019/isabelle-naproche-for-automatic-proof-checking-of-ordinary-mathematical-texts}.
+
+\bibitem[bib({\natexlab{b}})]{bibtex.g}
+{2. Satz von Sylow in Naproche}.
+\newblock \url{https://github.com/moritz-hl/sylowftl}, {\natexlab{b}}.
 
 \bibitem[Avigad()]{bibtex.e}
 J.~Avigad.
