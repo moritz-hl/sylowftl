@@ -1991,7 +1991,7 @@ Coset(g, H, G) = {g *^{G} h | h << H}.
 Das Lemma 1.1 beweist, dass beide Ansätze das gleiche metatheoretische Objekt beschreiben.
 \subsection{Funktionsdefinitionen}
 
-Während Lean als funktionale Programmiersprache verschieden Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt, stellt Naproche nur einen eigenschräkten naiven Funktions- und Begriff bereit. Während innerhalb von Beweisen durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M} Funktionen in Naproche definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
+Während Lean als funktionale Programmiersprache verschiedene Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt (Siehe \cite{bibtex.e}), stellt Naproche nur einen eingeschräkten naiven Funktions- und Mengenbegriff bereit. Während innerhalb von Beweisen in Naproche durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M} Funktionen definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
 
 \subsection{Struktur}
 
@@ -2039,7 +2039,7 @@ Hier scheint insbesondere der \verb!Reasoner! in Naproche eine Rolle zu spielen,
 
 Schlussendlich würden beide Systeme von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
 Lean profititiert hier von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
-Schreibt man beispielsweise anstatt \verb!contradiction! fälschlicherweise \verb!contradictio!, so meldet Lean \verb!unknown identifier 'contradictio'! während Isabelle-Naproche \verb!unexpected .! erst am Ende der Zeile reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
+Schreibt man beispielsweise anstatt ''\verb!contradiction!'' fälschlicherweise ''\verb!contradictio!'', so meldet Lean ''\verb!unknown identifier contradictio!'' während Isabelle-Naproche ''\verb!unexpected .!'' erst am Ende der Zeile reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
 \begin{lstlisting}
     contradiction tactic failed
     state:
@@ -2059,7 +2059,7 @@ während Isabelle-Naproche nur \verb![Reasoner] goal failed! zurückgibt.
 
 Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 4.4) zu betrachten. Hier werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
 
-Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in evtl. verschiedener Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch das hier momentan effizientere System Lean mithilfe der mathlib verifiziert werden würden.
+Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in verschiedenen Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch Lean mithilfe der bestehenden mathlib verifiziert werden würden.
 
 Hervorzuheben ist das Projekt ''Formal Abstracts'' \cite{bibtex.b}, das zentrale Sätze der Mathematik in Lean formuliert, um eine einheitliche Grundlage für weitere Formalisierungen zu schaffen.
 
@@ -2072,7 +2072,7 @@ Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwi
 
 \item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Qoutientbegriff \verb!qout! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
 
-\item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangehenden Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
+\item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangegangenen Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
 \item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
 
