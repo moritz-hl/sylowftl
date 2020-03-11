@@ -1927,18 +1927,21 @@ Theorem Sylow2a.
 \subsection{Beweisführung}
 
 Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean eine funktionale Programmiersprache ist und auf der Typentheorie basiert. Dies führt zu einer sehr technischen Aufbau des Lean-Beweises durch die Komposition von Lambda-Termen.
-Als Beispiel hierfür 
+Als Beispiel hierfür betrachten wir einen Teil des Beweises, dass es sich bei der Sylow-Gruppenaktion um eine Gruppenaktion handelt:
 \lstset{language=lean}
 \begin{lstlisting}
 one_smul := λ a, quotient.induction_on' a (λ a, quotient_group.eq.2
     (by simp [is_submonoid.one_mem]))
 \end{lstlisting}
 
+Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben:
+
 \lstset{language=ftl}
 \begin{lstlisting}
+For every element x of M we have f[(One(H), x)] = x.
 \end{lstlisting}
 
-Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben. Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'' umzusetzen, was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
+Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'', was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
 
 \lstset{language=lean}
 \begin{lstlisting}
