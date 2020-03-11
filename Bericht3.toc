@@ -37,7 +37,7 @@
 \contentsline {subsection}{\numberline {4.6}Struktur}{44}
 \contentsline {subsection}{\numberline {4.7}Lesbarkeit}{45}
 \contentsline {subsection}{\numberline {4.8}Elaborating}{45}
-\contentsline {subsection}{\numberline {4.9}User Experience}{45}
+\contentsline {subsection}{\numberline {4.9}User Experience}{46}
 \contentsline {section}{\numberline {5}Diskussion}{47}
 \contentsline {subsection}{\numberline {5.1}Begriffsbildung}{47}
 \contentsline {subsection}{\numberline {5.2}Vorschl\IeC {\"a}ge zur Weiterentwicklung an Naproche}{47}

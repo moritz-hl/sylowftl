@@ -692,7 +692,7 @@ and for every y << M there is an element x of Dom(f) such that f[x]=y).
 
 Der Gruppenbegriff wird abstrakt als \verb!Notion! eingeführt.
 Für diese \verb!Notion! werden die Existenz einer Trägermenge \verb!El(G)!, die Existenz der Eins, Inversen und Verknüpfung sowie deren Eigenschaften axiomatisch gefordert.
-Die Verknüpfung \verb!a *^{G} b! muss hier explizit durch \verb!G! gekennzeichnet werden.
+Die Verknüpfung \verb!a *^{G} b! muss hier explizit als Verknüpfung auf der Gruppe \verb!G! gekennzeichnet werden.
 
 \begin{lstlisting}
 
@@ -743,7 +743,7 @@ If x *^{G} y = x then y = One(G).
 \subsection{Untergruppen}
 
 Untergruppen werden als Teilmengen von \verb!El(G)! eingeführt.
-Im Beweis von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es hier nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen dies hier als Axiom gefordert wird.
+Im Beweis des zweiten Satzes von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es hier nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen dies hier als Axiom gefordert wird.
 
 
 \begin{lstlisting}
@@ -1145,7 +1145,7 @@ Wir liefern hier einen Beweis, der sich durch ein Symmetrieargument vereinfachen
 
 \subsection{Endliche Mengen}
 
-Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigeschaften. Interessant sind hier die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von Gruppen. Da wir die ganze Zahlen recht abstrakt eingeführt haben und insbesondere kein Induktionsaxiom haben, müssen wir diese drei Axiome hier seperat fordern, obwohl sie auf Metaebene aus \verb!cardUnion0! gefolgert werden können.
+Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigeschaften. Interessant sind hier die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von Gruppen. Da wir die ganze Zahlen abstrakt und insbesondere ohne ein Induktionsaxiom eingeführt haben, müssen wir diese drei Axiome hier seperat fordern, obwohl sie auf Metaebene aus \verb!cardUnion0! gefolgert werden können.
 
 \begin{lstlisting}
 
@@ -1385,7 +1385,7 @@ If Coset(g, Stab(x, f, M, G), G) = Coset(h, Stab(x, f, M, G), G) then f[(g, x)] 
 \subsection{Stabilisator und Orbit}
 
 Außerhalb von Beweisen lassen sich in Naproche keine Funktionen definieren. In der herkömmlichen Mathematik werden Funktionen oft definiert und erst nachträglich auf ''Wohldefiniertheit'' bzw. Repräsentantenunabhängigkeit überprüft.
-Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren. In diesem Text belassen wir es jedoch dabei -- auf Metaebene begründet durch das vorangegange Lemma -- die Existenz der folgenden Funktion als Axiom zu fordern.
+Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren, in diesem Text belassen wir es jedoch dabei -- auf Metaebene begründet durch das vorangegange Lemma -- die Existenz der folgenden Funktion als Axiom zu fordern.
 
 \begin{lstlisting}
 
@@ -1655,7 +1655,7 @@ Wir führen den Begriff des Fixpunktes und der Menge der Fixpunkte einer Gruppen
 
 \subsection{Eine Gruppenaktion}
 
-Um den zweiten Satz von Sylow zu beweisen,  muss eine explizite Gruppenaktion definiert werden. Im Gegensatz zur abstrakten Formulierung des Gruppen- und Zahlbegriffes in dieser Formalisierung lässt sich aufgrund der Formulierung der Definition von Gruppenaktionen nun in Naproche zeigen, dass es sich bei dieser Funktion um eine Gruppenaktion handelt.
+Um den zweiten Satz von Sylow zu beweisen, muss eine explizite Gruppenaktion definiert werden. Im Gegensatz zur abstrakten Formulierung des Gruppen- und Zahlbegriffes in dieser Formalisierung lässt sich aufgrund der Formulierung der Definition von Gruppenaktionen nun in Naproche zeigen, dass es sich bei dieser Funktion um eine Gruppenaktion handelt.
 
 \begin{lstlisting}
 Lemma.
@@ -1927,6 +1927,16 @@ Theorem Sylow2a.
 \subsection{Beweisführung}
 
 Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean eine funktionale Programmiersprache ist und auf der Typentheorie basiert. Dies führt zu einer sehr technischen Aufbau des Lean-Beweises durch die Komposition von Lambda-Termen.
+Als Beispiel hierfür 
+\lstset{language=lean}
+\begin{lstlisting}
+one_smul := λ a, quotient.induction_on' a (λ a, quotient_group.eq.2
+    (by simp [is_submonoid.one_mem]))
+\end{lstlisting}
+
+\lstset{language=ftl}
+\begin{lstlisting}
+\end{lstlisting}
 
 Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben. Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'' umzusetzen, was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
 
