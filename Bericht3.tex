@@ -2061,6 +2061,7 @@ Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vor
 
 Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in verschiedenen Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch Lean mithilfe der bestehenden mathlib verifiziert werden würden.
 
+Um die verschiedenen Ansätze zu kombinieren, benötigt man Mittel, Begriffe des einen Systems in Begriffe des anderen Systems umzusetzen. Dies setzt gewisse Konventionen in der Begriffsbildung voraus. (Die Benennungskonventionen der mathlib sind in \cite{bibtex.i} zu finden).
 Hervorzuheben ist das Projekt ''Formal Abstracts'' \cite{bibtex.b}, das zentrale Sätze der Mathematik in Lean formuliert, um eine einheitliche Grundlage für weitere Formalisierungen zu schaffen.
 
 \subsection{Vorschläge zur Weiterentwicklung an Naproche}
@@ -2077,13 +2078,13 @@ Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwi
 \item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
 
 \item Für das Einbinden von anderen Dateien existiert in Isabelle-Naproche bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
-Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. Im Sinne der \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter in Texte einzubinden und so den von uns gewählten Ansatz des ''Exportierens'' von Theoremen als Axiome zu internaliseren.
+Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In Anlehnung an die \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter einlesen zu können.
 
-\item Ausgeprägtere Fehlermeldungen in Isabelle-Naproche würden den Prozess des Formalisierens vermutlich vereinfachen, da gerade die Arbeit des \verb!Reasoners! in Kombination mit dem externen \verb!ATP! momentan eine Blackbox ist, was dazu führt, dass das Beheben Fehlern meist nur durch langwieriges Ausprobieren realisierbar ist.
+\item Genauere Fehlermeldungen in Isabelle-Naproche würden den Prozess des Formalisierens vermutlich vereinfachen, da gerade die Arbeit des \verb!Reasoners! in Kombination mit dem externen \verb!ATP! momentan eine Blackbox ist, was dazu führt, dass das Beheben von Fehlern meist nur durch langwieriges Ausprobieren realisierbar ist.
 
 \item Es wäre des Weiteren sinnvoll, Isabelle-Naproche dahingehend anzupassen, dass es sich unter den verschiedenen Betriebsystemen identisch verhält. So brechen unter Mac Os X die Beweise momentan nach einer bestimmten Zeit ab, während dies unter Windows nicht der Fall ist. Dies hindert die gemeinsame Entwicklung von Naproche-Texten.
 
-\item Schlussendlich würde eine ausgeprägtere Dokumentation des im Sinne des Einführungstextes ''Theorem Proving in Lean'' \cite{bibtex.e}, insbesondere den Einstieg in das Arbeiten mit Naproche steigern. So ist momentan beispielsweise nicht klar, welche sprachlichen Konstrukte überhaupt unterstützt werden.
+\item Schlussendlich würde eine ausgeprägtere Dokumentation des Isabelle-Naproche im Sinne des Einführungstextes ''Theorem Proving in Lean'' \cite{bibtex.e} insbesondere den Einstieg in das Arbeiten mit Naproche vereinfachen.
 
 \end{itemize}
 
