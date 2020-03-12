@@ -513,7 +513,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	\subsection{Sylow 2 in Lean}
 	Wir wollen nun auf einige Details im Beweis des Satzes eingehen. Die verwendeten Lemmata, die für das sukzessive Umformen via \ls{rw} oder \ls{simp} genutzt werden, sind dabei weder mathematisch noch hinsichtlich des Formalisierungsprozesses besonders interessant. Es werden zahlreiche technische Lemma über natürliche Zahlen, Kardinalitäten, Funktionen, etc. zusammengetragen, deren Beweise für den Menschen trivial und in Lean im Nachhinein teilweise nur sehr schwer verständlich sind. Es ist prinzipiell klar, dass es auf Basis der konstruierten Begriffe und Strukturen möglich ist, entsprechende Beweise für Lean verständlich zu formulieren und es genügt in der Regel zu wissen, dass sie existieren.
 	
-	Die ersten drei Hilfslemma liefern uns den gewünschten Fixpunkt.
+	Die ersten drei Hilfslemmata liefern uns den gewünschten Fixpunkt.
 	\begin{lstlisting}
 	lemma sylow_2 [fintype G] {p : ℕ} (hp : nat.prime p)
 	(H K : set G) [is_sylow H hp] [is_sylow K hp] :
@@ -626,17 +626,17 @@ Die Formalisierung in Naproche teilt sich in 8 Dateien auf:
 
 \medskip
 
-In jeder Datei werden zu Beginn jeweils die Aussagen und Definitionen der vorangegangen Dateien eingebunden. Hierfür wurden Hilfsdateien \verb!xxExport.ftl! erstellt, in denen zu jeder Datei die daran enthalten Definitionen und Theoreme in Form von Axiomen ohne Beweise festgehalten wurden.
-Grundsätzlich wäre es möglich diese Dateien über den Befehl \verb![read dateiname.ftl]! einzulesen, da dieser Befehl jedoch in der jetzigen Version von Naproche nicht auf allen Betriebssystemen gleichermaßen funktioniert, haben wir die Dateien manuell kopiert und dies durch Kommentare im Quelltext vermerkt.
+In jeder Datei werden zu Beginn jeweils die Aussagen und Definitionen der vorangegangen Dateien eingebunden. Hierfür wurden Hilfsdateien \verb!xxExport.ftl! erstellt, in denen die in der jeweiligen Definitionen und Theoreme in Form von Axiomen ohne Beweise festgehalten wurden.
+Grundsätzlich wäre es möglich, diese Dateien über den Befehl \verb![read dateiname.ftl]! einzulesen, da dieser Befehl jedoch in der jetzigen Version von Naproche nicht auf allen Betriebssystemen gleichermaßen funktioniert, haben wir die Dateien manuell kopiert und dies durch Kommentare im Quelltext vermerkt.
 
 Die Formalisierung ließ sich auf einem MacBook Pro (16 GB RAM, Intel i7 2,7 GhZ) von 2018 innerhalb der Isabelle-Naproche Umgebung\cite{bibtex.f} in rund 5 Minuten verifizieren. Fügt man jedoch alle Dateien aneinander, ohne die Theoreme jeweils durch Axiome zu ersetzen, dann ist Naproche nicht mehr in der Lage, den Beweis vollständig zu verifizieren.
 
-Der Dateien finden sich unter \url{https://github.com/moritz-hl/sylowftl} \cite{bibtex.g}.
+Die Dateien finden sich unter \url{https://github.com/moritz-hl/sylowftl} \cite{bibtex.g}.
 
 \subsection{Grundlegende Definitionen}
 
 Zunächst führen wir einige grundlegenden Definitionen ein.
-Interessant ist hier insbesondere der Begriff der \verb!disjunct collection! den wir einführen um später über disjunkte Vereinigung ''sprechen'' zu können.
+Interessant ist hier insbesondere der Begriff der \verb!disjunct collection !, den wir einführen, um später über disjunkte Vereinigung ''sprechen'' zu können.
 
 \begin{lstlisting}
 Let M, N denote sets.
@@ -692,7 +692,7 @@ and for every y << M there is an element x of Dom(f) such that f[x]=y).
 
 Der Gruppenbegriff wird abstrakt als \verb!Notion! eingeführt.
 Für diese \verb!Notion! werden die Existenz einer Trägermenge \verb!El(G)!, die Existenz der Eins, Inversen und Verknüpfung sowie deren Eigenschaften axiomatisch gefordert.
-Die Verknüpfung \verb!a *^{G} b! muss hier explizit als Verknüpfung auf der Gruppe \verb!G! gekennzeichnet werden.
+Die Verknüpfung \verb!a *^{G} b! muss explizit als Verknüpfung auf der Gruppe \verb!G! gekennzeichnet werden.
 
 \begin{lstlisting}
 
@@ -743,7 +743,7 @@ If x *^{G} y = x then y = One(G).
 \subsection{Untergruppen}
 
 Untergruppen werden als Teilmengen von \verb!El(G)! eingeführt.
-Im Beweis des zweiten Satzes von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es hier nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen dies hier als Axiom gefordert wird.
+Im Beweis des zweiten Satzes von Sylow wird genutzt, dass Untergruppen selbst wieder eine Gruppenstruktur annehmen. Da wir den Begriff der Gruppe abstrakt eingeführt haben, ist es an dieser Stelle nicht möglich, zu beweisen, dass \verb!Gr(U, G)! eine Gruppe ist, weswegen diese Aussage als Axiom gefordert wird.
 
 
 \begin{lstlisting}
@@ -796,8 +796,8 @@ Qed.
 
 \subsection{Nebenklassen}
 
-Wir führen Nebenklassen im Gegensatz zum Ansatz der Formalisierung in Lean nicht über Qoutienten ein, sondern über die mengenbasierte Definition.
-Das in der Einführung genannte Lemma begründet, dass diese Ansätze das gleiche metatheoretische Objekt formalisieren.
+Wir führen Nebenklassen im Gegensatz zur Formalisierung in Lean nicht über Qoutienten ein, sondern über die mengenbasierte Definition.
+Lemma 1.1 begründet, dass diese Ansätze das gleiche metatheoretische Objekt formalisieren.
 
 \begin{lstlisting}
 
@@ -925,7 +925,7 @@ U and V are conjugates in G iff there is an element g of El(G) such that U = Con
 \subsection{Zahlen}
 
 Da wir uns mit endlichen Gruppen, also insbesondere mit Kardinalitäten beschäftigen, führen wir nun die ganzen Zahlen ein. 
-Herkömmliche Texte über die Sylowsätze \cite{bibtex.a} behandeln Fragen der elementaren Zahlentheorie nicht in voller Tiefe, sondern setzen eine gewisse mathematischen Vorkenntnis voraus.
+Herkömmliche Texte über die Sylowsätze \cite{bibtex.a} behandeln Fragen der elementaren Zahlentheorie nicht in voller Tiefe, sondern setzen eine gewisse mathematische Vorkenntnis voraus.
 In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekannte Eigenschaften axiomatisch.
 
 \begin{lstlisting}
@@ -1058,7 +1058,7 @@ In diesem Sinne führen auch wir die Zahlen abstrakt ein und fordern dann bekann
 
 \subsection{Primzahlen}
 
-Auch den Begriff der Primzahl führen wir abstrakt ein. Bemerkenswert ist hier, dass nicht auf die herkömmliche Definition der Primzahlen zurückgegriffen wird, sondern im gesamten Beweis des zweiten Satzes von Sylow nur die durch das folgende Axiom geforderte Eigenschaft benötigt wird.
+Auch den Begriff der Primzahl führen wir abstrakt ein. Bemerkenswert ist, dass nicht auf die herkömmliche Definition der Primzahlen zurückgegriffen wird, sondern im gesamten Beweis des zweiten Satzes von Sylow nur die durch das folgende Axiom geforderte Eigenschaft benötigt wird.
 
 \begin{lstlisting}
 
@@ -1080,7 +1080,7 @@ Auch den Begriff der Primzahl führen wir abstrakt ein. Bemerkenswert ist hier, 
 \subsection{Ein Lemma über Potenzen}
 
 Das folgende Lemma wird eine zentrale Rolle im Beweis des zweiten Teiles des Satzes einnehmen.
-Wir liefern hier einen Beweis, der sich durch ein Symmetrieargument vereinfachen ließe, welches sich jedoch in Naproche nicht abbilden lässt.
+Wir liefern einen Beweis, der sich durch ein Symmetrieargument vereinfachen ließe, welches sich jedoch in Naproche nicht abbilden lässt.
 
 \begin{lstlisting}
 	Lemma DLogN.
@@ -1145,7 +1145,7 @@ Wir liefern hier einen Beweis, der sich durch ein Symmetrieargument vereinfachen
 
 \subsection{Endliche Mengen}
 
-Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigeschaften. Interessant sind hier die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von Gruppen. Da wir die ganze Zahlen abstrakt und insbesondere ohne ein Induktionsaxiom eingeführt haben, müssen wir diese drei Axiome hier seperat fordern, obwohl sie auf Metaebene aus \verb!cardUnion0! gefolgert werden können.
+Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigeschaften. Interessant sind die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von endlichen Mengen. Da wir die ganzen Zahlen abstrakt und insbesondere ohne ein Induktionsaxiom eingeführt haben, müssen wir die drei Axiome seperat fordern, obwohl sie auf Metaebene aus \verb!cardUnion0! gefolgert werden können.
 
 \begin{lstlisting}
 
@@ -1655,7 +1655,7 @@ Wir führen den Begriff des Fixpunktes und der Menge der Fixpunkte einer Gruppen
 
 \subsection{Eine Gruppenaktion}
 
-Um den zweiten Satz von Sylow zu beweisen, muss eine explizite Gruppenaktion definiert werden. Im Gegensatz zur abstrakten Formulierung des Gruppen- und Zahlbegriffes in dieser Formalisierung lässt sich aufgrund der Formulierung der Definition von Gruppenaktionen nun in Naproche zeigen, dass es sich bei dieser Funktion um eine Gruppenaktion handelt.
+Um den zweiten Satz von Sylow zu beweisen, muss eine explizite Gruppenaktion definiert werden, die wir als \verb!Op(U, P, G)! bezeichnen.
 
 \begin{lstlisting}
 Lemma.
@@ -1690,7 +1690,7 @@ Qed.
 
 \end{lstlisting}
 
-Aufgrund des vorangegangen Lemmas führt die folgende Definition nicht zu Problemen hinsichtlich der Konsistenz der Formalisierung (Siehe 3.12).
+Aufgrund des vorangegangen Lemmas führt die folgende Definition nicht zu Problemen hinsichtlich der Konsistenz der Formalisierung.
 
 \begin{lstlisting}
 
@@ -1700,7 +1700,7 @@ Let U be a subgroup of G.
 Op(U, P, G) is a function f 
 such that f is from Prod(El(Gr(U, G)), Cosets(P, G)) to Cosets(P, G) and
 for all elements u of U for all elements x of El(G) 
-f[(u, Coset(x, P, G))] = Coset(u *^{G}  x,P, G).
+f[(u, Coset(x, P, G))] = Coset(u *^{G} x,P, G).
 
 Lemma.
 Let P be a subgroup of G.
@@ -1930,8 +1930,9 @@ Der zentrale Unterschied zwischen den beiden Formalisierungen ist, dass Lean ein
 Als Beispiel hierfür betrachten wir einen Teil des Beweises, dass es sich bei der Sylow-Gruppenaktion um eine Gruppenaktion handelt:
 \lstset{language=lean}
 \begin{lstlisting}
-one_smul := λ a, quotient.induction_on' a (λ a, quotient_group.eq.2
-    (by simp [is_submonoid.one_mem]))
+one_smul : ∀ (x : left_cosets L₁), (1 : L₂) • x = x := 
+λ a, quotient.induction_on' a (λ a, quotient_group.eq.2 
+(by simp [is_submonoid.one_mem]))
 \end{lstlisting}
 
 Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das heißt mit aneinandergereihten Aussagen, die durch den internen \verb!Reasoner! sowie den externen \verb!ATP! schrittweise verifiziert werden. Dies ermöglicht es dem Naproche-Text auf der einen Seite, auf sprachlicher Ebene recht nah am Stil der herkömmlichen Mathematik zu bleiben:
@@ -1941,7 +1942,7 @@ Im Gegensatz dazu arbeitet das Naprochesystem in einem deklarativen Stil, das he
 For every element x of M we have f[(One(H), x)] = x.
 \end{lstlisting}
 
-Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache hier jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'', was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
+Auf der anderen Seite ermöglicht die Beschaffenheit von Lean als Programmiersprache jedoch gewisse Methoden wie die mehrfache Wiederholung von Argumenten durch sogenannte ''Taktiken'', was sich im deklarativen Stil von Naproche momentan nicht abbilden lässt (Betrachte den Beweis in Abschnitt 3.8).
 
 \lstset{language=lean}
 \begin{lstlisting}
@@ -1957,14 +1958,17 @@ Ein weiterer Unterschied ist die Behandlung von algebraischen Strukturen hinsich
 
 So existiert in Lean das System der Typenklassen, während in Naproche keine bis auf einen naiven Mengen und Funktionsbegriff keine Strukturelemente bereitgestellt werden.
 
-Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell als Erweiterung des Typenklasse Monoid entstehen, werden diese in der Naproche-Formalisierung als abstrakte Notion eingeführt und so über allgemeine Gruppen argumentiert. Exemplarisch stellt sich hier die Behandlung der Untergruppen heraus:
-\lstinline{instance subtype.group s : set α [is_subgroup] s : group s := ...} Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffasen lassen.
+Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell als Erweiterung des Typenklasse Monoid entstehen, werden diese in der Naproche-Formalisierung als abstrakte Notion eingeführt. Als exemplarisch stellt sich die Behandlung der Untergruppen heraus:
+\begin{lstlisting}
+instance subtype.group s : set α [is_subgroup] s : group s := ...
+\end{lstlisting}
+Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffasen lassen.
 Da Naproche keine solche Strukturen bereitstellt, benötigten wir hierfür die axiomatische geforderte Gruppe \verb!Gr(U, G)! (siehe Abschnitt 3.2).
 
 \subsection{Nebenklassen}
 
-Der Begriff der Nebenklassen ist in den vorliegenden Formalisierungen insofern interessant, als dass er in Lean und Naproche auf zwei verschiedene Arbeiten umgesetzt wird. 
-Während diese in Lean als Qoutienten eigenführt werden 
+Der Begriff der Nebenklassen ist in den vorliegenden Formalisierungen insofern interessant, als er in Lean und Naproche auf zwei verschiedene Arbeiten umgesetzt wird. 
+Während diese in Lean als Quotienten eigenführt werden 
 \lstset{language = lean}
 \begin{lstlisting}
 	def left_rel [group α] (s : set α) [is_subgroup s] : setoid α :=
@@ -1991,15 +1995,15 @@ Coset(g, H, G) = {g *^{G} h | h << H}.
 Das Lemma 1.1 beweist, dass beide Ansätze das gleiche metatheoretische Objekt beschreiben.
 \subsection{Funktionsdefinitionen}
 
-Während Lean als funktionale Programmiersprache verschiedene Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt (Siehe \cite{bibtex.e}), stellt Naproche nur einen eingeschräkten naiven Funktions- und Mengenbegriff bereit. Während innerhalb von Beweisen in Naproche durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M} Funktionen definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
+Während Lean als funktionale Programmiersprache verschiedene Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt (Siehe \cite{bibtex.e}), stellt Naproche nur einen eingeschräkten naiven Funktions- und Mengenbegriff zur Verfügung. Während innerhalb von Beweisen in Naproche durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M } Funktionen definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
 
 \subsection{Struktur}
 
-Im herkömmlicheen Beweis \cite{bibtex.a}  werden die grundlegende Eigenschaften von endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden. In der Lean-Formalisierung hingegen wird mithilfe der umfassenden mathlib ausgehend von grundlegenden typentheoretischen Definitionen eine abgeschlossene Theorie aufgebaut und verifiziert.
+Im herkömmlichen Beweis \cite{bibtex.a}  werden die grundlegende Eigenschaften von endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden. In der Lean-Formalisierung hingegen wird mithilfe der umfassenden mathlib ausgehend von grundlegenden typentheoretischen Definitionen eine abgeschlossene Theorie aufgebaut und verifiziert.
 
-Es wäre wünschenswert die Naproche-Formalisierung als Ganzes verifizieren zu lassen. Hier scheitert jedoch das System aus Komplexitätsgründen, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
+Es wäre wünschenswert, die Naproche-Formalisierung als Ganzes verifizieren zu lassen. Daran scheitert jedoch das System aus Komplexitätsgründen, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
 
-Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
+Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit, Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
 
 \subsection{Lesbarkeit}
 In der vorangegangen Gegenüberstellung ist erkennbar, dass der deklarative Stil von Naproche / ForTheL sowie der Verwendung von kontrollierter natürlicher Sprache dazu führt, dass der Naproche-Text für herkömmliche Mathematiker lesbar ist. So ist bis auf die Layout- und Gestaltungsebene eine große oberflächliche Ähnlichkeit zwischen den Beweisen zu erkennen.
@@ -2032,14 +2036,15 @@ In der herkömmlichen Mathematik findet sich hier oft ein Kompromiss. So werden 
 
 Wir wollen nun einige Aspekte des Arbeitens mit den beiden Systemen beschreiben.
 
-Ein Gesichtspunkt ist hier die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Lean-Text in verschiedenen Umgebungen verifizieren. Für verschiedene Versionen von Lean gilt dies jedoch nicht. So ist zum Beispiel die ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel und musste deswegen angepasst werden.
-Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt das Verändern weniger Zeilen im Quelltext häufig dazu, dass Aussagen an anderen Stellen, die vorher verifiziert wurden, nicht mehr verifiziert werden. Insbesondere ist hier das Zusammenarbeiten mehrerer Personen mit verschiedenen Betriebssystemen kritisch, da nach unserer Erfahrung unter Linux/Mac verifizierte Dateien unter Windows oftmals nicht ohne weitere Veränderungen verifiziert werden konnten. 
+Ein Gesichtspunkt ist die Stabilität der Systeme. Solange man die gleiche Lean Version verwendet, kann man einen einmal geschrieben Lean-Text in verschiedenen Umgebungen verifizieren. Für verschiedene Versionen von Lean gilt dies jedoch nicht. So ist zum Beispiel die ursprüngliche Lean Datei \cite{bibtex.c} mit der Lean Version 3.4.2 nicht mehr kompatibel und musste deswegen angepasst werden.
+Im Gegensatz hierzu ist das Verifizieren in Naproche sehr instabil. So führt das Verändern weniger Zeilen im Quelltext häufig dazu, dass Aussagen an anderen Stellen, die vorher verifiziert wurden, nicht mehr verifiziert werden. Insbesondere ist das Zusammenarbeiten mehrerer Personen mit verschiedenen Betriebssystemen momentan dadurch gehindert, dass nach unserer Erfahrung auf Linux und Mac verifizierte Dateien unter Windows oftmals nicht ohne weitere Veränderungen verifiziert werden konnten. 
 
-Hier scheint insbesondere der \verb!Reasoner! in Naproche eine Rolle zu spielen, der in unserer Arbeit große Schwierigkeiten hatte, Funktionsterme auf ontologische Korrektheit zu überprüfen, weswegen wir deren Einsatz auf ein Minimum reduzieren mussten.
+In Naproche scheint insbesondere der \verb!Reasoner!  eine Rolle zu spielen, der in unserer Arbeit große Schwierigkeiten hatte, Funktionsterme auf ontologische Korrektheit zu überprüfen, weswegen wir deren Einsatz auf ein Minimum reduzieren mussten.
 
-Schlussendlich würden beide Systeme von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
-Lean profititiert hier von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
-Schreibt man beispielsweise anstatt ''\verb!contradiction!'' fälschlicherweise ''\verb!contradictio!'', so meldet Lean ''\verb!unknown identifier contradictio!'' während Isabelle-Naproche ''\verb!unexpected .!'' erst am Ende der Zeile reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
+Schlussendlich würde insbesondere das Naproche-System von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
+
+Lean profititiert von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
+Schreibt man anstatt ''\verb!contradiction!'' fälschlicherweise ''\verb!contradictio!'', so meldet Lean ''\verb!unknown identifier contradictio!'' während Isabelle-Naproche erst am Ende der Zeile ''\verb!unexpected .!'' reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
 \begin{lstlisting}
     contradiction tactic failed
     state:
@@ -2057,7 +2062,7 @@ während Isabelle-Naproche nur \verb![Reasoner] goal failed! zurückgibt.
 
 \subsection{Begriffsbildung}
 
-Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 4.4) zu betrachten. Hier werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
+Um mathematische Beweise zu formalisieren, ist es grundlegend, die im Beweis vorkommenden Begriffe im jeweiligen System zu implementieren. Im vorliegenden Projekt ist insbesondere die Implementierung der Nebenklassen (Siehe Abschnitt 4.4) zu betrachten. Für diese werden zwei verschiedene Ansätze genutzt, die auf der Metaebene äquivalent sind.
 
 Interessant wäre es, Möglichkeiten zu schaffen, Formalisierungen in verschiedenen Systeme auf einer Metaebene miteinander zu kombinieren, um die jeweiligen Vorteile auszunutzen. Hätte man diesen Schritt vollzogen, so könnte man die vorliegende Formalisierung des zweiten Satzes von Sylow in Naproche durch die Lean-Formalisierung der ganzen Zahlen und Kardinalitäten von endlichen Mengen vervollständigen, um eine in sich geschlossenen Formalisierung zu erhalten, deren Hauptresultat in der für Mathematiker leichter lesbaren kontrollierten natürlichen Sprache ForTheL vorliegt, während elementare technische Aussagen durch Lean mithilfe der bestehenden mathlib verifiziert werden würden.
 
@@ -2069,16 +2074,16 @@ Hervorzuheben ist das Projekt ''Formal Abstracts'' \cite{bibtex.b}, das zentrale
 Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwicklung des Naprochesystems entstanden.
 
 \begin{itemize}
-\item So wäre es wünschenswert eine native Option zu haben, mit algebraischen Strukturen umzugehen, da diese Ausgangspunkt vieler mathematischer Theorien sind und momentan von Naproche nicht unterstützt werden. (Siehe Abschnitt 3.2 bezüglich der Formalisierung des Gruppenbegriffes).
+\item So wäre es wünschenswert, eine native Option zu haben, mit algebraischen Strukturen umzugehen, da diese Ausgangspunkt vieler mathematischer Theorien sind und momentan von Naproche nicht unterstützt werden. (Siehe Abschnitt 3.2 bezüglich der Formalisierung des Gruppenbegriffes).
 
-\item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Qoutientbegriff \verb!qout! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
+\item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Quotientbegriff \verb!qout! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
 
 \item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangegangenen Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
-\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematische Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Hier wäre es eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
+\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematischen Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Es wäre eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
 
 \item Für das Einbinden von anderen Dateien existiert in Isabelle-Naproche bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
-Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In Anlehnung an die \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter einlesen zu können.
+Es wäre wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In Anlehnung an die \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter einlesen zu können.
 
 \item Genauere Fehlermeldungen in Isabelle-Naproche würden den Prozess des Formalisierens vermutlich vereinfachen, da gerade die Arbeit des \verb!Reasoners! in Kombination mit dem externen \verb!ATP! momentan eine Blackbox ist, was dazu führt, dass das Beheben von Fehlern meist nur durch langwieriges Ausprobieren realisierbar ist.
 
@@ -2090,9 +2095,9 @@ Hier wäre es wünschenswert, auch auf andere Verzeichnisse zugreifen zu können
 
 \subsection{Fazit}
 
-Zusammenfassend ist erkennbar geworden, dass die betrachteten Formalisierungssysteme recht unterschiedliche Ansätze verfolgen, welche verschiede Vor- und Nachteile haben. Während Lean als typentheoretische funktionale Programmiersprache von der Möglichkeit des effizienten Einbindens von umfassenden Bibliotheken wie der mathlib sowie der interaktiven Unterstützung durch präzise Fehlermeldungen profitiert,
+Zusammenfassend ist erkennbar geworden, dass die betrachteten Formalisierungssysteme unterschiedliche Ansätze verfolgen, welche verschiede Vor- und Nachteile haben. Während Lean als typentheoretische funktionale Programmiersprache von der Möglichkeit des effizienten Einbindens von umfassenden Bibliotheken wie der mathlib sowie der interaktiven Unterstützung durch präzise Fehlermeldungen profitiert,
 liegt der Vorteil von Naproche im deklarativen Stil und der natürlichen Sprache, die es ermöglicht, Formalisierungen zu erstellen, die Texten der herkömmlichen Mathematik ähneln.
-Erstrebenswert wäre es, Möglichkeiten der Kombination der beiden Systeme zu schaffen, um auch größere mathematische Theorien in einem für herkömmliche Mathematiker verständlichen Stil zu formalisieren.
+Erstrebenswert wäre es, Möglichkeiten der Kombination der beiden Systeme zu schaffen, um auch größere mathematische Theorien in einem für gewöhnliche Mathematiker verständlichen Stil zu formalisieren.
 
 \newpage
 
