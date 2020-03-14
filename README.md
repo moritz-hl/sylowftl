@@ -1,6 +1,6 @@
 # Second Sylow Theorem in Naproche / ForTheL
 
-This repository contains files that can be interpreted as a proof of the [Second Sylow Theorem](https://en.wikipedia.org/wiki/Sylow_theorems) by [Naproche-SAD](https://github.com/Naproche/Naproche-SAD)
+This repository contains files that can be interpreted as a proof of the [Second Sylow Theorem](https://en.wikipedia.org/wiki/Sylow_theorems) by [Naproche-SAD](https://github.com/Naproche/Naproche-SAD).  
 The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university of Bonn in 2019/20.
 
 
@@ -9,7 +9,7 @@ The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university
 The proof is divided into eight files:
 
 - **01basicgrptheory.ftl**  
-> Introduction of groups, subgroups and cosets
+&ensp;Introduction of groups, subgroups and cosets
 - **02numbers.ftl**  
 Axiomatic introduction of natural numbers and integers.
 - **03cards.ftl**  
