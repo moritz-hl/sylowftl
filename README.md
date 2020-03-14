@@ -30,4 +30,4 @@ The files have been verified in [Isabelle - Naproche](https://sketis.net/2019/is
 
 ## Formalization in Lean
 
-A formalization in [LEAN](https://leanprover.github.io) can be found at [moritz-hl/sylow2](https://github.com/moritz-hl/sylow2) (based on [ChrisHughes24/Sylow](https://github.com/ChrisHughes24/Sylow)).
+A formalization in [LEAN](https://leanprover.github.io) based on [ChrisHughes24/Sylow](https://github.com/ChrisHughes24/Sylow) can be found at [moritz-hl/sylowlean](https://github.com/moritz-hl/sylowlean).
