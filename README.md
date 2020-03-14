@@ -29,4 +29,4 @@ The files have been verified in Isabelle - Naproche on a MacBook Pro with an 2,7
 
 ## Formalization in Lean
 
-A formalization in LEAN can be found under [https://github.com/moritz-hl/sylow2] (based on [https://github.com/ChrisHughes24/Sylow])
+A formalization in LEAN can be found under https://github.com/moritz-hl/sylow2 (based on https://github.com/ChrisHughes24/Sylow)
