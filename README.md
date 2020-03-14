@@ -25,7 +25,7 @@ The proof is divided into eight files located in <tt>/PROOF/</tt>:
 - **08sylow2.ftl**  
 &ensp;&ensp;Proof of Sylow's Second Theorem
 
-The files have been verified in Isabelle - Naproche on a MacBook Pro with an 2,7 GHz Quad-Core Intel Core i7 and 16 GB of RAM in approximately 5 minutes.
+The files have been verified in [Isabelle - Naproche](https://sketis.net/2019/isabelle-naproche-for-automatic-proof-checking-of-ordinary-mathematical-texts) on a MacBook Pro with an 2,7 GHz Quad-Core Intel Core i7 and 16 GB of RAM in approximately 5 minutes.
 
 ## Formalization in Lean
 
