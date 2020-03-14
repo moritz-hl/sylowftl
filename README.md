@@ -4,7 +4,7 @@ This repository contains files that can be interpreted as a proof of the [Second
 The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university of Bonn in 2019/20.
 
 
-## Structure
+## The Proof
 
 The proof is divided into eight files located in <tt>/PROOF/</tt>:
 
