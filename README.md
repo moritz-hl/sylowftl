@@ -20,7 +20,7 @@ The proof is divided into eight files located in <tt>/PROOF/</tt>:
 - **04lagrange.ftl**  
 &ensp;&ensp;Proof of [Lagrange's Theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory))
 - **05staborb.ftl**  
-&ensp;&ensp;Bijection between Stabilizer and Orbit
+&ensp;&ensp;Bijection between stabilizers and orbits
 - **06fixedpointsmodp.ftl**  
 &ensp;&ensp;Properties of fixed points of group actions
 - **07grpaction.ftl**  
