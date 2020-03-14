@@ -3,6 +3,9 @@
 This repository contains files that can be interpreted as a proof of [Sylow's Second Theorem](https://en.wikipedia.org/wiki/Sylow_theorems) by [Naproche-SAD](https://github.com/Naproche/Naproche-SAD).  
 The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university of Bonn in 2019/20.
 
+<hr>
+
+The goal of this project was to create a to serve as a comparison to an exisiting formaliziation in [LEAN](https://github.com/moritz-hl/sylowftl#formalization-in-lean)
 
 ## The Proof
 
