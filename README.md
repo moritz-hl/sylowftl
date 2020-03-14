@@ -5,7 +5,7 @@ The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university
 
 <hr>
 
-The goal of this project was to create a to serve as a comparison to an exisiting formaliziation in [LEAN](https://github.com/moritz-hl/sylowftl#formalization-in-lean)
+The goal of this project is to create a formalization in Naproche in comparison to an exisiting formaliziation in [LEAN](https://github.com/moritz-hl/sylowftl#formalization-in-lean)
 
 ## The Proof
 
