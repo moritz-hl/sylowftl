@@ -7,7 +7,7 @@ There exists a formalization in [LEAN](https://github.com/moritz-hl/sylowftl#for
 
 ## The Proof
 
-The proof is divided into eight files located in <tt>/PROOF/</tt>:
+The formalized proof is divided into eight files located in <tt>/PROOF/</tt>:
 
 - **01basicgrptheory.ftl**  
 &ensp;&ensp;Introduction of groups, subgroups and cosets
