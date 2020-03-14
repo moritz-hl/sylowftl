@@ -9,7 +9,7 @@ The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university
 The proof is divided into eight files:
 
 - **01basicgrptheory.ftl**  
-Introduction of groups, subgroups and cosets
+> Introduction of groups, subgroups and cosets
 - **02numbers.ftl**  
 Axiomatic introduction of natural numbers and integers.
 - **03cards.ftl**  
