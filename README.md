@@ -9,21 +9,21 @@ The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university
 The proof is divided into eight files:
 
 - **01basicgrptheory.ftl**  
-&ensp;Introduction of groups, subgroups and cosets
+&ensp;&ensp;Introduction of groups, subgroups and cosets
 - **02numbers.ftl**  
-Axiomatic introduction of natural numbers and integers.
+&ensp;&ensp;Axiomatic introduction of natural numbers and integers
 - **03cards.ftl**  
-Axiomatic introduction of finite sets and finite cardinalities.
+&ensp;&ensp;Axiomatic introduction of finite sets and finite cardinalities
 - **04lagrange.ftl**  
-Proof of [Lagrange's Theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory))
+&ensp;&ensp;Proof of [Lagrange's Theorem](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory))
 - **05staborb.ftl**  
-Bijection between Stabilizer and Orbit
+&ensp;&ensp;Bijection between Stabilizer and Orbit
 - **06fixedpointsmodp.ftl**  
-Properties of fixed points of group actions
+&ensp;&ensp;Properties of fixed points of group actions
 - **07grpaction.ftl**  
-Definition of the group action used in the following proof
+&ensp;&ensp;Definition of the group action used in the following proof
 - **08sylow2.ftl**  
-Proof of Sylow's Second Theorem
+&ensp;&ensp;Proof of Sylow's Second Theorem
 
 The files have been verified in Isabelle - Naproche on a MacBook Pro with an 2,7 GHz Quad-Core Intel Core i7 and 16 GB of RAM in approximately 5 minutes.
 
