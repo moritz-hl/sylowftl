@@ -6,7 +6,7 @@ The proof is based on a lecture held by Prof. Dr. Jan Schröer at the university
 
 ## Structure
 
-The proof is divided into eight files:
+The proof is divided into eight files located in <pre>/PROOF</pre>
 
 - **01basicgrptheory.ftl**  
 &ensp;&ensp;Introduction of groups, subgroups and cosets
