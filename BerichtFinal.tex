@@ -280,7 +280,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	| swap  : Π (x y : α) (l : list α), perm (y::x::l) (x::y::l)
 	| trans : Π {l₁ l₂ l₃ : list α}, perm l₁ l₂ → perm l₂ l₃ → perm l₁ l₃
 	\end{lstlisting}
-	Unter Verwendung des Beweises \lstinline|perm.eqv|, dass \lstinline|perm| eine Äquivalenzrelation ist, wird eine Instanz von \lstinline|setoid list $\alpha$ |eingeführt, welche dann in der Definition der Multimenge Verwendung findet:
+	Unter Verwendung des Beweises \lstinline|perm.eqv|, dass \lstinline|perm| eine Äquivalenzrelation ist, wird eine Instanz von \lstinline|setoid (list $\alpha$) |eingeführt, welche dann in der Definition der Multimenge Verwendung findet:
 	\begin{lstlisting}
 	instance is_setoid (α) : setoid (list α) :=
 	setoid.mk (@perm α) (perm.eqv α)
@@ -408,7 +408,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 
 
 	\subsection{Gruppen in Lean}
-	Gruppen werden sukzessive durch Erweiterungen von \lstinline|type calsses| definiert:
+	Gruppen werden sukzessive durch Erweiterungen von \lstinline|type classes| definiert:
 	\begin{lstlisting}
 	class has_mul (α : Type u) := (mul : α → α → α)
 	
@@ -473,7 +473,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	def left_cosets [group α] (s : set α) [is_subgroup s] : Type* := quotient (left_rel s)
 	\end{lstlisting}
 	Für eine Untergruppe \ls{H} von \ls{G} ist dann \ls{left_rel H} ein \ls{setoid G} mit entsprechender Relation und dem zugehörigen Beweis, dass es sich um eine Äquivalenzrelation handelt.
-	Mithilfe dieser Definition wird eine Instanz von \ls{fintype} bzgl. \lstinline|left_costes H| erstellt:
+	Mithilfe dieser Definition wird eine Instanz von \ls{fintype} bzgl. \lstinline|left_cosets H| erstellt:
 	\begin{lstlisting}
 	noncomputable instance [fintype G] (H : set G) [is_subgroup H] :  fintype (left_cosets H) := 
 	quotient.fintype (left_rel H)
@@ -534,7 +534,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	\end{lstlisting}
 	Zunächst wird in \lstinline|hs| die Kardinalität der Klasse der Nebenklassen auf Basis der Definition von Sylow-Gruppen umgeformt. Hierbei wird das Lemma von Lagrange unter dem Namen \ls{card_eq_card_cosets_mul_card_subgroup} benutzt.
 	
-	In \ls{hmodeq} kommt die Lean-Version von Lemma (??) zur Anwendung: 
+	In \ls{hmodeq} kommt die Lean-Version von Lemma 1.5 zur Anwendung: 
 	\begin{lstlisting}
 	lemma card_modeq_card_fixed_points [fintype α] [fintype G] 
 	[fintype (fixed_points G α)]
@@ -543,7 +543,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	\end{lstlisting}
 	Durch Substitution wird das allgemeine Resultat auf den Spezialfall übertragen.
 	
-	Mit Hilfe von \ls{hmodeq} lässt sich schließlich \ls{hfixed} zeigen, dass nämlich die Kardinalität der Fixpunkte größer Null ist. Nach \ls{nat.pos_of_ne_zero} genügt es zu zeigen, dass die Kardinalität der Fixpunkte ungleich Null ist. Es wird also ein Beweis von \ls{false} gefordert unter Annahme \ls{h}, die Kardinalität sei gleich Null. Der Widerspruch wird erzeugt, in dem erst 
+	Mit Hilfe von \ls{hmodeq} lässt sich schließlich \ls{hfixed} zeigen, dass nämlich die Kardinalität der Fixpunkte größer Null ist: Nach \ls{nat.pos_of_ne_zero} genügt es zu zeigen, dass die Kardinalität der Fixpunkte ungleich Null ist. Es wird also ein Beweis von \ls{false} gefordert unter Annahme \ls{h}, die Kardinalität sei gleich Null. Der Widerspruch wird erzeugt, in dem erst 
 	\begin{lstlisting}	
 	lemma not_dvd_div_dlogn {p a : ℕ} (ha : a > 0) (hp : p > 1) : 
 	¬p ∣ a / (p ^ dlogn p a)
@@ -562,7 +562,7 @@ Um mit der aktuellen Version (Stand März 2020) der Leanbibliothek mathlib \cite
 	
 	revert hx
 	\end{lstlisting}
-	Die Taktik \ls{revert} generalisiert den Beweis \ls{hx}, dass \ls{x} ein Fixpunkt ist, sodass nun folgendes zu beweisen ist:
+	Die Taktik \ls{revert} generalisiert den Beweis \ls{hx}, dass \ls{x} ein Fixpunkt ist, sodass nun folgendes Ziel zu beweisen ist:
 	\begin{lstlisting}
 	x ∈ fixed_points H (left_cosets K) → 
 	(∃ (g : G), H = conjugate_set g K)
@@ -796,7 +796,7 @@ Qed.
 
 \subsection{Nebenklassen}
 
-Wir führen Nebenklassen im Gegensatz zur Formalisierung in Lean nicht über Qoutienten ein, sondern über die mengenbasierte Definition.
+Wir führen Nebenklassen im Gegensatz zur Formalisierung in Lean nicht über Quotienten ein, sondern über die mengenbasierte Definition.
 Lemma 1.1 begründet, dass diese Ansätze das gleiche metatheoretische Objekt formalisieren.
 
 \begin{lstlisting}
@@ -1145,7 +1145,7 @@ Wir liefern einen Beweis, der sich durch ein Symmetrieargument vereinfachen lie�
 
 \subsection{Endliche Mengen}
 
-Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigeschaften. Interessant sind die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von endlichen Mengen. Da wir die ganzen Zahlen abstrakt und insbesondere ohne ein Induktionsaxiom eingeführt haben, müssen wir die drei Axiome seperat fordern, obwohl sie auf Metaebene aus \verb!cardUnion0! gefolgert werden können.
+Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomatisch die bekannten Eigenschaften Interessant sind die Axiome \verb!cardUnion0-2! bezüglich der Vereinigung von endlichen Mengen. Da wir die ganzen Zahlen abstrakt und insbesondere ohne ein Induktionsaxiom eingeführt haben, müssen wir die drei Axiome separat fordern, obwohl sie auf der Metaebene aus \verb!cardUnion0! gefolgert werden können.
 
 \begin{lstlisting}
 
@@ -1201,7 +1201,7 @@ Endliche Mengen führen wir als abstrakten Begriff ein und fordern dann axiomati
 	If M is a finite set such that every element of M is a finite set
 	and M is disjunct collection
 	and for all elements N of M k | card(N)
-	then k | card(\-/ M).
+	then k | card(\-/ M).
 	
 	Axiom.
 	Let N1, N2 be finite sets.
@@ -1385,7 +1385,7 @@ If Coset(g, Stab(x, f, M, G), G) = Coset(h, Stab(x, f, M, G), G) then f[(g, x)] 
 \subsection{Stabilisator und Orbit}
 
 Außerhalb von Beweisen lassen sich in Naproche keine Funktionen definieren. In der herkömmlichen Mathematik werden Funktionen oft definiert und erst nachträglich auf ''Wohldefiniertheit'' bzw. Repräsentantenunabhängigkeit überprüft.
-Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren, in diesem Text belassen wir es jedoch dabei -- auf Metaebene begründet durch das vorangegange Lemma -- die Existenz der folgenden Funktion als Axiom zu fordern.
+Man könnte diesen Vorgang über einen Relationsbegriff und weitere Axiome formalisieren, in diesem Text belassen wir es jedoch dabei -- auf Metaebene begründet durch das vorangegangene Lemma -- die Existenz der folgenden Funktion als Axiom zu fordern.
 
 \begin{lstlisting}
 
@@ -1457,7 +1457,7 @@ end.
 qed.
 \end{lstlisting}
 
-\subsection{Fipunkte}
+\subsection{Fixpunkte}
 
 Wir führen den Begriff des Fixpunktes und der Menge der Fixpunkte einer Gruppenaktion ein und beweisen ein Lemma.
 
@@ -1962,13 +1962,13 @@ Während in der Formalisierung in Lean beispielsweise die Gruppen strukturell al
 \begin{lstlisting}
 instance subtype.group s : set α [is_subgroup] s : group s := ...
 \end{lstlisting}
-Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffasen lassen.
+Hier wird in Lean gezeigt, dass Untergruppen eine \ls{instance} der Typenklasse \ls{group} ist. Dies sorgt dafür, dass sich Untergruppen in Lean nun ohne weitere Notation auch als Gruppen auffassen lassen.
 Da Naproche keine solche Strukturen bereitstellt, benötigten wir hierfür die axiomatische geforderte Gruppe \verb!Gr(U, G)! (siehe Abschnitt 3.2).
 
 \subsection{Nebenklassen}
 
 Der Begriff der Nebenklassen ist in den vorliegenden Formalisierungen insofern interessant, als er in Lean und Naproche auf zwei verschiedene Arbeiten umgesetzt wird. 
-Während diese in Lean als Quotienten eigenführt werden 
+Während diese in Lean als Quotienten eingeführt werden 
 \lstset{language = lean}
 \begin{lstlisting}
 	def left_rel [group α] (s : set α) [is_subgroup s] : setoid α :=
@@ -1982,7 +1982,7 @@ Während diese in Lean als Quotienten eigenführt werden
 	by simpa [mul_assoc] using this⟩
 	
 	def left_cosets [group α] (s : set α) [is_subgroup s] : Type* := quotient (left_rel s)
-    \end{lstlisting} haben wir uns in Naproche aufgrund des dort fehlenden Qoutientenbegriffes für eine mengenbasierte Definition entschieden:
+    \end{lstlisting} haben wir uns in Naproche aufgrund des dort fehlenden Quotientenbegriffes für eine mengenbasierte Definition entschieden:
 
 \lstset{language = ftl}
     \begin{lstlisting}
@@ -1995,15 +1995,15 @@ Coset(g, H, G) = {g *^{G} h | h << H}.
 Das Lemma 1.1 beweist, dass beide Ansätze das gleiche metatheoretische Objekt beschreiben.
 \subsection{Funktionsdefinitionen}
 
-Während Lean als funktionale Programmiersprache verschiedene Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt (Siehe \cite{bibtex.e}), stellt Naproche nur einen eingeschräkten naiven Funktions- und Mengenbegriff zur Verfügung. Während innerhalb von Beweisen in Naproche durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M } Funktionen definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
+Während Lean als funktionale Programmiersprache verschiedene Möglichkeiten zur Definition von Funktionen und Strukturen bereitstellt (Siehe \cite{bibtex.e}), stellt Naproche nur einen eingeschränkten naiven Funktions- und Mengenbegriff zur Verfügung. Während innerhalb von Beweisen in Naproche durch Ausdrücke der Form \lstset{language = ftl} \lstinline{Let f[x] = y for x in M } Funktionen definiert werden können, gibt es auf der globalen Ebene nur die Möglichkeit, Funktionen durch Axiome beziehungsweise 'axiomatische' Definitionen zu fordern. Dies führt zu den in Abschnitt 3.12 angesprochenen Problemen hinsichtlich der ''Wohldefiniertheit''.
 
 \subsection{Struktur}
 
-Im herkömmlichen Beweis \cite{bibtex.a}  werden die grundlegende Eigenschaften von endlichen Mengen und den ganzen Zahlen als bekannt vorrausgesetzt. Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden. In der Lean-Formalisierung hingegen wird mithilfe der umfassenden mathlib ausgehend von grundlegenden typentheoretischen Definitionen eine abgeschlossene Theorie aufgebaut und verifiziert.
+Im herkömmlichen Beweis \cite{bibtex.a}  werden die grundlegende Eigenschaften von endlichen Mengen und den ganzen Zahlen als bekannt vorausgesetzt Dies spiegelt sich in der Formalisierung in Naproche insofern wieder, als diese Eigenschaften axiomatisch gefordert und nicht explizit bewiesen werden. In der Lean-Formalisierung hingegen wird mithilfe der umfassenden mathlib ausgehend von grundlegenden typentheoretischen Definitionen eine abgeschlossene Theorie aufgebaut und verifiziert.
 
-Es wäre wünschenswert, die Naproche-Formalisierung als Ganzes verifizieren zu lassen. Daran scheitert jedoch das System aus Komplexitätsgründen, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zititert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
+Es wäre wünschenswert, die Naproche-Formalisierung als Ganzes verifizieren zu lassen. Daran scheitert jedoch das System aus Komplexitätsgründen, weswegen wir in jeder Datei jeweils die Aussagen und Definitionen der vorangegangen Dateien als Axiome ohne Beweise einbinden. Dieser Ansatz findet sich insofern in der herkömmlichen Mathematik, als dort auch nur die Aussagen eines bereits bewiesenen Theorems zitiert werden, wohingegen die exakte Ausgestaltung des Beweises meist eine untergeordnete Rolle spielt: "Nach Lemma 1.5 gilt [...]" \cite{bibtex.a}.
 
-Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit, Bibliotheken einzubinden. Es ist inbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
+Im Gegensatz hierzu profitiert Lean als Programmiersprache von der Möglichkeit, Bibliotheken einzubinden. Es ist insbesondere möglich, Dateien oder ganze Bibliotheken durch den Kommandozeilenbefehl \verb!leanpkg build ! in  \verb!.olean! Binärdateien zu übersetzen, die von Lean dann weitaus schneller verifiziert werden können. Dies ermöglicht es, mit umfangreichen Bibliotheken wie der mathlib \cite{bibtex.d} interaktiv zu arbeiten.
 
 \subsection{Lesbarkeit}
 In der vorangegangen Gegenüberstellung ist erkennbar, dass der deklarative Stil von Naproche / ForTheL sowie der Verwendung von kontrollierter natürlicher Sprache dazu führt, dass der Naproche-Text für herkömmliche Mathematiker lesbar ist. So ist bis auf die Layout- und Gestaltungsebene eine große oberflächliche Ähnlichkeit zwischen den Beweisen zu erkennen.
@@ -2029,7 +2029,7 @@ Im Gegensatz hierzu lässt sich die Formalisierung in Lean nur mit einer gewisse
 
 \subsection{Elaborating}
 
-Ein Vorteil von Lean gegenüber Naproche / ForTheL hinsichtlich der Lesbarkeit ist das sogennante ''Elaborating''. Aufgrund der strikten Typisierung ist Lean in der Lage, beispielsweise bei Ausdrücken der Form $a * b$ mit $a, b : G$ selbstständig aus dem Kontext zu ermitteln, dass es sich bei $*$ um die Verknüpfung von G handelt. Da dies in Naproche nicht möglich ist, entstehen sperrige Ausdrücke wie beispielsweise \verb!fixedPoints(Op(U, P, G), Cosets(P, G),! \verb!Gr(U, G))!, die die Lesbarkeit des Naproche-Textes vermindern.
+Ein Vorteil von Lean gegenüber Naproche / ForTheL hinsichtlich der Lesbarkeit ist das sogenannte ''Elaborating''. Aufgrund der strikten Typisierung ist Lean in der Lage, beispielsweise bei Ausdrücken der Form $a * b$ mit $a, b : G$ selbstständig aus dem Kontext zu ermitteln, dass es sich bei $*$ um die Verknüpfung von G handelt. Da dies in Naproche nicht möglich ist, entstehen sperrige Ausdrücke wie beispielsweise \verb!fixedPoints(Op(U, P, G), Cosets(P, G),! \verb!Gr(U, G))!, die die Lesbarkeit des Naproche-Textes vermindern.
 In der herkömmlichen Mathematik findet sich hier oft ein Kompromiss. So werden an einigen Stellen die Abhängigkeiten gekennzeichnet, wie zum Beispiel im Ausdruck $\text{Syl}_{p}(G)$, während an anderen Stellen, wie in \textit{Je zwei $p$-Sylowgruppen sind konjugiert}, aus dem Kontext ersichtlich wird, welche Gruppe gemeint ist.
 
 \subsection{User Experience}
@@ -2043,7 +2043,7 @@ In Naproche scheint insbesondere der \verb!Reasoner!  eine Rolle zu spielen, der
 
 Schlussendlich würde insbesondere das Naproche-System von einer ausgeprägteren Dokumentation profitieren, da momentan viel Zeit darauf verloren geht, sich über einen Trial-and-Error-Prozess mit den Systemen vertraut zu machen.
 
-Lean profititiert von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
+Lean profitiert von den ausgeprägten Fehlermeldungen, die oftmals klar erkennbar machen, welche Zeilen in welcher Form geändert werden müssen, um eine valide Datei zu erhalten.
 Schreibt man anstatt ''\verb!contradiction!'' fälschlicherweise ''\verb!contradictio!'', so meldet Lean ''\verb!unknown identifier contradictio!'' während Isabelle-Naproche erst am Ende der Zeile ''\verb!unexpected .!'' reklamiert. Schlägt die Verifizierung fehl, so gibt Lean beispielsweise folgende Fehlermeldung aus:
 \begin{lstlisting}
     contradiction tactic failed
@@ -2076,18 +2076,18 @@ Als Resultat des Formalisierungsprozesses sind einige Ideen für die Weiterentwi
 \begin{itemize}
 \item So wäre es wünschenswert, eine native Option zu haben, mit algebraischen Strukturen umzugehen, da diese Ausgangspunkt vieler mathematischer Theorien sind und momentan von Naproche nicht unterstützt werden. (Siehe Abschnitt 3.2 bezüglich der Formalisierung des Gruppenbegriffes).
 
-\item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Quotientbegriff \verb!qout! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
+\item Des Weiteren ist der aktuell in Naproche implementierte Funktionsbegriff nicht ausreichend, um Konstrukte wie in Abschnitt 3.12 abzudecken. In Lean werden solche Konstruktionen durch den Quotientbegriff \verb!quot! abgedeckt (Siehe Abschnitt 2.1). Insofern wäre es sinnvoll, einen solchen auch in Naproche zu implementieren.
 
-\item Ein großer Teil des Formalisierens in Naproche bechränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangegangenen Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
+\item Ein großer Teil des Formalisierens in Naproche beschränkte sich darauf, die Ausdrücke so zu modifizieren, dass sie vom \verb!Reasoner! auf ontologische Korrektheit überprüft werden konnten. In Anbetracht der vorangegangenen Punkte, wäre es interessant, den Reasoner hinsichtlich evtl. nativen Konstrukte zu optimieren. Momentan scheint dieser gerade bei Funktionstermen große Probleme zu haben, sodass an vielen Stellen weitere Argumente hinzugefügt werden mussten.
 
-\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''vorraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematischen Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Es wäre eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
+\item Eine weitere Idee, die während unseres Projektes entstanden ist, ist das Einführen eines weiteren Axiom-Begriffes. So finden sich in unser Formalisierung zum einen ''grundlegende'' Axiome wie die Forderung des Existenz von Inversen in einer Gruppe (Siehe Abschnitt 3.2) und ''voraussetzenden'' Axiome wie \verb!cardUnion1! (Siehe Abschnitt 3.9.), welche im Gegensatz zu den ''grundlegenden'' Axiomen sozusagen die mathematischen Vorkenntnisse beschreiben, die von einem Leser eines herkömmlichen Textes über die Sylow-Sätze gefordert werden. Es wäre eventuell sinnvoll, eine Möglichkeit der expliziten Unterscheidung dieser Axiome vorzunehmen. (Zum Beispiel durch das Einführen des Bezeichners \verb!Presupposition! zusätzlich zu \verb!Axiom!.)
 
 \item Für das Einbinden von anderen Dateien existiert in Isabelle-Naproche bereits der \verb!read! Befehl. Dieser kann allerdings in der momentanen Ausführung nur auf Dateien im \verb!examples! Ordner zugreifen.
-Es wäre wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In Anlehnung an die \verb!.olean! Binärdatein in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifzierte Texte effizienter einlesen zu können.
+Es wäre wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In Anlehnung an die \verb!.olean! Binärdateien in Lean wäre es zudem sinnvoll, einen ähnlichen Übersetzungsprozess in Naproche zu implementieren, um bereits verifizierte Texte effizienter einlesen zu können.
 
 \item Genauere Fehlermeldungen in Isabelle-Naproche würden den Prozess des Formalisierens vermutlich vereinfachen, da gerade die Arbeit des \verb!Reasoners! in Kombination mit dem externen \verb!ATP! momentan eine Blackbox ist, was dazu führt, dass das Beheben von Fehlern meist nur durch langwieriges Ausprobieren realisierbar ist.
 
-\item Es wäre des Weiteren sinnvoll, Isabelle-Naproche dahingehend anzupassen, dass es sich unter den verschiedenen Betriebsystemen identisch verhält. So brechen unter Mac Os X die Beweise momentan nach einer bestimmten Zeit ab, während dies unter Windows nicht der Fall ist. Dies hindert die gemeinsame Entwicklung von Naproche-Texten.
+\item Es wäre des Weiteren sinnvoll, Isabelle-Naproche dahingehend anzupassen, dass es sich unter den verschiedenen Betriebssystemen identisch verhält. So brechen unter Mac Os X die Beweise momentan nach einer bestimmten Zeit ab, während dies unter Windows nicht der Fall ist. Dies hindert die gemeinsame Entwicklung von Naproche-Texten.
 
 \item Schlussendlich würde eine ausgeprägtere Dokumentation des Isabelle-Naproche im Sinne des Einführungstextes ''Theorem Proving in Lean'' \cite{bibtex.e} insbesondere den Einstieg in das Arbeiten mit Naproche vereinfachen.
 
@@ -2095,9 +2095,9 @@ Es wäre wünschenswert, auch auf andere Verzeichnisse zugreifen zu können. In 
 
 \subsection{Fazit}
 
-Zusammenfassend ist erkennbar geworden, dass die betrachteten Formalisierungssysteme unterschiedliche Ansätze verfolgen, welche verschiede Vor- und Nachteile haben. Während Lean als typentheoretische funktionale Programmiersprache von der Möglichkeit des effizienten Einbindens von umfassenden Bibliotheken wie der mathlib sowie der interaktiven Unterstützung durch präzise Fehlermeldungen profitiert,
+Zusammenfassend ist erkennbar geworden, dass die betrachteten Formalisierungssysteme unterschiedliche Ansätze verfolgen, welche verschiedene Vor- und Nachteile haben. Während Lean als typentheoretische funktionale Programmiersprache von der Möglichkeit des effizienten Einbindens von umfassenden Bibliotheken wie der mathlib sowie der interaktiven Unterstützung durch präzise Fehlermeldungen profitiert,
 liegt der Vorteil von Naproche im deklarativen Stil und der natürlichen Sprache, die es ermöglicht, Formalisierungen zu erstellen, die Texten der herkömmlichen Mathematik ähneln.
-Erstrebenswert wäre es, Möglichkeiten der Kombination der beiden Systeme zu schaffen, um auch größere mathematische Theorien in einem für gewöhnliche Mathematiker verständlichen Stil zu formalisieren.
+Erstrebenswert wäre es, Möglichkeiten der Kombination der beiden Systeme zu schaffen, um auch umfassendere mathematische Theorien in einem für gewöhnliche Mathematiker verständlichen Stil zu formalisieren.
 
 \newpage
 

@@ -1,3 +1,0 @@
-#Axiom. Contradiction.
-
-Lemma. Contradiction.
