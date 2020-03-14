@@ -4,6 +4,18 @@ This repository contains files that can be interpreted as a proof of the [Second
 
 ## Structure
 
+The proof is divided into eight files:
+
+
+- 01basicgrptheory.ftl
+- 02numbers.ftl
+- 03cards.ftl
+- 04lagrange.ftl
+- 05staborb.ftl
+- 06fixedpointsmodp.ftl
+- 07grpaction.ftl
+- 08sylow2.ftl
+
 The files have been verified in Isabelle - Naproche on a MacBook Pro with an 2,7 GHz Quad-Core Intel Core i7 and 16 GB of RAM in approximately 5 minutes.
 
 ## Formalization in Lean
